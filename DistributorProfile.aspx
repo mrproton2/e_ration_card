@@ -8,13 +8,13 @@
             <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-12 ">
                 <form class="needs-validation" novalidate>
                     <div class="form-group">
-                        <label for="kotedar">Kotedar Name:</label>
+                        <label for="kotedar">Kotedar Name11:</label>
                         <input type="text" class="form-control" id="txtkotedar" placeholder="Enter Name" name="kotedar" required>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please Enter Kotedar Name.</div>
                     </div>
                     <div class="form-group">
-                        <label for="mobile">Mobile No:</label>
+                        <label for="mobile">Mobile No22:</label>
                         <input type="text" class="form-control" id="txtmobile" placeholder="Enter Your Mobile No." name="mobile" required>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please Enter Your Mobile No.</div>
