@@ -1,12 +1,13 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Site.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="e_ration_card.index" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/Site.Master" AutoEventWireup="true" CodeBehind="index.aspx.cs" Inherits="e_ration_card.index" EnableEventValidation="false"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
      <style>
-  /* Make the image fully responsive */
+  /* Make the image fully responsive */ 
   .carousel-inner img {
     width: 100%;
     height: 100%;
   }
   </style>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <section>
@@ -47,7 +48,5 @@
     <span class="carousel-control-next-icon"></span>
   </a>
 </div>
-</div>
     </section>
-
 </asp:Content>

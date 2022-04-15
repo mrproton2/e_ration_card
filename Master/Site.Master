@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="e_ration_card.Master.Site" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="e_ration_card.Master.Site"%>
 
 <!DOCTYPE html>
 
@@ -65,7 +65,6 @@
 </nav>
    </section>
 
-        <section>
     <div class="container">
   <!-- The Modal -->
   <div class="modal fade" id="myModal">
@@ -80,26 +79,21 @@
         
         <!-- Modal body -->
         <div class="modal-body text-primary">
-          <form action="" class="needs-validation" novalidate>
+         
   <div class="form-group">
     <label for="uname">Username:</label>
-    <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
-    <div class="valid-feedback">Valid.</div>
-    <div class="invalid-feedback">Please fill out this field.</div>
+    <input type="text" class="form-control" id="uname" runat="server" placeholder="Enter username" name="uname">
   </div>
   <div class="form-group">
     <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
-    <div class="valid-feedback">Valid.</div>
-    <div class="invalid-feedback">Please fill out this field.</div>
+    <input type="password" class="form-control" id="pwd" runat="server" placeholder="Enter password" name="pwd">
   </div>
-</form>
+
         </div>
         
         <!-- Modal footer -->
         <div class="modal-footer">
-            <asp:Button ID="btnlogin" runat="server" Text="Login" class="btn btn-primary" />
-            <asp:Button ID="btnsignup1" runat="server" Text="Sign Up" class="btn btn-primary" data-toggle="modal" data-target="#myModalSignUp" />
+           <asp:Button ID="btnlogin" runat="server" Text="Login" class="btn btn-primary" OnClick="btnlogin_Click" OnClientClick="return Validation();" />
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
         
@@ -108,87 +102,187 @@
   </div>
   
 </div>
-
-</section>
-
-    <section>
-    <div class="container">
+            <div class="container">
   <!-- The Modal -->
   <div class="modal fade" id="myModalSignUp">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-      
         <!-- Modal Header -->
         <div class="modal-header">
           <h4 class="modal-title">Sign Up</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        
         <!-- Modal body -->
         <div class="modal-body text-primary">
-          <form action="" class="needs-validation" novalidate>
+     <div class="form-group">
+     <label for="yname">Your Name:</label>
+     <input type="text" class="form-control" TextMode="Text" id="txtname" runat="server" placeholder="Enter Name" name="yname" onkeypress="return alphaOnly(event);">
+      </div>
   <div class="form-group">
-    <label for="yname">Your Name:</label>
-    <input type="text" class="form-control" id="yname" placeholder="Enter Name" name="yname" required>
-    <div class="valid-feedback">Valid.</div>
-    <div class="invalid-feedback">Please Enter Your Name.</div>
-  </div>
-  <div class="form-group">
-    <label for="uname">Username:</label>
-    <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
-    <div class="valid-feedback">Valid.</div>
-    <div class="invalid-feedback">Please Enter Your UserName.</div>
+    <label for="username">Username:</label>
+    <input type="text" class="form-control" id="txtusername" runat="server" placeholder="Enter username" name="username" onkeypress="return event.keyCode != 13;">
   </div>
   <div class="form-group">
     <label for="mobile">Mobile:</label>
-    <input type="text" class="form-control" id="mobile" placeholder="Enter Your Mobile No" name="mobile" required>
-    <div class="valid-feedback">Valid.</div>
-    <div class="invalid-feedback">Please Enter Your Mobile No.</div>
+    <input type="number" class="form-control" Textmode="Number" maxlength="10" id="txtmobile" runat="server" placeholder="Enter Your Mobile No" name="mobile" onkeypress="return event.keyCode != 13;">
   </div>
   <div class="form-group">
     <label for="email">Email:</label>
-    <input type="text" class="form-control" id="email" placeholder="Enter Your Email " name="email" required>
-    <div class="valid-feedback">Valid.</div>
-    <div class="invalid-feedback">Please Enter Your Email.</div>
+    <input type="email" class="form-control" id="txtemail" runat="server" placeholder="Enter Your Email " name="email" onkeypress="return event.keyCode != 13;">
   </div>
   <div class="form-group">
     <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
-    <div class="valid-feedback">Valid.</div>
-    <div class="invalid-feedback">Please fill out this field.</div>
+    <input type="password" class="form-control" id="txtpassword" runat="server" placeholder="Enter password" name="pswd" onkeypress="return event.keyCode != 13;">
   </div>
   <div class="form-group">
     <label for="utype">User Type</label>
-     <asp:DropDownList ID="ddlusertype" runat="server">
-          <asp:ListItem value="value" selected="True">**SELECT**</asp:ListItem> 
-          <asp:ListItem value="value" selected="False">Consumer</asp:ListItem> 
-          <asp:ListItem value="value" selected="False">Distributor</asp:ListItem> 
-          <asp:ListItem value="value" selected="False">Govt</asp:ListItem>
+     <asp:DropDownList id="ddlusertype" runat="server">
+          <asp:ListItem value=" " selected="True">**SELECT**</asp:ListItem> 
+          <asp:ListItem value="GENERAL" selected="False">GENERAL</asp:ListItem> 
+          <asp:ListItem value="DISTRIBUTOR" selected="False">DISTRIBUTOR</asp:ListItem> 
      </asp:DropDownList>    
   </div>
-</form>
-</div>
-        
-        <!-- Modal footer -->
+        </div>
+           <!-- Modal footer -->
         <div class="modal-footer">
-            <asp:Button ID="btnsignup" runat="server" Text="Sign Up"  class="btn btn-primary" />
+            <div class="modal-footer">
+            <asp:Button ID="btnsignup" runat="server" Text="Sign Up" class="btn btn-primary" Onclick="btnsignup_Click" OnClientClick="return ValidationSignUp();"  />
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
-        
+        </div>
+
       </div>
     </div>
   </div>
   
 </div>
 
-</section>
-
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
     </form>    
-     <script>
-// Disable form submissions if there are invalid fields
+    <script type="text/javascript">
+
+        function ValidateCharacters(str, e) {
+            if (e.shiftKey) {
+                if (e.preventDefault != undefined) {
+                    e.preventDefault();
+                }
+                else {
+                    e.returnValue = false;
+                }
+            }
+            else {   //      backspace          tab                end               home             left arrow        right arrow         delete
+                if (e.keyCode == 8 || e.keyCode == 9 || e.keyCode == 35 || e.keyCode == 36 || e.keyCode == 37 || e.keyCode == 39 || e.keyCode == 46) {
+                    return true;
+                }
+                if (e.charCode != undefined ? str.indexOf(String.fromCharCode(e.charCode)) == -1 : str.indexOf(String.fromCharCode(e.keyCode)) == -1) {
+                    if (e.preventDefault != undefined) {
+                        e.preventDefault();
+                    }
+                    else {
+                        e.returnValue = false;
+                    }
+                }
+            }
+        }
+
+        function ValidateCharactersMultiline(str, e, val, maxLength) {
+            if (e.shiftKey) {
+                if (e.preventDefault != undefined) {
+                    e.preventDefault();
+                }
+                else {
+                    e.returnValue = false;
+                }
+            }
+            else {
+                if (val.value.length >= maxLength) {
+                    e.preventDefault();
+                }
+
+                //      backspace          tab                 end                          home             left arrow                    right arrow         delete
+                if (e.keyCode == 8 || e.keyCode == 9 || e.keyCode == 35 || e.keyCode == 36 || e.keyCode == 37 || e.keyCode == 39 || e.keyCode == 46) {
+                    return true;
+                }
+                if (e.charCode != undefined ? str.indexOf(String.fromCharCode(e.charCode)) == -1 : str.indexOf(String.fromCharCode(e.keyCode)) == -1) {
+                    if (e.preventDefault != undefined) {
+                        e.preventDefault();
+                    }
+                    else {
+                        e.returnValue = false;
+                    }
+                }
+            }
+        }
+        //debugger
+        //function displayErrorMessage(sErrorMsg) {
+        //    win = window.open(",", 'popup', 'height = 200 width=200 toolbar = yes  titlebar=yes status = no resizeable=yes scrollbars=yes');
+        //    win.document.write("" + sErrorMsg + "");
+        //}
+
+
+        function Validation() {
+
+            var username = document.getElementById("uname").value;
+            var pass = document.getElementById("pwd").value;
+
+            if (username == "" && pass == "") {
+                alert("Please Enter Username and Password");
+                return false;
+            }         
+            
+            //else
+            //{
+            //    return true;
+            //}
+        }
+debugger
+        function ValidationSignUp() { 
+
+            var name = document.getElementById("txtname").value;
+            var usernames = document.getElementById("txtusername").value;
+            var mobile = document.getElementById("txtmobile").value;
+            var email = document.getElementById("txtemail").value;
+            var password = document.getElementById("txtpassword").value;
+            
+           
+
+             if (name == "") {
+                
+                 alert("Please Enter Name");
+                 txtname.focus();
+                 return false;
+            }
+              if (usernames == "") {
+                  alert("Please Enter usernames");
+                  txtusername.focus();
+                return false;
+            }
+             if (mobile == "") {
+                alert("Please Enter Mobile No");
+                return false;
+            }
+             if (email == "") {
+                alert("Please Enter Email ID");
+                return false;
+            }
+             if (password == "") {
+                 alert("Please Enter Password");                
+                 return false;
+            }
+            
+            if (document.getElementById('<%=ddlusertype.ClientID %>').selectedIndex == 0)
+            {
+               alert("Please Select UserType");
+                return false;
+            }    
+            else {
+                return true;
+            }
+        }
+
+// Disab    {e form submissions if there are invalid fields
 (function() {
   'use strict';
   window.addEventListener('load', function() {
@@ -205,7 +299,7 @@
       }, false);
     });
   }, false);
-})();
-     </script>
+         })();       
+    </script>
 </body>
 </html>

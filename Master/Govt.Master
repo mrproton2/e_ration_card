@@ -38,7 +38,7 @@ li a {
 }
 
 li a.active {
-  background-color: #04AA6D;
+  background-color: #ff9900;
   color: white;
 }
 
@@ -75,6 +75,7 @@ li a:hover:not(.active) {
   <li><a href="#news">News</a></li>
   <li><a href="#contact">Contact</a></li>
   <li><a href="#about">About</a></li>
+ <li><a href="index.aspx"><asp:LinkButton ID="lbLogout" runat="server" CausesValidation="false" Text="Logout" OnClick="lbLogout_Click"></asp:LinkButton></a></li>
   </ul>
   
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">

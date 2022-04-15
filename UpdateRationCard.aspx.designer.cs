@@ -69,6 +69,15 @@ namespace e_ration_card
         protected global::System.Web.UI.WebControls.CheckBox chkannualincome;
 
         /// <summary>
+        /// changename control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changename;
+
+        /// <summary>
         /// lblnamechange control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,15 @@ namespace e_ration_card
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblnamechange;
+
+        /// <summary>
+        /// txtnewname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtnewname;
 
         /// <summary>
         /// fu1changename control.
@@ -103,6 +121,15 @@ namespace e_ration_card
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnchangename;
+
+        /// <summary>
+        /// changeaddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changeaddress;
 
         /// <summary>
         /// lblchangeaddress control.
@@ -141,6 +168,15 @@ namespace e_ration_card
         protected global::System.Web.UI.WebControls.Button btnchangeaddress;
 
         /// <summary>
+        /// changemembernam control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl changemembernam;
+
+        /// <summary>
         /// lblchangemembername control.
         /// </summary>
         /// <remarks>
@@ -175,6 +211,15 @@ namespace e_ration_card
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnchangemembername;
+
+        /// <summary>
+        /// addmember control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl addmember;
 
         /// <summary>
         /// lbladdmember control.
@@ -213,6 +258,15 @@ namespace e_ration_card
         protected global::System.Web.UI.WebControls.Button btnaddmember;
 
         /// <summary>
+        /// removemember control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl removemember;
+
+        /// <summary>
         /// lblremovemember control.
         /// </summary>
         /// <remarks>
@@ -220,6 +274,15 @@ namespace e_ration_card
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblremovemember;
+
+        /// <summary>
+        /// ddlremovemembername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlremovemembername;
 
         /// <summary>
         /// fu1removemember control.
@@ -247,6 +310,15 @@ namespace e_ration_card
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnremovemember;
+
+        /// <summary>
+        /// annualincome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl annualincome;
 
         /// <summary>
         /// lblincome control.
@@ -283,5 +355,14 @@ namespace e_ration_card
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnannualincome;
+
+        /// <summary>
+        /// gvchangename control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvchangename;
     }
 }

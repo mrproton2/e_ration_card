@@ -11,6 +11,14 @@ namespace e_ration_card.Master
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["user_id"] == null)
+            {
+                Response.Redirect("index.aspx");
+            }
+            else
+            {
+
+            }
 
         }
     }

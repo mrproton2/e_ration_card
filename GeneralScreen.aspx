@@ -1,10 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Master/General.Master" AutoEventWireup="true" CodeBehind="GeneralScreen.aspx.cs" Inherits="e_ration_card.GeneralScreen" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div style="margin-left: 15%; padding: 1px 16px; height: 100%; margin-top:0px;">
+    <div class="border border-dark rounded" style="margin-left: 15%; padding: 1px 16px; height: 100%; margin-top:0px;">
+        <div class="panel panel-default">
+           <div class="panel-body">         
         <div class="row bg-light pt-3" style="padding-left:70%;">
             <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12 ">
                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Check Units</button>
@@ -66,6 +69,9 @@
                 <asp:GridView ID="gvmemberlist" runat="server" AutoGenerateColumns="true"></asp:GridView>
     </div>
     </div>
+
+                        </div>
+                      </div>
         
         <section>
             <div class="container">

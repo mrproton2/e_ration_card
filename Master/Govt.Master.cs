@@ -13,5 +13,13 @@ namespace e_ration_card.Master
         {
 
         }
+
+        protected void lbLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Session.Abandon();
+
+            Response.Redirect("index.aspx?action=logout");
+        }
     }
 }

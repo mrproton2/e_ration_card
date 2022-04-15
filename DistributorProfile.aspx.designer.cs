@@ -15,6 +15,24 @@ namespace e_ration_card
     {
 
         /// <summary>
+        /// txtkotedar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtkotedar;
+
+        /// <summary>
+        /// txtmobile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtmobile;
+
+        /// <summary>
         /// txtemail control.
         /// </summary>
         /// <remarks>
@@ -22,6 +40,15 @@ namespace e_ration_card
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtemail;
+
+        /// <summary>
+        /// txtaddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtaddress;
 
         /// <summary>
         /// ddlstate control.
@@ -51,6 +78,42 @@ namespace e_ration_card
         protected global::System.Web.UI.WebControls.DropDownList ddlconstituency;
 
         /// <summary>
+        /// txtkotedarid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtkotedarid;
+
+        /// <summary>
+        /// txtaadharno control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtaadharno;
+
+        /// <summary>
+        /// txtpanno control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtpanno;
+
+        /// <summary>
+        /// txtpincode control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtpincode;
+
+        /// <summary>
         /// fuphoto control.
         /// </summary>
         /// <remarks>
@@ -58,6 +121,15 @@ namespace e_ration_card
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fuphoto;
+
+        /// <summary>
+        /// lblphotoname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblphotoname;
 
         /// <summary>
         /// fusignature control.
@@ -69,6 +141,15 @@ namespace e_ration_card
         protected global::System.Web.UI.WebControls.FileUpload fusignature;
 
         /// <summary>
+        /// lblsignature control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblsignature;
+
+        /// <summary>
         /// btnsubmit control.
         /// </summary>
         /// <remarks>
@@ -76,6 +157,15 @@ namespace e_ration_card
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnsubmit;
+
+        /// <summary>
+        /// btnupdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnupdate;
 
         /// <summary>
         /// btnclear control.

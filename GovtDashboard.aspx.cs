@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +11,23 @@ namespace e_ration_card
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //string username = "";
+            //string userid = "";
+            //Nullable<int> username = null;
 
+            // username = Session["username"].ToString();
+            // userid = Session["user_id"].ToString();
+
+
+            if (Session["user_id"] == null)
+            {
+                Response.Redirect("index.aspx");
+            }
+            else
+            {
+
+            }
+           
         }
     }
 }

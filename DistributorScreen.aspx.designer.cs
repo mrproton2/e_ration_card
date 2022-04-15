@@ -15,6 +15,15 @@ namespace e_ration_card.Master
     {
 
         /// <summary>
+        /// txtrationcardno control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtrationcardno;
+
+        /// <summary>
         /// btnserch control.
         /// </summary>
         /// <remarks>
@@ -42,22 +51,49 @@ namespace e_ration_card.Master
         protected global::System.Web.UI.WebControls.Label lblmember;
 
         /// <summary>
-        /// lstallgoods control.
+        /// detailDiv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lstallgoods;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl detailDiv;
 
         /// <summary>
-        /// lstselected control.
+        /// lstLeft control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lstselected;
+        protected global::System.Web.UI.WebControls.ListBox lstLeft;
+
+        /// <summary>
+        /// btnLeft control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLeft;
+
+        /// <summary>
+        /// btnRight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRight;
+
+        /// <summary>
+        /// lstRight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lstRight;
 
         /// <summary>
         /// lblprice control.
@@ -78,6 +114,15 @@ namespace e_ration_card.Master
         protected global::System.Web.UI.WebControls.Label lblweight;
 
         /// <summary>
+        /// lbldatetime control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbldatetime;
+
+        /// <summary>
         /// ddlactivemember control.
         /// </summary>
         /// <remarks>
@@ -96,13 +141,13 @@ namespace e_ration_card.Master
         protected global::System.Web.UI.WebControls.DropDownList ddlinactivemember;
 
         /// <summary>
-        /// btnupload control.
+        /// btnsubmit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnupload;
+        protected global::System.Web.UI.WebControls.Button btnsubmit;
 
         /// <summary>
         /// btnclear control.

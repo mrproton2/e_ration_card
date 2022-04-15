@@ -11,7 +11,24 @@ namespace e_ration_card.Master
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["user_id"] == null)
+            {
+                Response.Redirect("index.aspx");
+            }
+            else
+            {
 
+            }
+        }
+        protected void lbLogout_Click(object sender, EventArgs e)
+        {
+            HttpContext.Current.Session.Clear();
+            HttpContext.Current.Session.Abandon();
+            HttpContext.Current.User = null;
+            //Session.Clear();
+            //Session.Abandon();
+
+            Response.Redirect("index.aspx?action=logout");
         }
     }
 }
