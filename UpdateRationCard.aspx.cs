@@ -18,6 +18,9 @@ namespace e_ration_card
 
         changename objchangename = new changename();
         clsRationCardUpdation objclsRationCardUpdation = new clsRationCardUpdation();
+        distribution_details objdistribution_Details = new distribution_details();
+        clsDbConnector objclsDbConnector = new clsDbConnector();
+        clsDistribution objclsDistribution = new clsDistribution();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -41,6 +44,11 @@ namespace e_ration_card
 
 
             BindGridChangeName();
+
+            Label lblhname = this.Master.FindControl("lblhname") as Label;
+            lblhname.Text = Session["cardholdername"].ToString();
+            Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;           
+            lblconstiuency.Text = Session["constituency"].ToString();
 
 
         }
@@ -146,21 +154,26 @@ namespace e_ration_card
 
         private void BindGridChangeName()
         {
-            string constr = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                using (SqlCommand cmd = new SqlCommand())
-                {
-                    cmd.CommandText = "select * from tbl_change_name";
-                    cmd.Connection = con;
-                    con.Open();
-                    gvchangename.DataSource = cmd.ExecuteReader();
-                    gvchangename.DataBind();
-                    con.Close();
-                }
-            }
+
+            string strSQ1 = "select * from tbl_change_name";
+            DataTable dsGrid = new DataTable();
+            dsGrid = objclsDbConnector.GetData(strSQ1);
+
+            gvchangename.DataSource = dsGrid;
+            gvchangename.DataBind();
+            ViewState["dt"] = dsGrid;
+            
         }
 
+        private void BindGridChangeNameD()
+        {
+         
+
+            gvchangename.DataSource = ViewState["dt1"] as DataTable;
+            gvchangename.DataBind();
+        
+
+        }
         protected void lnkDownloadDoc2_Click(object sender, EventArgs e)
         {
 
@@ -254,11 +267,48 @@ namespace e_ration_card
 
         }
 
+        //protected void lnkDelete_Click(object sender, EventArgs e)
+        //{
+
+        //}
+
         //protected void gvchangename_PageIndexChanging(object sender, GridViewPageEventArgs e)
         //{
         //    gvchangename.PageIndex = e.NewPageIndex;
         //    gvchangename.DataSource = ViewState[""];
         //    gvchangename.DataBind();
         //}
+
+        
+
+
+   
+
+        protected void gvchangename_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                string item = e.Row.Cells[0].Text;
+
+                foreach (LinkButton button in e.Row.Cells[6].Controls.OfType<LinkButton>())
+                {
+                    if (button.CommandName == "Delete")
+                    {
+                        button.Attributes["onclick"] = "if(!confirm('Do you want to delete " + item + "?')){ return false; };";
+                    }
+                }
+            }
+        }
+
+       
+
+        protected void gvchangename_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int index = Convert.ToInt32(e.RowIndex);
+            DataTable dt = ViewState["dt"] as DataTable;
+            dt.Rows[index].Delete();
+            ViewState["dt1"] = dt;
+            BindGridChangeNameD();
+        }
     }
 }

@@ -18,6 +18,7 @@ namespace e_ration_card.Models
         public string total_weight { get; set; }
         public int total_price { get; set; }
         public DateTime date_time { get; set; }
-       
+        public int general_id { get; set; }
+
     }
 }

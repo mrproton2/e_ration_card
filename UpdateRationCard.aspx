@@ -186,7 +186,7 @@
         <div class="x_content topmargin noPadding table-responsive">
 <asp:GridView ID="gvchangename" runat="server" HeaderStyle-BackColor="#ff9900" HeaderStyle-ForeColor="White"
     RowStyle-BackColor="" AlternatingRowStyle-BackColor="White" AlternatingRowStyle-ForeColor="#000"
-    AutoGenerateColumns="false" CssClass="table table-bordered" Style="text-align: center" Width="100%">
+    AutoGenerateColumns="false" CssClass="table table-bordered" Style="text-align: center" Width="100%" OnRowDataBound="gvchangename_RowDataBound" OnRowDeleting="gvchangename_RowDeleting">
     <Columns>
         <asp:BoundField DataField="new_name" HeaderText="New Name"/>
         <asp:BoundField DataField="cn_doc1_name" HeaderText="File Name 1"/>  
@@ -209,6 +209,15 @@
                     CommandArgument='<%# Eval("cn_id") %>'></asp:LinkButton>
             </ItemTemplate>
         </asp:TemplateField>
+        <asp:BoundField DataField="Authorize" HeaderText="Approval"/>  
+         <%--<asp:TemplateField ItemStyle-HorizontalAlign = "Center">
+            <ItemTemplate>
+                <asp:LinkButton ID="lnkDelete" runat="server" Text="Delete" 
+                    CommandArgument='<%# Eval("cn_id") %>'></asp:LinkButton>
+            </ItemTemplate>
+        </asp:TemplateField>--%>
+
+        <%--<asp:CommandField ShowDeleteButton="True" ButtonType="Link" />--%>
     </Columns>
 </asp:GridView>
             </div>

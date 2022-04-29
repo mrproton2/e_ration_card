@@ -77,11 +77,10 @@
     </nav>
     </div>
 
-    <div style="margin-top:75px;margin-left:60%;margin-bottom:0px;" >
-   Kotedar Name:-<asp:Label ID="lblkname" runat="server" Font-Bold="True"></asp:Label>
-   Kotedar ID:-<asp:Label ID="lblkid" runat="server" Font-Bold="True"></asp:Label>
+    <div style="margin-top:75px;margin-left:60%;margin-bottom:0px;background-color:#FF9900;" >
+   Kotedar Name:-<asp:Label ID="lblkname" runat="server" Font-Bold="True" ForeColor="White"></asp:Label>
+   Kotedar ID:-<asp:Label ID="lblkid" runat="server" Font-Bold="True" ForeColor="White"></asp:Label>
    Constiuency:-<asp:Label ID="lblconstiuency" runat="server" Font-Bold="True"></asp:Label>
-   <asp:TextBox ID="txtlblkname" runat="server" BorderStyle="None"></asp:TextBox>
    </div>
     
         <div id="myDIV">
@@ -89,7 +88,6 @@
       <li><a href="DistributorScreen.aspx">DS</a></li>
       <li><a href="#news">DS Report</a></li>
       <li><a href="#news">Biometric activation</a></li>
-      <li><a href="#contact">New Govt Notif..</a></li>
       <li><a href="DistributorProfile.aspx">Upadate Profile</a></li>
       <li><a href="index.aspx"><asp:LinkButton ID="lbLogout" runat="server" CausesValidation="false" Text="Logout" OnClick="lbLogout_Click"></asp:LinkButton></a></li>
       </ul>

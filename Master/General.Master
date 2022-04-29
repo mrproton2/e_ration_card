@@ -79,17 +79,15 @@
     </nav>
 
     </div>
-     <div style="margin-top:75px;margin-left:60%;margin-bottom:0px; background-color:red;" >
-   Card Holder Name<asp:Label ID="lblhname" runat="server" Text="Label"></asp:Label>
-   Constiuency<asp:Label ID="lblconstiuency" runat="server" Text="Label"></asp:Label>
+     <div style="margin-top:75px;margin-left:60%;margin-bottom:0px; background-color:#FF9900;" >
+   Card Holder Name:-<asp:Label ID="lblhname" runat="server" Text="Label" Font-Bold="True"></asp:Label>
+   Constiuency:-<asp:Label ID="lblconstiuency" runat="server" Text="Label" Font-Bold="True"></asp:Label>
    </div>
  <div id="myDIV">
       <ul>
       <li><a href="GeneralScreen.aspx">GS</a></li>
       <li><a href="GeneralProfile.aspx">Update Profile</a></li>
       <li><a href="UpdateRationCard.aspx">Ration Card Update</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="#about">About</a></li>
       <li><a href="index.aspx"><asp:LinkButton ID="lbLogout" runat="server" CausesValidation="false" Text="Logout" OnClick="lbLogout_Click"></asp:LinkButton></a></li>
       </ul>
      </div>

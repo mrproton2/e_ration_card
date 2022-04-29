@@ -52,12 +52,10 @@ namespace e_ration_card
 
             }
 
-            //Label lbl = this.Master.FindControl("lblkname") as Label;
-            //lbl.Text = Session["name"].ToString();
-            //TextBox txtlblkname = this.Master.FindControl("txtlblkname") as TextBox;
-            //txtlblkname.Text = Session["name"].ToString();
-            //((Distributor)Master).TextBoxOnMasterPage.Text = txtkotedar.Value;
-            //Master.TextBoxOnMasterPage.Text = txtkotedar.Value;
+            Label lblhname = this.Master.FindControl("lblhname") as Label;
+            lblhname.Text = Session["cardholdername"].ToString();
+            Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
+            lblconstiuency.Text = Session["constituency"].ToString();
 
         }
 

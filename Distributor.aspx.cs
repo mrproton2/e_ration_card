@@ -23,7 +23,14 @@ namespace e_ration_card
             {
                 
               
-            }    
+            }
+            Label lblname = this.Master.FindControl("lblkname") as Label;
+            lblname.Text = Session["name"].ToString();
+            Label lblkid = this.Master.FindControl("lblkid") as Label;
+            lblkid.Text = Session["kotedarid"].ToString();
+            Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
+            string test = Session["constituency"].ToString();
+            lblconstiuency.Text = Session["constituency"].ToString();
 
         }
     }

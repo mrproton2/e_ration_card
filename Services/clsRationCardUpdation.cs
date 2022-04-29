@@ -36,7 +36,8 @@ namespace e_ration_card.Services
                             cmd.Parameters.AddWithValue("@cn_doc2_size",3254);
                             cmd.Parameters.AddWithValue("@cn_doc1_data", objchangename.cn_doc1_data);
                             cmd.Parameters.AddWithValue("@cn_doc2_data", 650); 
-                            cmd.Parameters.AddWithValue("@contcontenttype", objchangename.contcontenttype); 
+                            cmd.Parameters.AddWithValue("@contcontenttype", objchangename.contcontenttype);
+                            cmd.Parameters.AddWithValue("@Authorize","Pending");
                             //cmd.Parameters.AddWithValue("@creatredate", "");
                             //cmd.Parameters.AddWithValue("@createdby", "");
                             cmd.Connection = con;

@@ -19,6 +19,10 @@ namespace e_ration_card.Master
             {
 
             }
+            Label lblhname = this.Master.FindControl("lblhname") as Label;
+            lblhname.Text = Session["cardholdername"].ToString();
+            Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
+            lblconstiuency.Text = Session["constituency"].ToString();
 
         }
     }

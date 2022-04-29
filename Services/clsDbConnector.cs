@@ -76,6 +76,24 @@ namespace e_ration_card.Services
             return dsTemp;
         }
 
+        public DataTable GetData(string strSQL)
+        {
+            if (dbConnection.State == ConnectionState.Closed)
+            {
+                dbConnection.Open();
+            }
+            if (dbConnection.State == ConnectionState.Broken)
+            {
+                dbConnection.Close();
+                dbConnection.Open();
+            }
+            dbAdapter = new SqlDataAdapter(strSQL, dbConnection);
+            DataTable dsTemp = new DataTable();
+            dbAdapter.Fill(dsTemp);
+            dbConnection.Close();
+            return dsTemp;
+        }
+
         public SqlDataReader getSqlDataReader(string strSQL)
         {
             if (dbConnection.State == ConnectionState.Closed)

@@ -60,15 +60,6 @@ namespace e_ration_card.Master
         protected global::System.Web.UI.WebControls.Label lblconstiuency;
 
         /// <summary>
-        /// txtlblkname control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtlblkname;
-
-        /// <summary>
         /// lbLogout control.
         /// </summary>
         /// <remarks>

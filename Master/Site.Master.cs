@@ -112,7 +112,21 @@ namespace e_ration_card.Master
                     Session["username"] = dtTemp.Rows[0]["user_name"].ToString();
                     Session["user_id"] = dtTemp.Rows[0]["user_id"].ToString();
                     Session["name"] = dtTemp.Rows[0]["name"].ToString();
-                    if (Session["username"].ToString() != null && Session["user_id"].ToString() != null)
+
+                        clsuserlogin_logic objclsuserlogin_logic = new clsuserlogin_logic();
+                        users objusers = new users();
+                        clsDbConnector objclsDbConnector = new clsDbConnector();
+                        clsUsers_logic objclsUsers_logic = new clsUsers_logic();
+                        string userid = Session["user_id"].ToString();
+                        string strSQL;
+                        strSQL = "Select * from tbl_general_registration where user_id ='" + userid + "'";
+                        DataSet ds = objclsDbConnector.GetDataSet(strSQL);
+                        DataTable dt = ds.Tables[0];
+                        Session["cardholdername"] = dt.Rows[0]["card_holder_name"].ToString();
+                        Session["constituency"] = dt.Rows[0]["constituency"].ToString();
+
+
+                        if (Session["username"].ToString() != null && Session["user_id"].ToString() != null)
                     {
                         Response.Redirect("GeneralDashbord.aspx");
                     }
@@ -136,6 +150,8 @@ namespace e_ration_card.Master
                         strSQL = "Select * from tbl_kotedar_registration where user_id ='" + userid + "'";
                         DataSet ds = objclsDbConnector.GetDataSet(strSQL);
                         DataTable dt = ds.Tables[0];
+                        Session["kotedarid"] = dt.Rows[0]["kotedar_no"].ToString();
+                        Session["constituency"] = dt.Rows[0]["contituency"].ToString();
 
                         if (Session["username"].ToString() != null && Session["user_id"].ToString() != null)
                     {

@@ -146,7 +146,7 @@
            <!-- Modal footer -->
         <div class="modal-footer">
             <div class="modal-footer">
-            <asp:Button ID="btnsignup" runat="server" Text="Sign Up" class="btn btn-primary" Onclick="btnsignup_Click" OnClientClick="return ValidationSignUp();"  />
+            <asp:Button ID="btnsignup" runat="server" Text="Sign Up" class="btn btn-primary" Onclick="btnsignup_Click" OnClientClick="return ValidationSignUp() ;"  />
           <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
         </div>
@@ -227,16 +227,21 @@
             var username = document.getElementById("uname").value;
             var pass = document.getElementById("pwd").value;
 
-            if (username == "" && pass == "") {
-                alert("Please Enter Username and Password");
+            if (username == "") {
+                alert("Please Enter Username");
                 return false;
             }         
-            
+            if (pass == "") {
+                alert("Please Enter Password");
+                return false;
+            }   
             //else
             //{
             //    return true;
             //}
         }
+     
+
 debugger
         function ValidationSignUp() { 
 

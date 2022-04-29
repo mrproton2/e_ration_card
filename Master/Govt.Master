@@ -23,7 +23,7 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  width: 15%;
+  width: 10%;
   background-color: #f1f1f1;
   position:fixed;
   height: 100%;
@@ -71,10 +71,8 @@ li a:hover:not(.active) {
 </div>
 <div style="margin-top:70px">
   <ul>
-  <li><a class="active" href="#home">Home</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="#contact">Contact</a></li>
-  <li><a href="#about">About</a></li>
+  <li><a href="GovtDashboard.aspx">Correction Request</a></li>
+  <li><a href="rptDistributionData.aspx">Distribution Report</a></li>
  <li><a href="index.aspx"><asp:LinkButton ID="lbLogout" runat="server" CausesValidation="false" Text="Logout" OnClick="lbLogout_Click"></asp:LinkButton></a></li>
   </ul>
   
@@ -82,5 +80,18 @@ li a:hover:not(.active) {
             </asp:ContentPlaceHolder>
         </div>
     </form>
+     <script type="text/javascript">
+            const currentlLocation = location.href;
+            const menuItem = document.querySelectorAll('a');
+            const menuLength = menuItem.length  
+            for (let i = 0; i < menuLength; i++)
+            {
+                if (menuItem[i].href === currentlLocation) {
+                    menuItem[i].className = "active"
+
+                }
+         
+            }
+     </script>
 </body>
 </html>
