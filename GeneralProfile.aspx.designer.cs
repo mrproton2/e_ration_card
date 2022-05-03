@@ -39,7 +39,7 @@ namespace e_ration_card
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtmobileno;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtmobileno;
 
         /// <summary>
         /// txtaadharcardno control.
@@ -48,7 +48,7 @@ namespace e_ration_card
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtaadharcardno;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtaadharcardno;
 
         /// <summary>
         /// txtpanno control.
@@ -66,7 +66,7 @@ namespace e_ration_card
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtemail;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtemail;
 
         /// <summary>
         /// gvmemberlist control.
@@ -93,7 +93,7 @@ namespace e_ration_card
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtpincode;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtpincode;
 
         /// <summary>
         /// txtannualincome control.
@@ -102,7 +102,7 @@ namespace e_ration_card
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtannualincome;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtannualincome;
 
         /// <summary>
         /// ddlstate control.

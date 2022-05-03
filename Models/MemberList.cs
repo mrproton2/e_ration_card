@@ -15,7 +15,7 @@ namespace e_ration_card.Models
         public string createdby { get; set; }
         public string Status { get; set; }
         public int user_id { get; set; }
-        public int aadharno { get; set; }
+        public string aadharno { get; set; }
         public DateTime dob { get; set; }
 
 

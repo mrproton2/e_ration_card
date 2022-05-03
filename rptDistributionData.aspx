@@ -34,8 +34,8 @@
                
                       </div>
              <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12 pl-0 pr-0"> 
-                 <asp:DropDownList ID="ddlconstituency" runat="server" class="form-control" AutoPostBack="true">
-                     <asp:ListItem Value="Consumer" Selected="true">Consumer</asp:ListItem>
+                 <asp:DropDownList ID="ddlconstituency" runat="server" class="form-control"  AutoPostBack="true" DataTextField="consitiuency_name" DataValueField="consitiuency_name">
+                    
                  </asp:DropDownList>
                 </div>
         </div>

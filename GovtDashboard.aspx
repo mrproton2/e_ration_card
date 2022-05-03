@@ -31,11 +31,12 @@
                  </div> 
 
                     <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12 pl-0 pr-0">
-                         <asp:TextBox ID="txtconstituency" class="form-control" runat="server"></asp:TextBox>
+                        <asp:DropDownList ID="ddlconstituency" Datavalufield="consitiuency_name" DataTextField="consitiuency_name" class="form-control" runat="server"></asp:DropDownList>
                               </div>
 
              <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12 pl-5">
                  <asp:Button ID="btnserch" runat="server" class="btn-primary" Text="Search" OnClick="btnserch_Click" />
+                 <asp:Button ID="btnSubmit" runat="server" class="btn-primary" Text="Submit" OnClick="btnSubmit_Click" />
                  <asp:Button ID="btnclear" runat="server" class="btn-danger" Text="Clear"  />
                       </div>
                 
@@ -44,7 +45,7 @@
    <div class="x_content topmargin noPadding table-responsive">
   <asp:GridView ID="gvchangename" runat="server" HeaderStyle-BackColor="#ff9900" HeaderStyle-ForeColor="White"
     RowStyle-BackColor="" AlternatingRowStyle-BackColor="White" AlternatingRowStyle-ForeColor="#000"
-    AutoGenerateColumns="false" CssClass="table table-bordered table-responsive" Style="text-align: center" Width="100%" OnRowDataBound="gvchangename_RowDataBound" OnRowDeleting="gvchangename_RowDeleting" OnPreRender="gvchangename_PreRender">
+    AutoGenerateColumns="false" CssClass="table table-bordered table-responsive" Style="text-align: center" Width="100%" OnRowDataBound="gvlist_RowDataBound">
     <Columns> 
         <asp:TemplateField>
               <HeaderTemplate>
@@ -125,26 +126,32 @@
         </asp:TemplateField>
 
         <%--<asp:CommandField ShowDeleteButton="True" ButtonType="Link" />--%>
+       
     </Columns>
+        <EmptyDataTemplate>
+       <CENTER><div>No records found.</div></CENTER>
+    </EmptyDataTemplate>
 </asp:GridView>
             </div>
         </div>
-     <script>
+    
 
-         debugger
+    <script>
+
+        debugger
         function SelectAll(toggle) {
             var gvlist = document.getElementById('<%=gvchangename.ClientID %>')
-            var len = gvchangename.rows.length;
+            var len = gvlist.rows.length;
 
             for (intGv = 1; intGv < len; intGv++) {
-                if (!gvchangename.rows[intGv].cells[0].children[0].firstChild.disabled) {
-                    gvchangename.rows[intGv].cells[0].children[0].firstChild.checked = toggle;
-                  
+                if (!gvlist.rows[intGv].cells[0].children[0].firstChild.disabled) {
+                    gvlist.rows[intGv].cells[0].children[0].firstChild.checked = toggle;
+
                 }
             }
         }
 
-       
 
-     </script>
+
+    </script>
 </asp:Content>

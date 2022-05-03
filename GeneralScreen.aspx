@@ -10,8 +10,8 @@
            <div class="panel-body"  >         
         <div class="row bg-light pt-3" style="padding-left:70%;">
             <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12 ">
-                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Check Units</button>
-         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalThum">Biometric History</button>
+                 <button type="button" style="background-color:#ff9900; border: none; border-radius: 8px; display: inline-block;  color:white"  data-toggle="modal" data-target="#myModal">Check Units</button>
+         <button type="button" style="background-color:#ff9900; border: none; border-radius: 8px; color:white" data-toggle="modal" data-target="#myModalThum">Biometric History</button>
                 </div>
             </div>
 
@@ -82,7 +82,7 @@
 
                             <!-- Modal Header -->
                             <div class="modal-header">
-                                <h4 class="modal-title">cereals</h4>
+                                <h4 class="modal-title">Cereals Details</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
 
@@ -119,32 +119,24 @@
 
                             <!-- Modal Header -->
                             <div class="modal-header">
-                                <h4 class="modal-title">cereals</h4>
+                                <h4 class="modal-title">Biometric Details</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
 
                             <!-- Modal body -->
                             <div class="modal-body text-primary">
-                                <form action="" class="needs-validation" novalidate>
-                                    <div class="form-group">
-                                        <label for="uname">Username:</label>
-                                        <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
-                                        <div class="valid-feedback">Valid.</div>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="pwd">Password:</label>
-                                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
-                                        <div class="valid-feedback">Valid.</div>
-                                        <div class="invalid-feedback">Please fill out this field.</div>
-                                    </div>
-                                </form>
+                                <div class="modal-body text-primary">
+                                <asp:GridView ID="gvlist" runat="server" HeaderStyle-BackColor="#ff9900" HeaderStyle-ForeColor="White"
+    RowStyle-BackColor="" AlternatingRowStyle-BackColor="White" AlternatingRowStyle-ForeColor="#000"
+    AutoGenerateColumns="true" CssClass="table table-bordered table-responsive" Style="text-align: center" Width="100%">
+       <EmptyDataTemplate>
+       <CENTER><div>No records found.</div></CENTER>
+    </EmptyDataTemplate>
+</asp:GridView>
                             </div>
 
                             <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <asp:Button ID="Button1" runat="server" Text="Login" class="btn btn-primary" />
-                                <asp:Button ID="Button2" runat="server" Text="Sign Up" class="btn btn-primary" data-toggle="modal" data-target="#myModalSignUp" />
+                            <div class="modal-footer">                               
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             </div>
 

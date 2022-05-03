@@ -51,10 +51,10 @@
                   <asp:Label ID="lblchangeaddress" runat="server" Text="Address Correction:"></asp:Label>
                  </div> 
                     <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12 pl-0 pr-0">
-                  <input type="text" id="txtoldaddress" placeholder="Old Address:" name="oldaddress" required readonly="readonly">
+                  <input type="text" id="txtoldaddress" runat="server" placeholder="Old Address:" name="oldaddress" required readonly="readonly">
                               </div>
              <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12 pl-0 pr-0">
-                 <input type="text" id="txtnewaddress" placeholder="New address" name="newaddress" required>
+                 <input type="text" id="txtnewaddress" runat="server" placeholder="New address" name="newaddress" required>
                       </div>
 
 
@@ -65,7 +65,7 @@
                  <asp:FileUpload ID="fu2address" runat="server" />
                               </div>
              <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12 pl-5">
-                 &nbsp;<asp:Button ID="btnchangeaddress" runat="server" Text="Upload" OnClick="btnchangeaddress_Click" />
+                 &nbsp;<asp:Button ID="btnchangeaddress" runat="server" Text="Upload" OnClick="btnchangeaddress_Click1"/>
                       </div>
                 
                 </div>
@@ -81,10 +81,10 @@
                  <asp:Label ID="lblchangemembername" runat="server" Text="Member Name Correction:"></asp:Label>
                  </div> 
                     <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12 pl-0 pr-0">
-                  <input type="text" id="txtolmembername" placeholder="Old Member Name:" name="oldmembername" required readonly="readonly">
+                  <input type="text" id="txtolmembername" runat="server" placeholder="Old Member Name:" name="oldmembername" required readonly="readonly">
                               </div>
              <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12 pl-0 pr-0">
-                 <input type="text" id="txtnewmembername" placeholder="New Member Name" name="newmembername" required>
+                 <input type="text" id="txtnewmembername" runat="server" placeholder="New Member Name" name="newmembername" required>
                       </div>
                 
                 
@@ -108,10 +108,10 @@
                  <asp:Label ID="lbladdmember" runat="server" Text="Add Member:"></asp:Label>
                  </div> 
                     <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12 pl-0 pr-0">
-                  <input type="text" id="txtaddmembername" placeholder="Member Name:" name="membername" required>
+                  <input type="text" id="txtaddmembername" runat="server" placeholder="Member Name:" name="membername" required>
                               </div>
              <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12 pl-0 pr-0">
-                 <input type="text" id="txtaddmemberrelation" placeholder="Relation" name="memberrelation" required>
+                 <input type="text" id="txtaddmemberrelation" runat="server" placeholder="Relation" name="memberrelation" required>
                       </div>
                 
                 
@@ -222,6 +222,44 @@
 </asp:GridView>
             </div>
     
+        <div class="x_content topmargin noPadding table-responsive">
+<asp:GridView ID="gvchangeaddress" runat="server" HeaderStyle-BackColor="#ff9900" HeaderStyle-ForeColor="White"
+    RowStyle-BackColor="" AlternatingRowStyle-BackColor="White" AlternatingRowStyle-ForeColor="#000"
+    AutoGenerateColumns="false" CssClass="table table-bordered" Style="text-align: center" Width="100%" OnRowDataBound="gvchangename_RowDataBound" OnRowDeleting="gvchangename_RowDeleting">
+    <Columns>
+        <asp:BoundField DataField="new_name" HeaderText="New Address"/>
+        <asp:BoundField DataField="cn_doc1_name" HeaderText="File Name 1"/>  
+        <asp:TemplateField ItemStyle-HorizontalAlign = "Center" Visible="false">
+            <ItemTemplate>
+                <asp:LinkButton ID="lnkViewDoc1" runat="server" Text="View" OnClick="lnkViewDoc1_Click"
+                    CommandArgument='<%# Eval("cn_id") %>'></asp:LinkButton>
+            </ItemTemplate>
+        </asp:TemplateField>
+        <asp:TemplateField ItemStyle-HorizontalAlign = "Center">
+            <ItemTemplate>
+                <asp:LinkButton ID="lnkDownloadDocadd1" runat="server" Text="Download" OnClick="lnkDownloadDocadd1_Click"
+                    CommandArgument='<%# Eval("cn_id") %>'></asp:LinkButton>
+            </ItemTemplate>
+        </asp:TemplateField>
+        <asp:BoundField DataField="cn_doc2_name" HeaderText="File Name 2"/>
+        <asp:TemplateField ItemStyle-HorizontalAlign = "Center">
+            <ItemTemplate>
+                <asp:LinkButton ID="lnkDownloadDocadd2" runat="server" Text="Download" OnClick="lnkDownloadDocadd2_Click"
+                    CommandArgument='<%# Eval("cn_id") %>'></asp:LinkButton>
+            </ItemTemplate>
+        </asp:TemplateField>
+        <asp:BoundField DataField="Authorize" HeaderText="Approval"/>  
+         <%--<asp:TemplateField ItemStyle-HorizontalAlign = "Center">
+            <ItemTemplate>
+                <asp:LinkButton ID="lnkDelete" runat="server" Text="Delete" 
+                    CommandArgument='<%# Eval("cn_id") %>'></asp:LinkButton>
+            </ItemTemplate>
+        </asp:TemplateField>--%>
+
+        <%--<asp:CommandField ShowDeleteButton="True" ButtonType="Link" />--%>
+    </Columns>
+</asp:GridView>
+            </div>
    </div>
 
          

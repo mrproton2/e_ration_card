@@ -17,12 +17,18 @@ namespace e_ration_card
         distribution_details objdistribution_Details = new distribution_details();
         clsDbConnector objclsDbConnector = new clsDbConnector();
         clsDistribution objclsDistribution = new clsDistribution();
+
+     
         protected void Page_Load(object sender, EventArgs e)
         {
             clsDbConnector objclsDbConnector = new clsDbConnector();
             string strSQ = "SELECT state_id,state_name from tbl_state";
             DataSet ds = new DataSet();
             ds = objclsDbConnector.GetDataSet(strSQ);
+
+            string strSQ1 = "SELECT consitiuency_name from tbl_consitiuency";
+            DataSet ds1 = new DataSet();
+            ds1 = objclsDbConnector.GetDataSet(strSQ1);
             if (Session["user_id"] == null)
             {
                 Response.Redirect("index.aspx");
@@ -38,9 +44,15 @@ namespace e_ration_card
                 ddlstate.DataSource = ds.Tables[0];
                 ddlstate.DataBind();
                 ddlstate.Items.Insert(0, "**SELECT**");
-                ddldistrict.Items.Insert(0, "**SELECT**");                
+                ddldistrict.Items.Insert(0, "**SELECT**");
+
+                ddlconstituency.DataSource = ds1.Tables[0];
+                ddlconstituency.DataBind();
+                ddlconstituency.Items.Insert(0, "**SELECT**");
 
             }
+
+           
 
             BindGridAll();
         }
@@ -62,7 +74,7 @@ namespace e_ration_card
                 "from tbl_general_registration A " +
                 "inner join tbl_dd_cerealsdata B " +
                 "on A.general_id = B.general_id " + 
-                "where states='"+ ddlstate.SelectedItem.Text + "' or district='"+ ddldistrict.SelectedValue + "' or constituency='" + ddlconstituency.Text + "' And rationcard_no='" + txtration.Text+ "' And kotedar_no='" + txtkotedarno.Text+"'";
+                "where states='"+ ddlstate.SelectedItem.Text + "' And district='"+ ddldistrict.SelectedValue + "' And constituency='" + ddlconstituency.Text + "' or rationcard_no='" + txtration.Text+ "' or kotedar_no='" + txtkotedarno.Text+"'";
 
 
 

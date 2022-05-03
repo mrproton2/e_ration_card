@@ -17,6 +17,7 @@ namespace e_ration_card
     {
 
         changename objchangename = new changename();
+        clschangeaddress objclschangeaddress = new clschangeaddress();
         clsRationCardUpdation objclsRationCardUpdation = new clsRationCardUpdation();
         distribution_details objdistribution_Details = new distribution_details();
         clsDbConnector objclsDbConnector = new clsDbConnector();
@@ -44,6 +45,7 @@ namespace e_ration_card
 
 
             BindGridChangeName();
+            BindGridAddress();
 
             Label lblhname = this.Master.FindControl("lblhname") as Label;
             lblhname.Text = Session["cardholdername"].ToString();
@@ -309,6 +311,124 @@ namespace e_ration_card
             dt.Rows[index].Delete();
             ViewState["dt1"] = dt;
             BindGridChangeNameD();
+        }
+
+        protected void lnkDownloadDocadd1_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse((sender as LinkButton).CommandArgument);
+            byte[] bytes;
+            string fileName, contentType;
+            string constr = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = "select * from tbl_address_correction where ac_id=@ac_id";
+                    cmd.Parameters.AddWithValue("@ac_id", id);
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        sdr.Read();
+                        bytes = (byte[])sdr["cn_doc1_data"];
+                        contentType = sdr["contcontenttype"].ToString();
+                        fileName = sdr["cn_doc1_name"].ToString();
+                    }
+                    con.Close();
+                }
+            }
+            Response.Clear();
+            Response.Buffer = true;
+            Response.Charset = "";
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.ContentType = contentType;
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+            Response.BinaryWrite(bytes);
+            Response.Flush();
+            Response.End();
+
+        }
+
+        protected void lnkDownloadDocadd2_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse((sender as LinkButton).CommandArgument);
+            byte[] bytes;
+            string fileName, contentType;
+            string constr = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = "select * from tbl_address_correction where ac_id=@ac_id";
+                    cmd.Parameters.AddWithValue("@ac_id", id);
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        sdr.Read();
+                        bytes = (byte[])sdr["cn_doc2_data"];
+                        contentType = sdr["contcontenttype"].ToString();
+                        fileName = sdr["cn_doc2_name"].ToString();
+                    }
+                    con.Close();
+                }
+            }
+            Response.Clear();
+            Response.Buffer = true;
+            Response.Charset = "";
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.ContentType = contentType;
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+            Response.BinaryWrite(bytes);
+            Response.Flush();
+            Response.End();
+
+        }
+
+        protected void btnchangeaddress_Click1(object sender, EventArgs e)
+        {
+            objclschangeaddress.new_address = txtnewaddress .Value;
+            objclschangeaddress.old_address =txtoldaddress.Value;
+            HttpPostedFile postedFile =fu1address.PostedFile;
+            //string filename = Path.GetFileName(postedFile.FileName);
+            //string fileExtension = Path.GetExtension(filename);
+            //int fileSize = postedFile.ContentLength;
+            objchangename.contcontenttype = fu1address.PostedFile.ContentType;
+
+
+            objclschangeaddress.ac_doc1_name = Path.GetFileName(postedFile.FileName);
+            string fileExtension = Path.GetExtension(objclschangeaddress.ac_doc1_name);
+            objclschangeaddress.ac_doc1_size = postedFile.ContentLength;
+
+            Stream stream = postedFile.InputStream;
+            BinaryReader binaryReader = new BinaryReader(stream);
+            objclschangeaddress.ac_doc1_data = binaryReader.ReadBytes((int)stream.Length);
+
+            objclsRationCardUpdation.ChangeAddress(objclschangeaddress);
+
+        }
+
+        private void BindGridAddress()
+        {
+
+            string strSQ1 = "select * from tbl_address_correction";
+            DataTable dsGrid = new DataTable();
+            dsGrid = objclsDbConnector.GetData(strSQ1);
+
+            gvchangeaddress.DataSource = dsGrid;
+            gvchangeaddress.DataBind();
+            ViewState["dtadd"] = dsGrid;
+
+        }
+
+        private void BindGridAddressD()
+        {
+
+
+            gvchangeaddress.DataSource = ViewState["dtadd1"] as DataTable;
+            gvchangeaddress.DataBind();
+
+
         }
     }
 }

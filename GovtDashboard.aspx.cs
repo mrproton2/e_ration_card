@@ -28,7 +28,13 @@ namespace e_ration_card
 
             // username = Session["username"].ToString();
             // userid = Session["user_id"].ToString();
-            BindGridChangeName();
+
+            clsDbConnector objclsDbConnector = new clsDbConnector();
+            string strSQ = "SELECT consitiuency_name from tbl_consitiuency";
+            DataSet ds = new DataSet();
+            ds = objclsDbConnector.GetDataSet(strSQ);
+
+            //BindGridChangeName();
 
             if (Session["user_id"] == null)
             {
@@ -38,7 +44,17 @@ namespace e_ration_card
             {
 
             }
-           
+            if (!IsPostBack)
+            {
+                
+                ddlconstituency.DataSource = ds.Tables[0];
+                ddlconstituency.DataBind();
+                ddlconstituency.Items.Insert(0, "**SELECT**");
+                BindGridChangeName();
+                BindGridChangeNameB();
+
+            }
+
         }
 
         private void BindGridChangeName()
@@ -83,7 +99,10 @@ namespace e_ration_card
                     "Authorize,b.reject_reson " +
                     "from tbl_general_registration a " +
                     "inner join tbl_change_name b " +
-                    "on a.user_id = b.user_id where a.constituency='" + txtconstituency.Text + "'";
+                    "on a.user_id = b.user_id where a.constituency='" + ddlconstituency.SelectedItem.Text  +"' " +
+                    "and Authorize='Pending'";
+
+
                 DataTable dsGrid = new DataTable();
                 dsGrid = objclsDbConnector.GetData(strSQ1);
                 gvchangename.DataSource = dsGrid;
@@ -93,7 +112,7 @@ namespace e_ration_card
             }
             if (ddlcorrectiontype.SelectedValue == "Change Address")
             {
-                string strSQ1 = "select * from tbl_change_name where a.constituency='" + txtconstituency.Text + "'";
+                string strSQ1 = "select * from tbl_change_name where a.constituency='" + ddlconstituency.SelectedItem.Text + "'";
                 DataTable dsGrid = new DataTable();
                 dsGrid = objclsDbConnector.GetData(strSQ1);
                 gvchangename.DataSource = dsGrid;
@@ -289,32 +308,32 @@ namespace e_ration_card
             BindGridChangeNameB();
         }
 
-        protected void gvchangename_PreRender(object sender, EventArgs e)
-        {
-        //    int iFixedColumn = 1;
-        //    DataTable dt = new DataTable();
+        //protected void gvchangename_PreRender(object sender, EventArgs e)
+        //{
+        ////    int iFixedColumn = 1;
+        ////    DataTable dt = new DataTable();
 
-        //    try
-        //    {
-        //        dt = (DataTable)gvchangename.DataSource;
+        ////    try
+        ////    {
+        ////        dt = (DataTable)gvchangename.DataSource;
 
-        //        for (short i = 0; i <= dt.Columns.Count - 1; i++)
-        //        {
-        //            DataColumn col = dt.Columns[i];
-        //            if (col.ColumnName.ToUpper().StartsWith("H_"))
-        //            {
-        //                for (short j = 0; j <= gvchangename.Rows.Count - 1; j++)
-        //                {
-        //                    gvchangename.Rows[j].Cells[i + iFixedColumn].Attributes.Add("style", "display:none");
-        //                }
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Response.Write(ex.Message);
-        //    }
-        }
+        ////        for (short i = 0; i <= dt.Columns.Count - 1; i++)
+        ////        {
+        ////            DataColumn col = dt.Columns[i];
+        ////            if (col.ColumnName.ToUpper().StartsWith("H_"))
+        ////            {
+        ////                for (short j = 0; j <= gvchangename.Rows.Count - 1; j++)
+        ////                {
+        ////                    gvchangename.Rows[j].Cells[i + iFixedColumn].Attributes.Add("style", "display:none");
+        ////                }
+        ////            }
+        ////        }
+        ////    }
+        ////    catch (Exception ex)
+        ////    {
+        ////        Response.Write(ex.Message);
+        ////    }
+        //}
 
         protected void gvlist_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -370,6 +389,76 @@ namespace e_ration_card
                 columnIndex++; // keep adding 1 while we don't have the correct name
             }
             return columnIndex;
+        }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+
+            if (Session["user_id"] != null)
+            {
+                string user_id1 = Session["user_id"].ToString();
+                //objgeneral_registration.user_id = Convert.ToInt32(user_id1);
+            }
+
+            Bulk_Update();
+
+            
+        }
+        protected void Bulk_Update()
+        {
+            try
+            {
+                
+                foreach (GridViewRow row in gvchangename.Rows)
+                {
+                 
+                    CheckBox chkRow = (CheckBox)row.FindControl("chkChange");
+                    bool isSelected = (row.FindControl("chkChange") as CheckBox).Checked;
+                    if (chkRow.Checked || isSelected)
+                    {
+                        //string nowDate = DateTime.Now.AddDays(365).ToString();                       
+                        DropDownList ddlapprovestatus = row.FindControl("ddlapprovestatus") as DropDownList;
+                        string auth = ddlapprovestatus.SelectedItem.Text;
+                        TextBox reason = (TextBox)row.FindControl("txtrejectreason");
+
+                        string res = reason.Text; 
+                         Label cnid = (Label)row.FindControl("lblcnid");
+                        int cnid1 = Convert.ToInt32(cnid.Text);
+                        string dateCreated = DateTime.Now.ToShortDateString();
+                        string user_id1 = Session["user_id"].ToString();
+                        string updtQuery = "update tbl_change_name set Authorize='" + auth + "'," +
+                            "reject_reson='" + res + "'," +
+                            " creatredate ='" + dateCreated + "' " +
+                            "where cn_id='" + cnid1 + "'";
+                        string consString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+                        //using (SqlConnection con = new SqlConnection(consString))
+                        using (SqlConnection UpdtCon = new SqlConnection(consString))
+                        using (SqlCommand UpdtCmd = new SqlCommand(updtQuery, UpdtCon))
+                        {
+                            UpdtCon.Open();
+                            int i = UpdtCmd.ExecuteNonQuery();
+                            if (i > 0)
+                            {
+                                //string message = "Approval/Rejection Done.";
+                                //script += message;
+                                //script += "')};";
+                                //ClientScript.RegisterStartupScript(this.GetType(), "", script, true);
+                                Response.Write("<script>alert('Detail Updated Successfull');</script>");
+
+                            }
+                        }
+                    }
+                }
+
+               
+                gvchangename.DataSource = "";
+                gvchangename.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script language='javascript'>alert('" + Server.HtmlEncode(ex.Message.ToString()) + "')</script>");
+            }
+
         }
 
     }

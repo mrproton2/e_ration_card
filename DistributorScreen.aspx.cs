@@ -41,6 +41,8 @@ namespace e_ration_card.Master
             {
                
             }
+
+         
             if (!IsPostBack)
             {
                 //string strSQ = "select cereals_name Name,per_personunit Units from tbl_default_cereals";
@@ -49,7 +51,9 @@ namespace e_ration_card.Master
                 //dsGrid.Columns.AddRange(new DataColumn[1] { new DataColumn("activecount", typeof(string)) });
                 //gvlist.DataSource = dsGrid;
                 //gvlist.DataBind();
-                
+
+               
+
             }
             Label lblname = this.Master.FindControl("lblkname") as Label;
             lblname.Text = Session["name"].ToString();
@@ -111,10 +115,26 @@ namespace e_ration_card.Master
             dsActiveCount = objclsDbConnector.GetDataSet(strSQLCount);
             string activecount = dsActiveCount.Tables[0].Rows[0]["column1"].ToString();
             lblmember.Text = activecount;
+            int checkactive = Convert.ToInt32(activecount);
             if(activecount !=null)
             {
                 detailDiv.Visible = true;
                 //int activecount1 = Convert.ToInt32(activecount);
+            }
+
+            string strSQLCount1 = "select count(1)" +
+              "from tbl_general_registration where rationcard_no ='" + rationcard + "'";
+            DataSet dsRationCard = new DataSet();
+            dsRationCard = objclsDbConnector.GetDataSet(strSQLCount);
+            string rationcardcount = dsRationCard.Tables[0].Rows[0]["column1"].ToString();
+            //lblmember.Text = activecount;
+            int checkactive1 = Convert.ToInt32(rationcardcount);
+            if (checkactive1 == 0 && checkactive == 0)
+            {
+                Response.Write("<script>alert('Invalid Rationcard No');</script>");
+                Initalizefield();
+                return;
+                
             }
 
             //lblprice.Text = Convert.ToString(Convert.ToInt32(activecount) * 3);
@@ -439,6 +459,7 @@ namespace e_ration_card.Master
         }
         protected void btnclear_Click(object sender, EventArgs e)
         {
+            detailDiv.Visible = false;
             txtrationcardno.Value = "";
             lblchn.Text = "";
             lbldatetime.Text = "";
@@ -454,6 +475,22 @@ namespace e_ration_card.Master
 
 
         }
-     
+
+        public void Initalizefield()
+        {
+            detailDiv.Visible = false;
+            //txtrationcardno.Value = "";
+            lblchn.Text = "";
+            lbldatetime.Text = "";
+            lblgeneralid.Text = "";
+            lblmember.Text = "";
+            lblprice.Text = "";
+            lblweight.Text = "";
+            //ddlactivemember.SelectedIndex = 0;
+            //ddlinactivemember.SelectedIndex = 0;
+            gvlist.DataSource = null;
+            //divrecord.visible = false;
+        }
+
     }
 }

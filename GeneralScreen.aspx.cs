@@ -44,6 +44,7 @@ namespace e_ration_card
             lblconstiuency.Text = Session["constituency"].ToString();
             GetData();
             BindGridAll();
+            Authenticatembr();
         }
 
         public void GetData()
@@ -78,9 +79,9 @@ namespace e_ration_card
 
 
             string userid = Session["user_id"].ToString();
-            string strSQ1 = "select A.rationcard_no RationCardNo,A.card_holder_name CardHolderName,A.pancard_no PanNo,A.states 'StateName******',A.district DistrictName," +
-                "A.constituency Constituency,A.typeof_rationcard RationCardType,A.aadharcard_no AadharNO,B.cereals_name CerealsName,B.per_personunit UnitPerPerson,B.weight_individual Weight," +
-                "B.price_individual Price,B.kotedar_name KotedarName,B.kotedar_no KotedarNo,B.curr_date DateTime " +
+            string strSQ1 = "select A.rationcard_no RationCardNo,A.card_holder_name CardHolderName," +
+                "A.typeof_rationcard RationCardType,B.cereals_name CerealsName,B.per_personunit UnitPerPerson,B.weight_individual Weight," +
+                "B.price_individual Price,B.kotedar_name KotedarName,B.curr_date DateTime " +
                 "from tbl_general_registration A " +
                 "inner join tbl_dd_cerealsdata B " +
                 "on A.general_id = B.general_id " +
@@ -97,6 +98,25 @@ namespace e_ration_card
 
         }
 
+
+        private void Authenticatembr()
+        {
+
+
+            string userid = Session["user_id"].ToString();
+            string strSQ1 = "select Authenticated_mbr Authentication_Person,date_time Dates,kotedar_name KotdarName " +
+                "from tbl_distribution_details " +
+                "where rationcard_no='" + lblrationca.Text + "'"; 
+
+
+
+            DataTable dsGrid = new DataTable();
+            dsGrid = objclsDbConnector.GetData(strSQ1);
+            gvlist.DataSource = dsGrid;
+            gvlist.DataBind();
+
+
+        }
         //protected void gvchangename_PageIndexChanging(object sender, GridViewPageEventArgs e)
         //{
         //    gvchangename.PageIndex = e.NewPageIndex;

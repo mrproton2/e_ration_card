@@ -22,15 +22,20 @@ namespace e_ration_card
         kotedar_registration objkotedar_registration = new kotedar_registration();
         clsDbConnector objclsDbConnector = new clsDbConnector();
         clsKotedarUpdation_logic objclsKotedarUpdation_Logic = new clsKotedarUpdation_logic();
+        //public static GeneralProfile objGeneralProfile = new GeneralProfile();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             clsDbConnector objclsDbConnector = new clsDbConnector();
-           string strSQ = "SELECT state_id,state_name from tbl_state";
+            string strSQ = "SELECT state_id,state_name from tbl_state";
             DataSet ds = new DataSet();
             ds=objclsDbConnector.GetDataSet(strSQ);
-            
-         
+
+           
+            string strSQ1 = "SELECT consitiuency_name from tbl_consitiuency";
+            DataSet ds1 = new DataSet();
+            ds1 = objclsDbConnector.GetDataSet(strSQ1);
+
 
             if (Session["user_id"] == null)
             {
@@ -48,7 +53,10 @@ namespace e_ration_card
                 ddlstate.DataBind();
                 ddlstate.Items.Insert(0, "**SELECT**");
                 ddldistrict.Items.Insert(0, "**SELECT**");
-                CheckData();
+                ddlconstituency.DataSource = ds1.Tables[0];
+                ddlconstituency.DataBind();
+                ddlconstituency.Items.Insert(0, "**SELECT**");      
+                //CheckData();
 
             }
 
@@ -87,6 +95,10 @@ namespace e_ration_card
 
         }
 
+        public void Validation()
+        {
+            Response.Write("<script>alert('Please Fill All Fields');</script>");
+        }
 
         public void InitializeField()
         {
@@ -118,16 +130,16 @@ namespace e_ration_card
             DataTable dtTemp = dsTemp.Tables[0];
             if (dtTemp.Rows.Count > 0)
             {
-                //btnsubmit.Visible = false;
-                //btnupdate.Visible = true;
+                btnsubmit.Visible = false;
+                btnupdate.Visible = true;
                 txtrationcardno.Value = dtTemp.Rows[0]["rationcard_no"].ToString();
                 txtaddress.Value = dtTemp.Rows[0]["addresss"].ToString();
                 txtaadharcardno.Value = dtTemp.Rows[0]["aadharcard_no"].ToString();
                 txtpanno.Value = dtTemp.Rows[0]["pancard_no"].ToString();
                 txtpincode.Value = dtTemp.Rows[0]["pincode_no"].ToString();
-                ddlstate.SelectedValue = dtTemp.Rows[0]["states"].ToString();
-                ddldistrict.SelectedValue = dtTemp.Rows[0]["district"].ToString();
-                ddlconstituency.SelectedValue = dtTemp.Rows[0]["constituency"].ToString();
+                ddlstate.SelectedItem.Text = dtTemp.Rows[0]["states"].ToString();
+                ddldistrict.SelectedItem.Text = dtTemp.Rows[0]["district"].ToString();
+                ddlconstituency.SelectedItem.Text = dtTemp.Rows[0]["constituency"].ToString();
                 txttypeofrationcard.Value = dtTemp.Rows[0]["typeof_rationcard"].ToString();
             }
             else
@@ -150,51 +162,13 @@ namespace e_ration_card
             }
             else
             {
-                //btnsubmit.Visible = true;
-                //btnupdate.Visible = false;
+                btnsubmit.Visible = true;
+                btnupdate.Visible = false;
 
             }
         }
 
-        protected void btnupdate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (Session["user_id"] != null)
-                {
-                    string user_id = Session["user_id"].ToString();
-                    objgeneral_registration.user_id = Convert.ToInt32(user_id);
-                }
-
-                objgeneral_registration.rationcard_no= Convert.ToInt32(txtrationcardno.Value);
-                objgeneral_registration.addresss= txtaddress.Value;
-                objgeneral_registration.aadharcard_no= txtaadharcardno.Value;
-                objgeneral_registration.pancard_no= txtpanno.Value;
-                objgeneral_registration.pincode_no= Convert.ToInt32(txtpincode.Value);
-                objgeneral_registration.states=ddlstate.SelectedValue;
-                objgeneral_registration.district=ddldistrict.SelectedValue;
-                objgeneral_registration.constituency=ddlconstituency.SelectedValue;
-                objgeneral_registration.typeof_rationcard=txttypeofrationcard.Value;
-
-
-                objclsGeneral_Logic.UpdatedGeneral(objgeneral_registration);
-
-
-                InitializeField();
-                        CheckData();
-                        Response.Write("<script>alert('General Detail Updated Successfull');</script>");
-                    
-                
-
-                
-
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('Error Occure Contact Admin');</script>");
-                Response.Write(ex.Message);
-            }
-        }
+ 
 
         protected void ddlstate_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -216,8 +190,7 @@ namespace e_ration_card
             var serializeData = JsonConvert.DeserializeObject<List<MemberList>>(empdata);
             if (serializeData==null)
             {
-               
-                
+                //objGeneralProfile.Validation();
             }
                 
             else
@@ -260,6 +233,50 @@ namespace e_ration_card
             Response.Redirect("GeneralProfile.aspx");
             //Server.Transfer("UserDetail.aspx");
         }
-        
+
+        protected void btnupdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Session["user_id"] != null)
+                {
+                    string user_id = Session["user_id"].ToString();
+                    objgeneral_registration.user_id = Convert.ToInt32(user_id);
+                }
+
+                objgeneral_registration.rationcard_no = Convert.ToInt32(txtrationcardno.Value);
+                objgeneral_registration.addresss = txtaddress.Value;
+                objgeneral_registration.aadharcard_no = txtaadharcardno.Value;
+                objgeneral_registration.pancard_no = txtpanno.Value;
+                objgeneral_registration.pincode_no = Convert.ToInt32(txtpincode.Value);
+                objgeneral_registration.states = ddlstate.SelectedValue;
+                objgeneral_registration.district = ddldistrict.SelectedValue;
+                objgeneral_registration.constituency = ddlconstituency.SelectedValue;
+                objgeneral_registration.typeof_rationcard = txttypeofrationcard.Value;
+
+
+                objclsGeneral_Logic.UpdatedGeneral(objgeneral_registration);
+
+
+                InitializeField();
+                CheckData();
+                Response.Write("<script>alert('General Detail Updated Successfull');</script>");
+
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('Error Occure Contact Admin');</script>");
+                Response.Write(ex.Message);
+            }
+        }
+
+        protected void btnclear_Click(object sender, EventArgs e)
+        {
+            txtaadharcardno.Value = "";
+        }
     }
 }

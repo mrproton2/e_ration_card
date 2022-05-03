@@ -141,6 +141,24 @@ namespace e_ration_card
         protected global::System.Web.UI.WebControls.Label lblchangeaddress;
 
         /// <summary>
+        /// txtoldaddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtoldaddress;
+
+        /// <summary>
+        /// txtnewaddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtnewaddress;
+
+        /// <summary>
         /// fu1address control.
         /// </summary>
         /// <remarks>
@@ -186,6 +204,24 @@ namespace e_ration_card
         protected global::System.Web.UI.WebControls.Label lblchangemembername;
 
         /// <summary>
+        /// txtolmembername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtolmembername;
+
+        /// <summary>
+        /// txtnewmembername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtnewmembername;
+
+        /// <summary>
         /// fu1changemembername control.
         /// </summary>
         /// <remarks>
@@ -229,6 +265,24 @@ namespace e_ration_card
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbladdmember;
+
+        /// <summary>
+        /// txtaddmembername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtaddmembername;
+
+        /// <summary>
+        /// txtaddmemberrelation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtaddmemberrelation;
 
         /// <summary>
         /// fu1addmember control.
@@ -364,5 +418,14 @@ namespace e_ration_card
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvchangename;
+
+        /// <summary>
+        /// gvchangeaddress control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvchangeaddress;
     }
 }

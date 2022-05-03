@@ -3,71 +3,71 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div style="margin-left: 15%; padding: 1px 16px; height: 100%; margin-top: 70px;" class="bg-light">
         <div class="row bg-light mb-3 text-center pt-3">
-            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <form class="needs-validation" novalidate>
+            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">              
                     <div class="form-group">
                         <label for="cardholdername">Card Holder Name:</label>
                     </div>
             </div>
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <input type="text" id="txtcardholdername" runat="server" placeholder="Card Holder Name" name="cardholdername" required readonly="readonly">
+                <input type="text" id="txtcardholdername" runat="server" placeholder="Card Holder Name" name="cardholdername" readonly="readonly">
             </div>
 
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <form class="needs-validation" novalidate>
+            
                     <div class="form-group">
                         <label for="rationcardno">Ration Card No:</label>
 
                     </div>
             </div>
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <input type="text" id="txtrationcardno" runat="server" placeholder="Ration Card No" name="rationcardno" required>
+                <input type="text" id="txtrationcardno" runat="server" placeholder="Ration Card No" name="rationcardno" readonly="readonly">
             </div>
 
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <form class="needs-validation" novalidate>
+               
                     <div class="form-group">
                         <label for="mobileno">Mobile No:</label>
 
                     </div>
             </div>
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <input type="text" id="txtmobileno" runat="server" placeholder="Mobile No" name="mobileno" required readonly="readonly">
+                <input type="number" id="txtmobileno" runat="server" placeholder="Mobile No" name="mobileno" >
             </div>
         </div>
 
         <div class="row bg-light mb-3 text-center  pt-3">
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <form class="needs-validation" novalidate>
+               
                     <div class="form-group">
                         <label for="aadharno">Aadhar Card No:</label>
                     </div>
             </div>
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <input type="text" id="txtaadharcardno" runat="server" placeholder="Aadhar Card No:" name="aadharno" required>
+                <input type="number" id="txtaadharcardno" runat="server" placeholder="Aadhar Card No:" name="aadharno">
             </div>
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <form class="needs-validation" novalidate>
+                
                     <div class="form-group">
                         <label for="pancardno">Pan Card No:</label>
 
                     </div>
             </div>
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <input type="text" id="txtpanno" runat="server" placeholder="Pan Card No:" name="panno" required>
+                <input type="text" id="txtpanno" runat="server" placeholder="Pan Card No:" name="panno">
             </div>
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <form class="needs-validation" novalidate>
+                
                     <div class="form-group">
                         <label for="email">Email:</label>
 
                     </div>
             </div>
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <input type="text" id="txtemail" runat="server" placeholder="Email" name="email" required readonly="readonly">
+                <input type="email" id="txtemail" runat="server" placeholder="Email" name="email" readonly="readonly" >
             </div>
         </div>
 
@@ -78,40 +78,36 @@
         </div>
 
         <div class="row bg-light mb-3 text-center  pt-3">
-            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <form class="needs-validation" novalidate>
+            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">               
                     <div class="form-group">
                         <label for="address">Address:</label>
 
                     </div>
             </div>
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <input type="text" id="txtaddress" runat="server" placeholder="Address:" name="address" required >
+                <input type="text" id="txtaddress" runat="server" placeholder="Address:" name="address">
             </div>
-            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <form class="needs-validation" novalidate>
+            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">             
                     <div class="form-group">
                         <label for="pincode">Pin Code No:</label>
 
                     </div>
             </div>
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <input type="text" id="txtpincode" runat="server" placeholder="Pin Code No:" name="pincode" required>
+                <input type="number" id="txtpincode" runat="server" placeholder="Pin Code No:" name="pincode">
             </div>
-            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <form class="needs-validation" novalidate>
+            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">              
                     <div class="form-group">
                         <label for="annualincome">Annual Income:</label>
 
                     </div>
             </div>
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <input type="text" id="txtannualincome" runat="server" placeholder="Annual Income" name="annualincome" required>
+                <input type="number" id="txtannualincome" runat="server" placeholder="Annual Income" name="annualincome">
             </div>
         </div>
         <div class="row bg-light mb-3 text-center  pt-3">
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <form class="needs-validation" novalidate>
                     <div class="form-group">
                         <label for="utype">State:</label>
                     </div>
@@ -120,8 +116,7 @@
                 <asp:DropDownList ID="ddlstate" runat="server" DataTextField="state_name" DataValueField="state_id" OnSelectedIndexChanged="ddlstate_SelectedIndexChanged" AutoPostBack="true">                   
                 </asp:DropDownList>
             </div>
-            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <form class="needs-validation" novalidate>
+            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">               
                     <div class="form-group">
                         <label for="utype">District:</label>
                     </div>
@@ -132,30 +127,26 @@
                 </asp:DropDownList>
             </div>
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <form class="needs-validation" novalidate>
+                
                     <div class="form-group">
                         <label for="utype">Constituency:</label>
                         </div>
                     </div>
                     <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                        <asp:DropDownList ID="ddlconstituency" runat="server">
-                            <asp:ListItem Value="SELECT" Selected="True">**SELECT**</asp:ListItem>
-                            <asp:ListItem Value="Consumer" Selected="False">Consumer</asp:ListItem>
-                            <asp:ListItem Value="Distributor" Selected="False">Distributor</asp:ListItem>
-                            <asp:ListItem Value="Govts" Selected="False">Govt</asp:ListItem>
+                        <asp:DropDownList ID="ddlconstituency" runat="server" DataTextField="consitiuency_name" DataValueField="consitiuency_name">                           
                         </asp:DropDownList>
                     </div>
             </div>
         <div class="row bg-light mb-3 text-center">
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <form class="needs-validation" novalidate>
+               
                     <div class="form-group">
                         <label for="typeofrationcard">Type of Ration Card:</label>
 
                     </div>
             </div>
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <input type="text" id="txttypeofrationcard" runat="server" placeholder="" name="typeofrationcard" required>
+                <input type="text" id="txttypeofrationcard" runat="server" placeholder="" name="typeofrationcard" />
             </div>
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
                 
@@ -201,10 +192,10 @@
                 <tbody>  
                     <tr class="data-contact-person">  
                         <td>  
-                            <input type="text" name="name" class="form-control name01" required/></td>  
+                            <input type="text" name="name" class="form-control name01" /></td>  
                         <td>  
-                            <%--<input type="text" name="relation" class="form-control relation01"  required/></td> --%>
-                            <asp:DropDownList ID="ddlrelation" class="form-control name01" runat="server">
+                         
+                            <asp:DropDownList ID="ddlrelation" class="form-control relation01" runat="server">
                             <asp:ListItem Value="SELECT" Selected="True">**SELECT**</asp:ListItem>
                             <asp:ListItem Value="Father" Selected="False">Father</asp:ListItem>
                             <asp:ListItem Value="Mother" Selected="False">Mother</asp:ListItem>
@@ -252,17 +243,18 @@
         </section>
          <div class="row bg-light text-center pb-4 mt-0">
             <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12">
-                <asp:Button ID="btnsubmit" runat="server" Text="Submit" class="btn btn-info" OnClick="btnsubmit_Click" OnClientClick="return ValidationGeneral();" />
-                <asp:Button ID="btnupdate" runat="server" Text="Update" class="btn btn-info" OnClick="btnupdate_Click" OnClientClick="return ValidationGeneral();" />
-                <asp:Button ID="btnclear" runat="server" Text="Clear" class="btn btn-danger" />
+                <asp:Button ID="btnsubmit" runat="server" Text="Submit" class="btn btn-info" OnClick="btnsubmit_Click" OnClientClick="return ValidationGeneralf()"/>
+                <asp:Button ID="btnupdate" runat="server" Text="Update" class="btn btn-info" OnClick="btnupdate_Click" OnClientClick="return ValidationGeneralf();"/>
+                <asp:Button ID="btnclear" runat="server" Text="Clear" class="btn btn-danger" OnClick="btnclear_Click" />
             </div>
         </div>
         </div>
 
     <script>
-        function ValidationGeneral() {
+        debugger
+        function ValidationGeneralf() {
 
-            var rationcardno = document.getElementById("txtrationcardno").value;           
+            var rationcardno = document.getElementById("txtrationcardno").value;
             var address = document.getElementById("txtaddress").value;
             var aadharcardno = document.getElementById("txtaadharcardno").value;
             var panno = document.getElementById("txtpanno").value;
@@ -292,28 +284,26 @@
                 alert("Please Enter Pincode");
                 return false;
             }
-
             if (typeofrationcard == "") {
                 alert("Please Enter typeof rationcard");
                 return false;
             }
-
             if (document.getElementById('<%=ddlstate.ClientID %>').selectedIndex == 0) {
-                alert("Please Select State");
-                return false;
-            }
-            if (document.getElementById('<%=ddldistrict.ClientID %>').selectedIndex == 0) {
+               alert("Please Select State");
+               return false;
+           }
+           if (document.getElementById('<%=ddldistrict.ClientID %>').selectedIndex == 0) {
                 alert("Please Select District");
                 return false;
             }
-            if (document.getElementById('<%=ddlconstituency.ClientID %>').selectedIndex == 0) {
-                alert("Please Select Constituency");
-                return false;
-            }
-            else {
-                return true;
-            }
-        }
+           if (document.getElementById('<%=ddlconstituency.ClientID %>').selectedIndex == 0) {
+               alert("Please Select Constituency");
+               return false;
+           }
+           else {
+               return true;
+           }
+       }
 
 
 
@@ -341,7 +331,6 @@
         $(document).on("click", ".deleteContact", function () {
             $(this).closest("tr").remove(); // closest used to remove the respective 'tr' in which I have my controls   
         }); 
-
 
 
 
@@ -385,5 +374,5 @@
         });  
 
 
-    </script>
+    </script>--%>
 </asp:Content>

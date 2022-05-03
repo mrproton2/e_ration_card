@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-group">
                         <label for="utype">Constituency:</label>
-                        <asp:DropDownList ID="ddlconstituency" runat="server">
+                        <asp:DropDownList ID="ddlconstituency" runat="server" DataTextField="consitiuency_name" DataValueField="consitiuency_name">
                             <asp:ListItem Value="SELECT" Selected="True">**SELECT**</asp:ListItem>
                             <asp:ListItem Value="Chandivali" Selected="False">Chandivali</asp:ListItem>                          
                         </asp:DropDownList>

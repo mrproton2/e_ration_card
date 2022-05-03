@@ -34,6 +34,11 @@ namespace e_ration_card
                
             }
 
+
+            string strSQ1 = "SELECT consitiuency_name from tbl_consitiuency";
+            DataSet ds1 = new DataSet();
+            ds1 = objclsDbConnector.GetDataSet(strSQ1);
+
             if (!IsPostBack)
             {
                
@@ -42,6 +47,9 @@ namespace e_ration_card
                 ddlstate.DataBind();
                 ddlstate.Items.Insert(0, "**SELECT**");
                 ddldistrict.Items.Insert(0, "**SELECT**");
+                ddlconstituency.DataSource = ds1.Tables[0];
+                ddlconstituency.DataBind();
+                ddlconstituency.Items.Insert(0, "**SELECT**");
                 CheckData();
                 
 
@@ -58,6 +66,8 @@ namespace e_ration_card
  
             //((Distributor)Master).TextBoxOnMasterPage.Text = txtkotedar.Value;
             //Master.TextBoxOnMasterPage.Text = txtkotedar.Value;
+
+
         }
 
 

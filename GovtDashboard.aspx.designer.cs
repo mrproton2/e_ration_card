@@ -51,13 +51,13 @@ namespace e_ration_card
         protected global::System.Web.UI.WebControls.Label lblconstituency;
 
         /// <summary>
-        /// txtconstituency control.
+        /// ddlconstituency control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtconstituency;
+        protected global::System.Web.UI.WebControls.DropDownList ddlconstituency;
 
         /// <summary>
         /// btnserch control.
@@ -67,6 +67,15 @@ namespace e_ration_card
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnserch;
+
+        /// <summary>
+        /// btnSubmit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSubmit;
 
         /// <summary>
         /// btnclear control.
