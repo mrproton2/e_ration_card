@@ -101,6 +101,7 @@
     <Content Include="GeneralDashbord.aspx" />
     <Content Include="DistributorScreen.aspx" />
     <Content Include="NewRationCardRegistation.aspx" />
+    <Content Include="rptDistribution.aspx" />
     <Content Include="rptDistributionData.aspx" />
     <Content Include="UpdateRationCard.aspx" />
     <Content Include="Web.config" />
@@ -194,9 +195,12 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\changename.cs" />
+    <Compile Include="Models\clsaddmember.cs" />
     <Compile Include="Models\clschangeaddress.cs" />
     <Compile Include="Models\clsdd_cereals_data.cs" />
     <Compile Include="Models\clsdefault_cereals.cs" />
+    <Compile Include="Models\clsmembercorrection.cs" />
+    <Compile Include="Models\clsremovembr.cs" />
     <Compile Include="Models\clsSP.cs" />
     <Compile Include="Models\country.cs" />
     <Compile Include="Models\distribution_details.cs" />
@@ -205,6 +209,13 @@
     <Compile Include="Models\kotedar_registration.cs" />
     <Compile Include="Models\MemberList.cs" />
     <Compile Include="Models\state.cs" />
+    <Compile Include="rptDistribution.aspx.cs">
+      <DependentUpon>rptDistribution.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="rptDistribution.aspx.designer.cs">
+      <DependentUpon>rptDistribution.aspx</DependentUpon>
+    </Compile>
     <Compile Include="rptDistributionData.aspx.cs">
       <DependentUpon>rptDistributionData.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

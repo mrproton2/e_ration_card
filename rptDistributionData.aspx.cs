@@ -70,7 +70,7 @@ namespace e_ration_card
 
             string strSQ1 = "select A.rationcard_no RationCardNo,A.card_holder_name CardHolderName,A.pancard_no PanNo,A.states 'StateName******',A.district DistrictName," +
                 "A.constituency Constituency,A.typeof_rationcard RationCardType,A.aadharcard_no AadharNO,B.cereals_name CerealsName,B.per_personunit UnitPerPerson,B.weight_individual Weight," +
-                "B.price_individual Price,B.kotedar_name KotedarName,B.kotedar_no KotedarNo,B.curr_date DateTime " +
+                "B.price_individual Price,B.kotedar_name KotedarName,B.kotedar_no KotedarNo,Convert(varchar, B.curr_date,105) Dates " +
                 "from tbl_general_registration A " +
                 "inner join tbl_dd_cerealsdata B " +
                 "on A.general_id = B.general_id " + 

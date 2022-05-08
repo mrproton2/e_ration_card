@@ -41,20 +41,12 @@ namespace e_ration_card.Master
             {
                
             }
+            //if (IsPostBack)
+            //{
+            //    objdistribution_Details.Authenticated_mbr = ddlactivemember.SelectedItem.Text;
 
-         
-            if (!IsPostBack)
-            {
-                //string strSQ = "select cereals_name Name,per_personunit Units from tbl_default_cereals";
-                //DataTable dsGrid = new DataTable();
-                //dsGrid = objclsDbConnector.GetData(strSQ);
-                //dsGrid.Columns.AddRange(new DataColumn[1] { new DataColumn("activecount", typeof(string)) });
-                //gvlist.DataSource = dsGrid;
-                //gvlist.DataBind();
+            //}
 
-               
-
-            }
             Label lblname = this.Master.FindControl("lblkname") as Label;
             lblname.Text = Session["name"].ToString();
             Label lblkid = this.Master.FindControl("lblkid") as Label;
@@ -78,14 +70,13 @@ namespace e_ration_card.Master
             dsActive = objclsDbConnector.GetDataSet(strSQ);
             if (dsActive.Tables[0].Rows.Count > 0)
             {
-                if (IsPostBack)
-                {
+               
                     ddlactivemember.DataSource = dsActive.Tables[0];
                     ddlactivemember.DataBind();
-                }
+                
                 //detailDiv.Visible = true;
                 lblchn.Text= dsActive.Tables[0].Rows[0]["card_holder_name"].ToString();
-                ViewState["Data"] = dsActive;
+               
             }
 
 
@@ -179,7 +170,7 @@ namespace e_ration_card.Master
             objdistribution_Details.kotedar_name = Session["name"].ToString();
             objdistribution_Details.Area = Session["constituency"].ToString();
             objdistribution_Details.cardholdernme = lblchn.Text;
-            objdistribution_Details.Authenticated_mbr = ddlactivemember.SelectedValue;
+            objdistribution_Details.Authenticated_mbr = ddlactivemember.SelectedItem.Text;
             objdistribution_Details.rationcard_no = Convert.ToInt32(txtrationcardno.Value);
             objdistribution_Details.total_price = 1;
             objdistribution_Details.total_weight = lblweight.Text;

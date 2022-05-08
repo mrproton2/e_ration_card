@@ -86,8 +86,7 @@
         <div id="myDIV">
       <ul>
       <li><a href="DistributorScreen.aspx">DS</a></li>
-      <li><a href="#news">DS Report</a></li>
-      <li><a href="#news">Biometric activation</a></li>
+      <li><a href="rptDistribution.aspx">DS Report</a></li>
       <li><a href="DistributorProfile.aspx">Upadate Profile</a></li>
       <li><a href="index.aspx"><asp:LinkButton ID="lbLogout" runat="server" CausesValidation="false" Text="Logout" OnClick="lbLogout_Click"></asp:LinkButton></a></li>
       </ul>

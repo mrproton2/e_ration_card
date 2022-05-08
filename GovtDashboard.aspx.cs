@@ -94,7 +94,7 @@ namespace e_ration_card
         {
             if (ddlcorrectiontype.SelectedValue == "Name Correction")
             {
-                string strSQ1 = "select b.cn_id,a.card_holder_name,a.constituency,a.rationcard_no,a.states,district," +
+                string strSQ1 = "select b.user_id user_id,b.cn_id,a.card_holder_name,a.constituency,a.rationcard_no,a.states,district," +
                     "b.old_name,b.new_name,cn_doc1_name,cn_doc2_name," +
                     "Authorize,b.reject_reson " +
                     "from tbl_general_registration a " +
@@ -112,11 +112,65 @@ namespace e_ration_card
             }
             if (ddlcorrectiontype.SelectedValue == "Change Address")
             {
-                string strSQ1 = "select * from tbl_change_name where a.constituency='" + ddlconstituency.SelectedItem.Text + "'";
+                string strSQ1 = "select b.user_id user_id, b.ac_id,a.card_holder_name,a.constituency,a.rationcard_no,a.states,district,b.old_address,b.new_address,ac_doc1_name,ac_doc2_name," +
+                    "Authorize,b.reject_reson " +
+                    "from tbl_general_registration a "+
+                    "inner join tbl_address_correction b " +
+                    "on a.user_id = b.user_id where a.constituency='" + ddlconstituency.SelectedItem.Text + "' " +
+                    "and Authorize='Pending'";
                 DataTable dsGrid = new DataTable();
                 dsGrid = objclsDbConnector.GetData(strSQ1);
-                gvchangename.DataSource = dsGrid;
-                gvchangename.DataBind();
+                gvaddresscorrection.DataSource = dsGrid;
+                gvaddresscorrection.DataBind();
+
+
+            }
+
+            if (ddlcorrectiontype.SelectedValue == "Member Name Correction")
+            {
+                string strSQ1 = "select b.user_id user_id, b.mbr_id,a.card_holder_name,a.constituency,a.rationcard_no,a.states,district,b.old_mbrname,b.new_mbrname,mbr_doc1_name,mbr_doc2_name," +
+                    "Authorize,b.reject_reson " +
+                    "from tbl_general_registration a " +
+                    "inner join tbl_membername_correction b " +
+                    "on a.user_id = b.user_id where a.constituency='" + ddlconstituency.SelectedItem.Text + "' " +
+                    "and Authorize='Pending'";
+                DataTable dsGrid = new DataTable();
+                dsGrid = objclsDbConnector.GetData(strSQ1);
+                gvmembernamecorr.DataSource = dsGrid;
+                gvmembernamecorr.DataBind();
+
+
+            }
+
+            if (ddlcorrectiontype.SelectedValue == "Add Member")
+            {
+                string strSQ1 = "select b.user_id user_id, b.addmbr_id,a.card_holder_name,a.constituency,a.rationcard_no,a.states,district,b.membername,addmbr_doc1_name,addmbr_doc2_name,b.relation, " +
+                    "Authorize,b.reject_reson " +
+                    "from tbl_general_registration a " +
+                    "inner join tbl_add_member b " +
+                    "on a.user_id = b.user_id where a.constituency='" + ddlconstituency.SelectedItem.Text + "' " +
+                    "and Authorize='Pending'";
+                DataTable dsGrid = new DataTable();
+                dsGrid = objclsDbConnector.GetData(strSQ1);
+                gvaddmbr.DataSource = dsGrid;
+                gvaddmbr.DataBind();
+
+
+            }
+
+
+            if (ddlcorrectiontype.SelectedValue == "Remove Member")
+            {
+                string strSQ1 = "select b.user_id user_id, b.removembr_id,a.card_holder_name,a.constituency,a.rationcard_no,a.states,district,b.membername,removembr_doc1_name,removembr_doc2_name,b.relation, " +
+                    "Authorize,b.reject_reson " +
+                    "from tbl_general_registration a " +
+                    "inner join tbl_remove_member b " +
+                    "on a.user_id = b.user_id where a.constituency='" + ddlconstituency.SelectedItem.Text + "' " +
+                    "and Authorize='Pending'";
+                DataTable dsGrid = new DataTable();
+                dsGrid = objclsDbConnector.GetData(strSQ1);
+                gvremovembr.DataSource = dsGrid;
+                gvremovembr.DataBind();
 
 
             }
@@ -445,6 +499,8 @@ namespace e_ration_card
                                 //ClientScript.RegisterStartupScript(this.GetType(), "", script, true);
                                 Response.Write("<script>alert('Detail Updated Successfull');</script>");
 
+                                Bulk_UpdateMain();
+
                             }
                         }
                     }
@@ -461,6 +517,216 @@ namespace e_ration_card
 
         }
 
+
+        public void Bulk_UpdateMain()
+        {
+            Label userid = (Label)FindControl("lbluserid");
+            int userid1 = Convert.ToInt32(userid.Text);
+           Label newname = (Label)FindControl("lblnewname");
+            string newnames = newname.Text;
+        // string user_id2 = session["user_id"].tostring();
+           string updtquery = "update user set name='" + newnames + "'," +
+                "where user_id='" + userid1 + "'";
+            string consString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+            //using (SqlConnection con = new SqlConnection(consString))
+            using (SqlConnection UpdtCon = new SqlConnection(consString))
+            using (SqlCommand UpdtCmd = new SqlCommand(updtquery, UpdtCon))
+            {
+                UpdtCon.Open();
+                int i = UpdtCmd.ExecuteNonQuery();
+                if (i > 0)
+                {
+                    //string message = "approval/rejection done.";
+                    //script += message;
+                    //script += "')};";
+                    //clientscript.registerstartupscript(this.gettype(), "", script, true);
+                    Response.Write("<script>alert('detail updated successfull');</script>");
+
+
+                }
+            }
+        }
+
+        protected void lnkDownloadDoc1_Click1(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void lnkDownloadDoc2_Click1(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void lnkDownloadDoc1_Click2(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void lnkDownloadDoc2_Click2(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void lnkDownloadDoc1_Click3(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void lnkDownloadDoc2_Click3(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void lnkDownloadDoc1_Click4(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void lnkDownloadDoc2_Click4(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void lnkDownloadAddressDoc1_Click(object sender, EventArgs e)
+        {
+
+            int id = int.Parse((sender as LinkButton).CommandArgument);
+            byte[] bytes;
+            string fileName, contentType;
+            string constr = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = "select * from tbl_address_correction where ac_id=@ac_id";
+                    cmd.Parameters.AddWithValue("@ac_id", id);
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        sdr.Read();
+                        bytes = (byte[])sdr["ac_doc1_data"];
+                        contentType = sdr["contcontenttype"].ToString();
+                        fileName = sdr["ac_doc1_name"].ToString();
+                    }
+                    con.Close();
+                }
+            }
+            Response.Clear();
+            Response.Buffer = true;
+            Response.Charset = "";
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.ContentType = contentType;
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+            Response.BinaryWrite(bytes);
+            Response.Flush();
+            Response.End();
+        }
+
+        protected void lnkDownloadMbrnameDoc1_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse((sender as LinkButton).CommandArgument);
+            byte[] bytes;
+            string fileName, contentType;
+            string constr = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = "select * from tbl_membername_correction where mbr_id=@mbr_id";
+                    cmd.Parameters.AddWithValue("@mbr_id", id);
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        sdr.Read();
+                        bytes = (byte[])sdr["mbr_doc1_data"];
+                        contentType = sdr["contcontenttype"].ToString();
+                        fileName = sdr["mbr_doc1_name"].ToString();
+                    }
+                    con.Close();
+                }
+            }
+            Response.Clear();
+            Response.Buffer = true;
+            Response.Charset = "";
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.ContentType = contentType;
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+            Response.BinaryWrite(bytes);
+            Response.Flush();
+            Response.End();
+        }
+
+        protected void lnkDownloadAddmbrDoc1_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse((sender as LinkButton).CommandArgument);
+            byte[] bytes;
+            string fileName, contentType;
+            string constr = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = "select * from tbl_membername_correction where addmbr_id=@addmbr_id";
+                    cmd.Parameters.AddWithValue("@addmbr_id", id);
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        sdr.Read();
+                        bytes = (byte[])sdr["addmbr_doc1_data"];
+                        contentType = sdr["contcontenttype"].ToString();
+                        fileName = sdr["addmbr_doc1_name"].ToString();
+                    }
+                    con.Close();
+                }
+            }
+            Response.Clear();
+            Response.Buffer = true;
+            Response.Charset = "";
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.ContentType = contentType;
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+            Response.BinaryWrite(bytes);
+            Response.Flush();
+            Response.End();
+        }
+
+        protected void lnkDownloadRemovembrDoc1_Click(object sender, EventArgs e)
+        {
+            int id = int.Parse((sender as LinkButton).CommandArgument);
+            byte[] bytes;
+            string fileName, contentType;
+            string constr = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(constr))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = "select * from tbl_remove_member where removembr_id=@removembr_id";
+                    cmd.Parameters.AddWithValue("@removembr_id", id);
+                    cmd.Connection = con;
+                    con.Open();
+                    using (SqlDataReader sdr = cmd.ExecuteReader())
+                    {
+                        sdr.Read();
+                        bytes = (byte[])sdr["removembr_doc1_data"];
+                        contentType = sdr["contcontenttype"].ToString();
+                        fileName = sdr["removembr_doc1_name"].ToString();
+                    }
+                    con.Close();
+                }
+            }
+            Response.Clear();
+            Response.Buffer = true;
+            Response.Charset = "";
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.ContentType = contentType;
+            Response.AppendHeader("Content-Disposition", "attachment; filename=" + fileName);
+            Response.BinaryWrite(bytes);
+            Response.Flush();
+            Response.End();
+        }
     }
 
 }

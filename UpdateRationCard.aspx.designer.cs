@@ -87,6 +87,15 @@ namespace e_ration_card
         protected global::System.Web.UI.WebControls.Label lblnamechange;
 
         /// <summary>
+        /// txtoldname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtoldname;
+
+        /// <summary>
         /// txtnewname control.
         /// </summary>
         /// <remarks>
@@ -204,13 +213,13 @@ namespace e_ration_card
         protected global::System.Web.UI.WebControls.Label lblchangemembername;
 
         /// <summary>
-        /// txtolmembername control.
+        /// ddlolmembername control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtolmembername;
+        protected global::System.Web.UI.WebControls.DropDownList ddlolmembername;
 
         /// <summary>
         /// txtnewmembername control.
@@ -339,6 +348,15 @@ namespace e_ration_card
         protected global::System.Web.UI.WebControls.DropDownList ddlremovemembername;
 
         /// <summary>
+        /// txtmemberremovereson control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtmemberremovereson;
+
+        /// <summary>
         /// fu1removemember control.
         /// </summary>
         /// <remarks>
@@ -427,5 +445,32 @@ namespace e_ration_card
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvchangeaddress;
+
+        /// <summary>
+        /// gvmbrcorrection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvmbrcorrection;
+
+        /// <summary>
+        /// gvaddmember control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvaddmember;
+
+        /// <summary>
+        /// gbremovembr control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gbremovembr;
     }
 }

@@ -189,7 +189,7 @@
    <form class="needs-validation" novalidate >
    <div class="form-group">
     <label for="utype">Active Mbr</label>
-     <asp:DropDownList ID="ddlactivemember" runat="server" DataTextField="Member_Name" DataValueField="Member_Name" AutoPostBack="true">          
+     <asp:DropDownList ID="ddlactivemember" runat="server" DataTextField="Member_Name" DataValueField="Member_Name" AutoPostBack="false">          
      </asp:DropDownList> 
         <label for="utype">InActive Mbr</label>
      <asp:DropDownList ID="ddlinactivemember" runat="server" DataTextField="Member_Name" DataValueField="Member_Name">

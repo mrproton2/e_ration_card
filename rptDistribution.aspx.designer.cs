@@ -11,7 +11,7 @@ namespace e_ration_card
 {
 
 
-    public partial class GovtDashboard
+    public partial class rptDistribution
     {
 
         /// <summary>
@@ -24,40 +24,40 @@ namespace e_ration_card
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl addmember;
 
         /// <summary>
-        /// lbladdmember control.
+        /// lblrationcard control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbladdmember;
+        protected global::System.Web.UI.WebControls.Label lblrationcard;
 
         /// <summary>
-        /// ddlcorrectiontype control.
+        /// txtration control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlcorrectiontype;
+        protected global::System.Web.UI.WebControls.TextBox txtration;
 
         /// <summary>
-        /// lblconstituency control.
+        /// lblkotedarno control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblconstituency;
+        protected global::System.Web.UI.WebControls.Label lblkotedarno;
 
         /// <summary>
-        /// ddlconstituency control.
+        /// txtdate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlconstituency;
+        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtdate;
 
         /// <summary>
         /// btnserch control.
@@ -69,15 +69,6 @@ namespace e_ration_card
         protected global::System.Web.UI.WebControls.Button btnserch;
 
         /// <summary>
-        /// btnSubmit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnSubmit;
-
-        /// <summary>
         /// btnclear control.
         /// </summary>
         /// <remarks>
@@ -87,48 +78,12 @@ namespace e_ration_card
         protected global::System.Web.UI.WebControls.Button btnclear;
 
         /// <summary>
-        /// gvchangename control.
+        /// gvlist control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvchangename;
-
-        /// <summary>
-        /// gvaddresscorrection control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvaddresscorrection;
-
-        /// <summary>
-        /// gvmembernamecorr control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvmembernamecorr;
-
-        /// <summary>
-        /// gvaddmbr control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvaddmbr;
-
-        /// <summary>
-        /// gvremovembr control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvremovembr;
+        protected global::System.Web.UI.WebControls.GridView gvlist;
     }
 }

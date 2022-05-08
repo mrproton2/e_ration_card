@@ -1,0 +1,100 @@
+﻿using e_ration_card.Models;
+using e_ration_card.Services;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace e_ration_card
+{
+    public partial class rptDistribution : System.Web.UI.Page
+    {
+        general_registration objgeneral_registration = new general_registration();
+
+        clsGeneral_Logic objclsGeneral_Logic = new clsGeneral_Logic();
+        kotedar_registration objkotedar_registration = new kotedar_registration();
+        clsDbConnector objclsDbConnector = new clsDbConnector();
+        clsKotedarUpdation_logic objclsKotedarUpdation_Logic = new clsKotedarUpdation_logic();
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            clsDbConnector objclsDbConnector = new clsDbConnector();
+            string strSQ = "SELECT state_id,state_name from tbl_state";
+            DataSet ds = new DataSet();
+            ds = objclsDbConnector.GetDataSet(strSQ);
+
+            string strSQ1 = "SELECT consitiuency_name from tbl_consitiuency";
+            DataSet ds1 = new DataSet();
+            ds1 = objclsDbConnector.GetDataSet(strSQ1);
+            if (Session["user_id"] == null)
+            {
+                Response.Redirect("index.aspx");
+            }
+            else
+            {
+
+            }
+
+            if (!IsPostBack)
+            {
+
+
+            }
+            Label lblhname = this.Master.FindControl("lblhname") as Label;
+            //lblhname.Text = Session["cardholdername"].ToString();
+            Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
+            lblconstiuency.Text = Session["constituency"].ToString();
+            BindGridAll();
+
+        }
+
+        private void BindGridAll()
+        {
+
+
+            string userid = Session["user_id"].ToString();
+            string strSQ1 = "select A.rationcard_no RationCardNo,A.card_holder_name CardHolderName," +
+                "A.typeof_rationcard RationCardType,B.cereals_name CerealsName,B.per_personunit UnitPerPerson,B.weight_individual Weight," +
+                "B.price_individual Price,B.kotedar_name KotedarName,Convert(varchar, B.curr_date,105) Dates " +
+                "from tbl_general_registration A " +
+                "inner join tbl_dd_cerealsdata B " +
+                "on A.general_id = B.general_id " +
+                "where A.user_id='" + userid + "'" +
+                "AND B.curr_date='" + txtdate.Value + "'" +
+                "or A.rationcard_no='" + txtration.Text + "'";
+               
+
+
+
+
+
+            DataTable dsGrid = new DataTable();
+            dsGrid = objclsDbConnector.GetData(strSQ1);
+            gvlist.DataSource = dsGrid;
+            gvlist.DataBind();
+
+
+        }
+
+        protected void ddlstate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
+        protected void btnclear_Click(object sender, EventArgs e)
+        {
+            
+            txtration.Text = "";
+            txtdate.Value = "";
+            gvlist.DataSource = null;
+            gvlist.DataBind();
+
+        }
+
+        protected void btnserch_Click(object sender, EventArgs e)
+        {
+            BindGridAll();
+        }
+    }
+}

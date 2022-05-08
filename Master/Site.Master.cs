@@ -128,7 +128,7 @@ namespace e_ration_card.Master
 
                         if (Session["username"].ToString() != null && Session["user_id"].ToString() != null)
                     {
-                        Response.Redirect("GeneralDashbord.aspx");
+                        Response.Redirect("GeneralScreen.aspx");
                     }
                     else
                     {
@@ -150,14 +150,17 @@ namespace e_ration_card.Master
                         strSQL = "Select * from tbl_kotedar_registration where user_id ='" + userid + "'";
                         DataSet ds = objclsDbConnector.GetDataSet(strSQL);
                         DataTable dt = ds.Tables[0];
-                        Session["kotedarid"] = dt.Rows[0]["kotedar_no"].ToString();
-                        Session["constituency"] = dt.Rows[0]["contituency"].ToString();
+                        if (dt.Rows.Count > 0)
+                        {
+                            Session["kotedarid"] = dt.Rows[0]["kotedar_no"].ToString();
+                            Session["constituency"] = dt.Rows[0]["contituency"].ToString();
+                        }
 
                         if (Session["username"].ToString() != null && Session["user_id"].ToString() != null)
                     {
                             if (dt.Rows.Count > 0)
                             {
-                                Response.Redirect("Distributor.aspx");
+                                Response.Redirect("DistributorScreen.aspx");
                             }
                             else
                             {
