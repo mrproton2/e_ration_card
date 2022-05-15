@@ -450,17 +450,17 @@ namespace e_ration_card
                 Response.Write("<script>alert('Please Enter Pincode..');</script>");
                 return;
             }         
-            if (ddlstate.SelectedItem.Text == "SELECT")
+            if (ddlstate.SelectedItem.Text == "**SELECT**")
             {
                 Response.Write("<script>alert('Please Select State..');</script>");
                 return;
             }
-            if (ddldistrict.SelectedItem.Text == "SELECT")
+            if (ddldistrict.SelectedItem.Text == "**SELECT**")
             {
                 Response.Write("<script>alert('Please Select District..');</script>");
                 return;
             }
-            if (ddlconstituency.SelectedItem.Text == "SELECT")
+            if (ddlconstituency.SelectedItem.Text == "**SELECT**")
             {
                 Response.Write("<script>alert('Please Select Constituency..');</script>");
                 return;
