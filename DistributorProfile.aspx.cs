@@ -51,18 +51,13 @@ namespace e_ration_card
                 ddlconstituency.DataBind();
                 ddlconstituency.Items.Insert(0, "**SELECT**");
                 CheckData();
-                
+               
 
+               
             }
-            
 
-            Label lblname = this.Master.FindControl("lblkname") as Label;
-            lblname.Text = Session["name"].ToString();
-            Label lblkid = this.Master.FindControl("lblkid") as Label;
-            lblkid.Text = Session["kotedarid"].ToString();
-            Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
-            string test= Session["constituency"].ToString();
-            lblconstiuency.Text = Session["constituency"].ToString();
+            FetchData();
+            
  
             //((Distributor)Master).TextBoxOnMasterPage.Text = txtkotedar.Value;
             //Master.TextBoxOnMasterPage.Text = txtkotedar.Value;
@@ -81,37 +76,45 @@ namespace e_ration_card
                     string user_id = Session["user_id"].ToString();
                     objkotedar_registration.user_id = Convert.ToInt32(user_id);
                 }
-
-                objkotedar_registration.kotedar_name = txtkotedar.Value;
-                objkotedar_registration.addresss = txtaddress.Value;
-                objkotedar_registration.states = ddlstate.SelectedValue;
-                objkotedar_registration.district = ddldistrict.SelectedValue;
-                objkotedar_registration.Constituency = ddlconstituency.SelectedValue;
-                objkotedar_registration.kotedar_no = txtkotedarid.Value;
-                objkotedar_registration.aadhar_no =txtaadharno.Value.Trim(); 
-                objkotedar_registration.pan_no = txtpanno.Value;
-                objkotedar_registration.pincode_no = Int32.Parse(txtpincode.Value.Trim());
-
-                string x=UploadPhoto();
-                if (x == "YES")
+                if (string.IsNullOrEmpty(txtaadharno.Value) || string.IsNullOrEmpty(txtaddress.Value) || string.IsNullOrEmpty(txtemail.Value) || string.IsNullOrEmpty(txtkotedar.Value) || string.IsNullOrEmpty(txtkotedarid.Value) || string.IsNullOrEmpty(txtpincode.Value) || string.IsNullOrEmpty(txtmobile.Value) || string.IsNullOrEmpty(txtpanno.Value) || (ddlstate.SelectedItem.Text == "**SELECT**") || ddldistrict.SelectedItem.Text == "**SELECT**" || ddlconstituency.SelectedItem.Text == "**SELECT**")
                 {
-                    string y = UploadSignature();
-                    if (y == "YES")
-                    {
-                        objclsKotedarUpdation_Logic.InsertKotedar(objkotedar_registration);
-
-                        InitializeField();
-                        CheckData();
-                        Response.Write("<script>alert('Kotedar Detail Save Successfull');</script>");
-                    }
+                    ValidateForm();
                 }
-                
                 else
                 {
-                    return;
+                    objkotedar_registration.kotedar_name = txtkotedar.Value;
+                    objkotedar_registration.addresss = txtaddress.Value;
+                    objkotedar_registration.states = ddlstate.SelectedValue;
+                    objkotedar_registration.district = ddldistrict.SelectedValue;
+                    objkotedar_registration.Constituency = ddlconstituency.SelectedValue;
+                    objkotedar_registration.kotedar_no = txtkotedarid.Value;
+                    objkotedar_registration.aadhar_no = txtaadharno.Value.Trim();
+                    objkotedar_registration.pan_no = txtpanno.Value;
+                    objkotedar_registration.pincode_no = Int32.Parse(txtpincode.Value.Trim());
+
+                    string x = UploadPhoto();
+                    if (x == "YES")
+                    {
+                        string y = UploadSignature();
+                        if (y == "YES")
+                        {
+                            objclsKotedarUpdation_Logic.InsertKotedar(objkotedar_registration);
+
+                            InitializeField();
+                            CheckData();
+                            Response.Write("<script>alert('Kotedar Detail Save Successfull');</script>");
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
+
             }
-            catch(Exception ex)
+
+
+            catch (Exception ex)
             {
                 Response.Write("<script>alert('Error Occure Contact Admin');</script>");
                 Response.Write(ex.Message);
@@ -146,37 +149,48 @@ namespace e_ration_card
                     string user_id = Session["user_id"].ToString();
                     objkotedar_registration.user_id = Convert.ToInt32(user_id);
                 }
-
-                objkotedar_registration.kotedar_name = txtkotedar.Value;
-                objkotedar_registration.addresss = txtaddress.Value;
-                objkotedar_registration.states = ddlstate.SelectedValue;
-                objkotedar_registration.district = ddldistrict.SelectedValue;
-                objkotedar_registration.Constituency = ddlconstituency.SelectedValue;
-                objkotedar_registration.kotedar_no = txtkotedarid.Value;
-                objkotedar_registration.aadhar_no = txtaadharno.Value.Trim();
-                objkotedar_registration.pan_no = txtpanno.Value;
-                objkotedar_registration.pincode_no = Int32.Parse(txtpincode.Value.Trim());
-
-                string x = UploadPhotoUpdate();
-                if (x == "YES")
+                if (string.IsNullOrEmpty(txtaadharno.Value) || string.IsNullOrEmpty(txtaddress.Value) || string.IsNullOrEmpty(txtemail.Value) || string.IsNullOrEmpty(txtkotedar.Value) || string.IsNullOrEmpty(txtkotedarid.Value) || string.IsNullOrEmpty(txtpincode.Value) || string.IsNullOrEmpty(txtmobile.Value) || string.IsNullOrEmpty(txtpanno.Value) || (ddlstate.SelectedItem.Text == "**SELECT**") || ddldistrict.SelectedItem.Text == "**SELECT**" || ddlconstituency.SelectedItem.Text == "**SELECT**")
                 {
-                    string y = UploadSignatureUpdate();
-                    if (y == "YES")
-                    {
-                        objclsKotedarUpdation_Logic.UpdateKotedar(objkotedar_registration);
-
-                        InitializeField();
-                        CheckData();
-                        Response.Write("<script>alert('Kotedar Detail Updated Successfull');</script>");
-                    }
+                    ValidateForm();
                 }
-
                 else
                 {
-                    return;
-                }
+                    objkotedar_registration.kotedar_name = txtkotedar.Value;
+                    objkotedar_registration.addresss = txtaddress.Value;
+                    objkotedar_registration.states = ddlstate.SelectedValue;
+                    objkotedar_registration.district = ddldistrict.SelectedValue;
+                    objkotedar_registration.Constituency = ddlconstituency.SelectedValue;
+                    objkotedar_registration.kotedar_no = txtkotedarid.Value;
+                    objkotedar_registration.aadhar_no = txtaadharno.Value.Trim();
+                    objkotedar_registration.pan_no = txtpanno.Value;
+                    objkotedar_registration.pincode_no = Int32.Parse(txtpincode.Value.Trim());
 
+                    string x = UploadPhotoUpdate();
+                    if (x == "YES")
+                    {
+                        string y = UploadSignatureUpdate();
+                        if (y == "YES")
+                        {
+                            objclsKotedarUpdation_Logic.UpdateKotedar(objkotedar_registration);
+
+                            InitializeField();
+                            CheckData();
+                            Response.Write("<script>alert('Kotedar Detail Updated Successfull');</script>");
+                            this.Page_Load(null, null);
+
+                        }
+                    }
+
+
+                    else
+                    {
+                        return;
+                    }
+
+                }
             }
+
+
             catch (Exception ex)
             {
                 Response.Write("<script>alert('Error Occure Contact Admin');</script>");
@@ -231,6 +245,31 @@ namespace e_ration_card
                 btnupdate.Visible = false;
 
             }
+        }
+
+        public void FetchData()
+        {
+
+            string userid = Session["user_id"].ToString();
+            string strSQL;
+            strSQL = "select * from tbl_kotedar_registration where user_id='" + userid + "'";
+            DataSet dsTemp = objclsDbConnector.GetDataSet(strSQL);
+            DataTable dtTemp = dsTemp.Tables[0];
+            if (dtTemp.Rows.Count > 0)
+            {
+                          
+
+                Label lblname = this.Master.FindControl("lblkname") as Label;
+                lblname.Text = Session["name"].ToString();
+
+                Label lblkid = this.Master.FindControl("lblkid") as Label;            
+                lblkid.Text = dtTemp.Rows[0]["kotedar_no"].ToString();  
+                
+                Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
+                lblconstiuency.Text = dtTemp.Rows[0]["contituency"].ToString();
+
+            }
+         
         }
 
         public string UploadPhoto()
@@ -367,6 +406,66 @@ namespace e_ration_card
             ds = objclsDbConnector.GetDataSet(strSQ);
             ddldistrict.DataSource = ds.Tables[0];
             ddldistrict.DataBind();
+        }
+
+        public void ValidateForm()
+        {
+            if (string.IsNullOrEmpty(txtaadharno.Value))
+            {
+                Response.Write("<script>alert('Please Enter Aadhar Card No..');</script>");
+                return;
+            }
+            if (string.IsNullOrEmpty(txtaddress.Value))
+            {
+                Response.Write("<script>alert('Please Enter Address..');</script>");
+                return;
+            }
+            if (string.IsNullOrEmpty(txtemail.Value))
+            {
+                Response.Write("<script>alert('Please Enter Email..');</script>");
+                return;
+            }
+            if (string.IsNullOrEmpty(txtkotedar.Value))
+            {
+                Response.Write("<script>alert('Please Enter KotedarName..');</script>");
+                return;
+            }           
+            if (string.IsNullOrEmpty(txtkotedarid.Value))
+            {
+                Response.Write("<script>alert('Please Enter KotedarNo..');</script>");
+                return;
+            }
+            if (string.IsNullOrEmpty(txtmobile.Value))
+            {
+                Response.Write("<script>alert('Please Enter MobileNo..');</script>");
+                return;
+            }
+            if (string.IsNullOrEmpty(txtpanno.Value))
+            {
+                Response.Write("<script>alert('Please Enter Pan..');</script>");
+                return;
+            }
+            if (string.IsNullOrEmpty(txtpincode.Value))
+            {
+                Response.Write("<script>alert('Please Enter Pincode..');</script>");
+                return;
+            }         
+            if (ddlstate.SelectedItem.Text == "SELECT")
+            {
+                Response.Write("<script>alert('Please Select State..');</script>");
+                return;
+            }
+            if (ddldistrict.SelectedItem.Text == "SELECT")
+            {
+                Response.Write("<script>alert('Please Select District..');</script>");
+                return;
+            }
+            if (ddlconstituency.SelectedItem.Text == "SELECT")
+            {
+                Response.Write("<script>alert('Please Select Constituency..');</script>");
+                return;
+            }
+
         }
     }
 }

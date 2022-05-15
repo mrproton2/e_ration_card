@@ -102,8 +102,8 @@
 
                     </div>
             </div>
-            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <input type="number" id="txtannualincome" runat="server" placeholder="Annual Income" name="annualincome">
+            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">               
+                <asp:DropDownList ID="ddlannualincome" DataTextField="annual_income" DataValueField="typeof_rationcard" runat="server" OnSelectedIndexChanged="ddlannualincome_SelectedIndexChanged" AutoPostBack="true" ></asp:DropDownList>
             </div>
         </div>
         <div class="row bg-light mb-3 text-center  pt-3">
@@ -243,8 +243,8 @@
         </section>
          <div class="row bg-light text-center pb-4 mt-0">
             <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12">
-                <asp:Button ID="btnsubmit" runat="server" Text="Submit" class="btn btn-info" OnClick="btnsubmit_Click" OnClientClick="return ValidationGeneralf()"/>
-                <asp:Button ID="btnupdate" runat="server" Text="Update" class="btn btn-info" OnClick="btnupdate_Click" OnClientClick="return ValidationGeneralf();"/>
+                <asp:Button ID="btnsubmit" runat="server" Text="Submit" class="btn btn-info" OnClick="btnsubmit_Click" />
+                <asp:Button ID="btnupdate" runat="server" Text="Update" class="btn btn-info" OnClick="btnupdate_Click" />
                 <asp:Button ID="btnclear" runat="server" Text="Clear" class="btn btn-danger" OnClick="btnclear_Click" />
             </div>
         </div>

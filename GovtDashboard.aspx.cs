@@ -94,7 +94,8 @@ namespace e_ration_card
         {
             if (ddlcorrectiontype.SelectedValue == "Name Correction")
             {
-                string strSQ1 = "select b.user_id user_id,b.cn_id,a.card_holder_name,a.constituency,a.rationcard_no,a.states,district," +
+
+                string strSQ1 = "select b.user_id user_id,b.cn_id,a.constituency,a.rationcard_no,a.states,district," +
                     "b.old_name,b.new_name,cn_doc1_name,cn_doc2_name," +
                     "Authorize,b.reject_reson " +
                     "from tbl_general_registration a " +
@@ -107,12 +108,12 @@ namespace e_ration_card
                 dsGrid = objclsDbConnector.GetData(strSQ1);
                 gvchangename.DataSource = dsGrid;
                 gvchangename.DataBind();
-
+                btnSubmit.Text = "Update Name";
 
             }
             if (ddlcorrectiontype.SelectedValue == "Change Address")
             {
-                string strSQ1 = "select b.user_id user_id, b.ac_id,a.card_holder_name,a.constituency,a.rationcard_no,a.states,district,b.old_address,b.new_address,ac_doc1_name,ac_doc2_name," +
+                string strSQ1 = "select b.user_id user_id, b.ac_id,a.constituency,a.rationcard_no,a.states,district,b.old_address,b.new_address,ac_doc1_name,ac_doc2_name," +
                     "Authorize,b.reject_reson " +
                     "from tbl_general_registration a "+
                     "inner join tbl_address_correction b " +
@@ -122,13 +123,14 @@ namespace e_ration_card
                 dsGrid = objclsDbConnector.GetData(strSQ1);
                 gvaddresscorrection.DataSource = dsGrid;
                 gvaddresscorrection.DataBind();
+                btnSubmit.Text = "Update Address";
 
 
             }
 
             if (ddlcorrectiontype.SelectedValue == "Member Name Correction")
             {
-                string strSQ1 = "select b.user_id user_id, b.mbr_id,a.card_holder_name,a.constituency,a.rationcard_no,a.states,district,b.old_mbrname,b.new_mbrname,mbr_doc1_name,mbr_doc2_name," +
+                string strSQ1 = "select b.user_id user_id, b.mbr_id,a.constituency,a.rationcard_no,a.states,district,b.old_mbrname,b.new_mbrname,mbr_doc1_name,mbr_doc2_name," +
                     "Authorize,b.reject_reson " +
                     "from tbl_general_registration a " +
                     "inner join tbl_membername_correction b " +
@@ -138,13 +140,14 @@ namespace e_ration_card
                 dsGrid = objclsDbConnector.GetData(strSQ1);
                 gvmembernamecorr.DataSource = dsGrid;
                 gvmembernamecorr.DataBind();
+                btnSubmit.Text = "Update Mbr Name";
 
 
             }
 
             if (ddlcorrectiontype.SelectedValue == "Add Member")
             {
-                string strSQ1 = "select b.user_id user_id, b.addmbr_id,a.card_holder_name,a.constituency,a.rationcard_no,a.states,district,b.membername,addmbr_doc1_name,addmbr_doc2_name,b.relation, " +
+                string strSQ1 = "select b.user_id user_id, b.addmbr_id,a.constituency,a.rationcard_no,a.states,district,b.membername,addmbr_doc1_name,addmbr_doc2_name,b.relation, " +
                     "Authorize,b.reject_reson " +
                     "from tbl_general_registration a " +
                     "inner join tbl_add_member b " +
@@ -154,6 +157,7 @@ namespace e_ration_card
                 dsGrid = objclsDbConnector.GetData(strSQ1);
                 gvaddmbr.DataSource = dsGrid;
                 gvaddmbr.DataBind();
+                btnSubmit.Text = "Add Member";
 
 
             }
@@ -161,7 +165,7 @@ namespace e_ration_card
 
             if (ddlcorrectiontype.SelectedValue == "Remove Member")
             {
-                string strSQ1 = "select b.user_id user_id, b.removembr_id,a.card_holder_name,a.constituency,a.rationcard_no,a.states,district,b.membername,removembr_doc1_name,removembr_doc2_name,b.relation, " +
+                string strSQ1 = "select b.mbrlist_id,b.user_id user_id, b.removembr_id,a.constituency,a.rationcard_no,a.states,district,b.membername,removembr_doc1_name,removembr_doc2_name,b.relation, " +
                     "Authorize,b.reject_reson " +
                     "from tbl_general_registration a " +
                     "inner join tbl_remove_member b " +
@@ -171,7 +175,7 @@ namespace e_ration_card
                 dsGrid = objclsDbConnector.GetData(strSQ1);
                 gvremovembr.DataSource = dsGrid;
                 gvremovembr.DataBind();
-
+                btnSubmit.Text = "Remove Member";
 
             }
 
@@ -453,10 +457,28 @@ namespace e_ration_card
                 string user_id1 = Session["user_id"].ToString();
                 //objgeneral_registration.user_id = Convert.ToInt32(user_id1);
             }
+            if (btnSubmit.Text == "Update Name")
+            {
+                Bulk_Update();
+            }
+            else if (btnSubmit.Text == "Update Address")
+            {
+                UpdateAddress();
+            }
+            else if (btnSubmit.Text == "Update Mbr Name")
+            {
+                UpdateMember();
+            }
+            else if (btnSubmit.Text == "Add Member")
+            {
+                AddMember();
+            }
+            else if (btnSubmit.Text =="Remove Member")
+            {
+                RemoveMember();
+            }
 
-            Bulk_Update();
 
-            
         }
         protected void Bulk_Update()
         {
@@ -497,7 +519,7 @@ namespace e_ration_card
                                 //script += message;
                                 //script += "')};";
                                 //ClientScript.RegisterStartupScript(this.GetType(), "", script, true);
-                                Response.Write("<script>alert('Detail Updated Successfull');</script>");
+                                
 
                                 Bulk_UpdateMain();
 
@@ -505,8 +527,8 @@ namespace e_ration_card
                         }
                     }
                 }
+                Response.Write("<script>alert('Detail Updated Successfull');</script>");
 
-               
                 gvchangename.DataSource = "";
                 gvchangename.DataBind();
             }
@@ -520,31 +542,352 @@ namespace e_ration_card
 
         public void Bulk_UpdateMain()
         {
-            Label userid = (Label)FindControl("lbluserid");
-            int userid1 = Convert.ToInt32(userid.Text);
-           Label newname = (Label)FindControl("lblnewname");
-            string newnames = newname.Text;
-        // string user_id2 = session["user_id"].tostring();
-           string updtquery = "update user set name='" + newnames + "'," +
-                "where user_id='" + userid1 + "'";
-            string consString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
-            //using (SqlConnection con = new SqlConnection(consString))
-            using (SqlConnection UpdtCon = new SqlConnection(consString))
-            using (SqlCommand UpdtCmd = new SqlCommand(updtquery, UpdtCon))
+            foreach (GridViewRow row in gvchangename.Rows)
             {
-                UpdtCon.Open();
-                int i = UpdtCmd.ExecuteNonQuery();
-                if (i > 0)
+
+                DropDownList ddlapprovestatus = row.FindControl("ddlapprovestatus") as DropDownList;
+                string auth = ddlapprovestatus.SelectedItem.Text;
+               
+               Label userid = (Label)row.FindControl("lbluserid");
+                string userid1 = userid.Text;
+                Label newname = (Label)row.FindControl("lblnewname");
+                string newnames = newname.Text;
+                // string user_id2 = session["user_id"].tostring();
+                string updtquery = "update users set name='" + newnames + "'" +
+                     " where user_id='" + userid1 + "'";
+                string consString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+                //using (SqlConnection con = new SqlConnection(consString))
+                using (SqlConnection UpdtCon = new SqlConnection(consString))
+                using (SqlCommand UpdtCmd = new SqlCommand(updtquery, UpdtCon))
                 {
-                    //string message = "approval/rejection done.";
-                    //script += message;
-                    //script += "')};";
-                    //clientscript.registerstartupscript(this.gettype(), "", script, true);
-                    Response.Write("<script>alert('detail updated successfull');</script>");
+                    UpdtCon.Open();
+                    int i = UpdtCmd.ExecuteNonQuery();
+                    if (i > 0 && auth == "Approved")
+                    {
+                        //string message = "approval/rejection done.";
+                        //script += message;
+                        //script += "')};";
+                        //clientscript.registerstartupscript(this.gettype(), "", script, true);
+                        //Response.Write("<script>alert('Details updated successfull');</script>");
 
 
+                    }
                 }
             }
+        }
+
+
+        public void UpdateAddressMain()
+        {
+            foreach (GridViewRow row in gvaddresscorrection.Rows)
+            {
+
+                DropDownList ddlapprovestatus = row.FindControl("ddlapprovestatus") as DropDownList;
+                string auth = ddlapprovestatus.SelectedItem.Text;
+
+                Label userid = (Label)row.FindControl("lbluserid");
+                string userid1 = userid.Text;
+                Label address = (Label)row.FindControl("lblnewname");
+                string address1 = address.Text;
+                string updtquery = "update tbl_general_registration set addresss='" + address1 + "'" +
+                     " where user_id='" + userid1 + "'";
+                string consString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+                //using (SqlConnection con = new SqlConnection(consString))
+                using (SqlConnection UpdtCon = new SqlConnection(consString))
+                using (SqlCommand UpdtCmd = new SqlCommand(updtquery, UpdtCon))
+                {
+                    UpdtCon.Open();
+                    int i = UpdtCmd.ExecuteNonQuery();
+                    if (i > 0 && auth == "Approved")
+                    {
+                        //string message = "approval/rejection done.";
+                        //script += message;
+                        //script += "')};";
+                        //clientscript.registerstartupscript(this.gettype(), "", script, true);
+                        //Response.Write("<script>alert('Details updated successfull');</script>");
+
+
+                    }
+                }
+            }
+        }
+
+        public void UpdateMbrNameMain()
+        {
+            foreach (GridViewRow row in gvmembernamecorr.Rows)
+            {
+
+                DropDownList ddlapprovestatus = row.FindControl("ddlapprovestatus") as DropDownList;
+                string auth = ddlapprovestatus.SelectedItem.Text;
+
+                Label userid = (Label)row.FindControl("lbluserid");
+                string userid1 = userid.Text;
+                Label name = (Label)row.FindControl("lblnewname");
+                string name1 =name.Text;
+                Label oname = (Label)row.FindControl("lbloldname");
+                string oname1 = oname.Text;
+                string updtquery = "update tbl_member_list set mbr_name='" + name1 + "'"  +
+                     "where mbr_name like '%" + oname1 + "%' AND user_id='" + userid1 + "'";
+                string consString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+                //using (SqlConnection con = new SqlConnection(consString))
+                using (SqlConnection UpdtCon = new SqlConnection(consString))
+                using (SqlCommand UpdtCmd = new SqlCommand(updtquery, UpdtCon))
+                {
+                    UpdtCon.Open();
+                    int i = UpdtCmd.ExecuteNonQuery();
+                    if (i > 0 && auth == "Approved")
+                    {
+                        //string message = "approval/rejection done.";
+                        //script += message;
+                        //script += "')};";
+                        //clientscript.registerstartupscript(this.gettype(), "", script, true);
+                        //Response.Write("<script>alert('Details updated successfull');</script>");
+
+
+                    }
+                }
+            }
+        }
+
+        protected void UpdateAddress()
+        {
+            try
+            {
+
+                foreach (GridViewRow row in gvaddresscorrection.Rows)
+                {
+
+                    CheckBox chkRow = (CheckBox)row.FindControl("chkChange");
+                    bool isSelected = (row.FindControl("chkChange") as CheckBox).Checked;
+                    if (chkRow.Checked || isSelected)
+                    {
+                        //string nowDate = DateTime.Now.AddDays(365).ToString();                       
+                        DropDownList ddlapprovestatus = row.FindControl("ddlapprovestatus") as DropDownList;
+                        string auth = ddlapprovestatus.SelectedItem.Text;
+                        TextBox reason = (TextBox)row.FindControl("txtrejectreason");
+
+                        string res = reason.Text;
+                        Label acid = (Label)row.FindControl("lblcnid");
+                        int acid1 = Convert.ToInt32(acid.Text);
+                        string dateCreated = DateTime.Now.ToShortDateString();
+                        string user_id1 = Session["user_id"].ToString();
+                        string updtQuery = "update tbl_address_correction set Authorize='" + auth + "'," +
+                            "reject_reson='" + res + "'," +
+                            " creatredate ='" + dateCreated + "' " +
+                            "where ac_id='" + acid1 + "'";
+                        string consString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+                        //using (SqlConnection con = new SqlConnection(consString))
+                        using (SqlConnection UpdtCon = new SqlConnection(consString))
+                        using (SqlCommand UpdtCmd = new SqlCommand(updtQuery, UpdtCon))
+                        {
+                            UpdtCon.Open();
+                            int i = UpdtCmd.ExecuteNonQuery();
+                            if (i > 0)
+                            {
+                                //string message = "Approval/Rejection Done.";
+                                //script += message;
+                                //script += "')};";
+                                //ClientScript.RegisterStartupScript(this.GetType(), "", script, true);
+                                //Response.Write("<script>alert('Detail Updated Successfull');</script>");
+                                UpdateAddressMain();
+
+                            }
+                        }
+                    }
+                }
+                Response.Write("<script>alert('Detail Updated Successfull');</script>");
+
+                gvchangename.DataSource = "";
+                gvchangename.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script language='javascript'>alert('" + Server.HtmlEncode(ex.Message.ToString()) + "')</script>");
+            }
+
+        }
+
+        protected void UpdateMember()
+        {
+            try
+            {
+
+                foreach (GridViewRow row in gvmembernamecorr.Rows)
+                {
+
+                    CheckBox chkRow = (CheckBox)row.FindControl("chkChange");
+                    bool isSelected = (row.FindControl("chkChange") as CheckBox).Checked;
+                    if (chkRow.Checked || isSelected)
+                    {
+                        //string nowDate = DateTime.Now.AddDays(365).ToString();                       
+                        DropDownList ddlapprovestatus = row.FindControl("ddlapprovestatus") as DropDownList;
+                        string auth = ddlapprovestatus.SelectedItem.Text;
+                        TextBox reason = (TextBox)row.FindControl("txtrejectreason");
+
+                        string res = reason.Text;
+                        Label mbrid = (Label)row.FindControl("lblcnid");
+                        int mbrid1 = Convert.ToInt32(mbrid.Text);
+                        string dateCreated = DateTime.Now.ToShortDateString();
+                        string user_id1 = Session["user_id"].ToString();
+                        string updtQuery = "update tbl_membername_correction set Authorize='" + auth + "'," +
+                            "reject_reson='" + res + "'," +
+                            " creatredate ='" + dateCreated + "' " +
+                            "where mbr_id='" + mbrid1 + "'";
+                        string consString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+                        //using (SqlConnection con = new SqlConnection(consString))
+                        using (SqlConnection UpdtCon = new SqlConnection(consString))
+                        using (SqlCommand UpdtCmd = new SqlCommand(updtQuery, UpdtCon))
+                        {
+                            UpdtCon.Open();
+                            int i = UpdtCmd.ExecuteNonQuery();
+                            if (i > 0)
+                            {
+                                //string message = "Approval/Rejection Done.";
+                                //script += message;
+                                //script += "')};";
+                                //ClientScript.RegisterStartupScript(this.GetType(), "", script, true);
+                                Response.Write("<script>alert('Detail Updated Successfull');</script>");
+
+                                UpdateMbrNameMain();
+
+                            }
+                        }
+                    }
+                }
+
+                Response.Write("<script>alert('Detail Updated Successfull');</script>");
+                gvmembernamecorr.DataSource = "";
+                gvmembernamecorr.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script language='javascript'>alert('" + Server.HtmlEncode(ex.Message.ToString()) + "')</script>");
+            }
+
+        }
+
+        protected void AddMember()
+        {
+            try
+            {
+
+                foreach (GridViewRow row in gvaddmbr.Rows)
+                {
+
+                    CheckBox chkRow = (CheckBox)row.FindControl("chkChange");
+                    bool isSelected = (row.FindControl("chkChange") as CheckBox).Checked;
+                    if (chkRow.Checked || isSelected)
+                    {
+                        //string nowDate = DateTime.Now.AddDays(365).ToString();                       
+                        DropDownList ddlapprovestatus = row.FindControl("ddlapprovestatus") as DropDownList;
+                        string auth = ddlapprovestatus.SelectedItem.Text;
+                        TextBox reason = (TextBox)row.FindControl("txtrejectreason");
+
+                        string res = reason.Text;
+                        Label addmbid = (Label)row.FindControl("lblcnid");
+                        int addmbrid1 = Convert.ToInt32(addmbid.Text);
+                        string dateCreated = DateTime.Now.ToShortDateString();
+                        string user_id1 = Session["user_id"].ToString();
+                        string updtQuery = "update tbl_add_member set Authorize='" + auth + "'," +
+                            "reject_reson='" + res + "'," +
+                            " creatredate ='" + dateCreated + "' " +
+                            "where addmbr_id='" + addmbrid1 + "'";
+                        string consString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+                        //using (SqlConnection con = new SqlConnection(consString))
+                        using (SqlConnection UpdtCon = new SqlConnection(consString))
+                        using (SqlCommand UpdtCmd = new SqlCommand(updtQuery, UpdtCon))
+                        {
+                            UpdtCon.Open();
+                            int i = UpdtCmd.ExecuteNonQuery();
+                            if (i > 0)
+                            {
+                                //string message = "Approval/Rejection Done.";
+                                //script += message;
+                                //script += "')};";
+                                //ClientScript.RegisterStartupScript(this.GetType(), "", script, true);
+                                Response.Write("<script>alert('Detail Updated Successfull');</script>");
+
+                                // Bulk_UpdateMain();
+                                InsertMbrActive();
+
+                            }
+                        }
+                    }
+                }
+
+                Response.Write("<script>alert('Detail Updated Successfull');</script>");
+                gvaddmbr.DataSource = "";
+                gvaddmbr.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script language='javascript'>alert('" + Server.HtmlEncode(ex.Message.ToString()) + "')</script>");
+            }
+
+        }
+
+        protected void RemoveMember()
+        {
+            try
+            {
+
+                foreach (GridViewRow row in gvremovembr.Rows)
+                
+                {
+
+                    CheckBox chkRow = (CheckBox)row.FindControl("chkChange");
+                    bool isSelected = (row.FindControl("chkChange") as CheckBox).Checked;
+                    if (chkRow.Checked || isSelected)
+                    {
+                        //string nowDate = DateTime.Now.AddDays(365).ToString();                       
+                        DropDownList ddlapprovestatus = row.FindControl("ddlapprovestatus") as DropDownList;
+                        string auth = ddlapprovestatus.SelectedItem.Text;
+                        TextBox reason = (TextBox)row.FindControl("txtrejectreason");
+
+                        string res = reason.Text;
+                        Label removembrid = (Label)row.FindControl("lblcnid");
+                        int removembr1 = Convert.ToInt32(removembrid.Text);
+                        string dateCreated = DateTime.Now.ToShortDateString();
+                        string user_id1 = Session["user_id"].ToString();
+                        string updtQuery = "update tbl_remove_member set Authorize='" + auth + "'," +
+                            "reject_reson='" + res + "'," +
+                            " creatredate ='" + dateCreated + "' " +
+                            "where removembr_id='" + removembr1 + "'";
+                        string consString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+                        //using (SqlConnection con = new SqlConnection(consString))
+                        using (SqlConnection UpdtCon = new SqlConnection(consString))
+                        using (SqlCommand UpdtCmd = new SqlCommand(updtQuery, UpdtCon))
+                        {
+                            UpdtCon.Open();
+                            int i = UpdtCmd.ExecuteNonQuery();
+                            if (i > 0 && auth == "Approved")
+                            {
+                                //string message = "Approval/Rejection Done.";
+                                //script += message;
+                                //script += "')};";
+                                //ClientScript.RegisterStartupScript(this.GetType(), "", script, true);
+                                if (auth == "Approved")
+                                {
+                                    RemoveMbrActive();
+                                    return;
+
+                                }
+
+                            }
+                        }
+                        
+                    }
+                }
+                Response.Write("<script>alert('Detail Updated Successfull');</script>");
+
+                gvremovembr.DataSource = "";
+                gvremovembr.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script language='javascript'>alert('" + Server.HtmlEncode(ex.Message.ToString()) + "')</script>");
+            }
+
         }
 
         protected void lnkDownloadDoc1_Click1(object sender, EventArgs e)
@@ -556,37 +899,7 @@ namespace e_ration_card
         {
 
         }
-
-        protected void lnkDownloadDoc1_Click2(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void lnkDownloadDoc2_Click2(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void lnkDownloadDoc1_Click3(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void lnkDownloadDoc2_Click3(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void lnkDownloadDoc1_Click4(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void lnkDownloadDoc2_Click4(object sender, EventArgs e)
-        {
-
-        }
-
+       
         protected void lnkDownloadAddressDoc1_Click(object sender, EventArgs e)
         {
 
@@ -727,6 +1040,85 @@ namespace e_ration_card
             Response.Flush();
             Response.End();
         }
+
+        public void InsertMbrActive()
+        {
+
+            {
+                try
+                {
+                    foreach (GridViewRow row in gvaddmbr.Rows)
+                    {
+                        Label mbrname = (Label)row.FindControl("lbloldname");
+                        string mbrname1 = mbrname.Text;
+                        string constr = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+                        string Query = "insert into tbl_member_list(mbr_name,Status) values('" + mbrname1 + "','Active');";
+                        using (SqlConnection con = new SqlConnection(constr))
+                        {
+                            using (SqlCommand cmd = new SqlCommand(Query, con))
+                            {
+                                cmd.CommandType = System.Data.CommandType.Text;
+                                cmd.Connection = con;
+                                con.Open();
+                                cmd.ExecuteNonQuery();
+                                con.Close();
+
+
+                            }
+
+                        }
+                       
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+
+        }
+
+        public void RemoveMbrActive()
+        {
+
+            {
+                try
+                {
+                    foreach (GridViewRow row in gvremovembr.Rows) 
+                    {
+                        Label userid = (Label)row.FindControl("lbluserid");
+                        string userid1 = userid.Text;
+                        Label mbrlistid = (Label)row.FindControl("lblmbrlistid");
+                        string mbrlistid1 = mbrlistid.Text;
+                        string constr = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+                        string Query = "Delete from tbl_member_list where mbrlist_id='" + mbrlistid1 + "'";
+                        using (SqlConnection con = new SqlConnection(constr))
+                        {
+                            using (SqlCommand cmd = new SqlCommand(Query, con))
+                            {
+                                cmd.CommandType = System.Data.CommandType.Text;
+                                cmd.Connection = con;
+                                con.Open();
+                                cmd.ExecuteNonQuery();
+                                con.Close();
+
+
+                            }
+
+                        }
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+            }
+
+        }
+
     }
 
 }

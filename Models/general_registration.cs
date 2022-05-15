@@ -15,7 +15,7 @@ namespace e_ration_card.Models
         public string states { get; set; }
         public string district { get; set; }
         public string constituency { get; set; }
-        public int annual_income { get; set; }
+        public string annual_income { get; set; }
         public string typeof_rationcard { get; set; }
         public string addresss { get; set; }
         public int pincode_no { get; set; }                  

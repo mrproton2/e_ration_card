@@ -66,7 +66,7 @@ namespace e_ration_card
 
             Label lblhname = this.Master.FindControl("lblhname") as Label;
             lblhname.Text = Session["cardholdername"].ToString();
-            txtoldname.Value= Session["cardholdername"].ToString();
+            //txtoldname.Value= Session["cardholdername"].ToString();
             Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;           
             lblconstiuency.Text = Session["constituency"].ToString();
 
@@ -536,6 +536,7 @@ namespace e_ration_card
             strSQLU = "SELECT * from users where user_id='" + userid + "'";
             DataSet dsTempU = objclsDbConnector.GetDataSet(strSQLU);
             DataTable dtTempU = dsTempU.Tables[0];
+            txtoldname.Value= dtTempU.Rows[0]["name"].ToString();
 
         }
 
@@ -855,7 +856,15 @@ namespace e_ration_card
 
         protected void btnremovemember_Click(object sender, EventArgs e)
         {
+            string userid = Session["user_id"].ToString();
+            string strSQLM;
+            strSQLM = "select mbrlist_id from tbl_member_list where mbr_name like '%" + ddlremovemembername.SelectedValue + "%' AND user_id='" + userid + "'";
+            DataSet dsTempM = objclsDbConnector.GetDataSet(strSQLM);
+            DataTable dtTempM = dsTempM.Tables[0];
+            string mbrid = dtTempM.Rows[0][0].ToString();
+
             objclsremovembr.new_membername = ddlremovemembername.SelectedValue;
+            objclsremovembr.mbrlist_id = Convert.ToInt32(mbrid);
             objclsremovembr.relation = txtmemberremovereson.Value;
             objclsremovembr.user_id = Convert.ToInt32(Session["user_id"].ToString());
             HttpPostedFile postedFile = fu1removemember.PostedFile;
@@ -870,9 +879,22 @@ namespace e_ration_card
             Stream stream = postedFile.InputStream;
             BinaryReader binaryReader = new BinaryReader(stream);
             objclsremovembr.removembr_doc1_data = binaryReader.ReadBytes((int)stream.Length);
-
+            
             objclsRationCardUpdation.RemoveMember(objclsremovembr);
             Response.Write("<script>alert('Request Raise Successfully');</script>");
         }
+
+        //public void GetMemberId()
+        //{
+        //    string userid = Session["user_id"].ToString();
+        //    string strSQLM;
+        //    strSQLM = "select mbrlist_id from tbl_member_list where mbr_name like '%'" + ddlremovemembername.SelectedValue + "'% ";
+        //    DataSet dsTempM = objclsDbConnector.GetDataSet(strSQLM);
+        //    DataTable dtTempM = dsTempM.Tables[0];
+        //    string mbrid = dtTempM.Rows[0][0].ToString();
+
+
+
+        //}
     }
 }

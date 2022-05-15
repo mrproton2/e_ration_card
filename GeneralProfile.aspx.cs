@@ -1,16 +1,13 @@
 ﻿using e_ration_card.Models;
 using e_ration_card.Services;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data;
-using System.Web.Services;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
-using Newtonsoft.Json;
+using System.Web.Services;
+using System.Web.UI.WebControls;
 
 namespace e_ration_card
 {
@@ -36,6 +33,12 @@ namespace e_ration_card
             DataSet ds1 = new DataSet();
             ds1 = objclsDbConnector.GetDataSet(strSQ1);
 
+            
+            string strSQ2 = "Select annual_income,typeof_rationcard from tbl_annual_income";
+            DataTable ds2 = new DataTable();
+            ds2 = objclsDbConnector.GetData(strSQ2);
+            
+
 
             if (Session["user_id"] == null)
             {
@@ -51,12 +54,17 @@ namespace e_ration_card
              
                 ddlstate.DataSource = ds.Tables[0];
                 ddlstate.DataBind();
+
                 ddlstate.Items.Insert(0, "**SELECT**");
                 ddldistrict.Items.Insert(0, "**SELECT**");
                 ddlconstituency.DataSource = ds1.Tables[0];
                 ddlconstituency.DataBind();
-                ddlconstituency.Items.Insert(0, "**SELECT**");      
-                //CheckData();
+                ddlconstituency.Items.Insert(0, "**SELECT**");
+                ddlannualincome.DataSource = ds2;
+                ddlannualincome.DataBind();
+                ddlannualincome.Items.Insert(0, "SELECT");
+                CheckData();
+
 
             }
 
@@ -75,24 +83,28 @@ namespace e_ration_card
                 string user_id1 = Session["user_id"].ToString();
                 objgeneral_registration.user_id = Convert.ToInt32(user_id1);
             }
+            if (string.IsNullOrEmpty(txtaadharcardno.Value) || ddlannualincome.SelectedItem.Text == "**SELECT**" || string.IsNullOrEmpty(txtpincode.Value) || string.IsNullOrEmpty(txtrationcardno.Value) || string.IsNullOrEmpty(txttypeofrationcard.Value) || (ddlstate.SelectedItem.Text == "SELECT") || ddldistrict.SelectedItem.Text == "SELECT" || ddlconstituency.SelectedItem.Text == "SELECT")
+            {
+                ValidateForm();
+            }
+            else {
+                objgeneral_registration.card_holdername = txtcardholdername.Value;
+                objgeneral_registration.rationcard_no = Convert.ToInt32(txtrationcardno.Value);
+                objgeneral_registration.aadharcard_no = (txtaadharcardno.Value);
+                objgeneral_registration.pancard_no = txtpanno.Value;
+                objgeneral_registration.card_holdername = txtcardholdername.Value;
+                objgeneral_registration.annual_income =ddlannualincome.SelectedItem.Text;
+                objgeneral_registration.states = ddlstate.SelectedValue;
+                objgeneral_registration.district = ddldistrict.SelectedValue;
+                objgeneral_registration.addresss = txtaddress.Value;
+                objgeneral_registration.constituency = ddlconstituency.SelectedValue;
+                objgeneral_registration.typeof_rationcard = txttypeofrationcard.Value;
 
-            objgeneral_registration.card_holdername = txtcardholdername.Value;
-            objgeneral_registration.rationcard_no = Convert.ToInt32(txtrationcardno.Value);          
-            objgeneral_registration.aadharcard_no = (txtaadharcardno.Value);
-            objgeneral_registration.pancard_no = txtpanno.Value;
-            objgeneral_registration.card_holdername = txtcardholdername.Value;
-            objgeneral_registration.annual_income = Convert.ToInt32(txtannualincome.Value);
-            objgeneral_registration.states = ddlstate.SelectedValue;
-            objgeneral_registration.district = ddldistrict.SelectedValue;
-            objgeneral_registration.addresss = txtaddress.Value;
-            objgeneral_registration.constituency = ddlconstituency.SelectedValue;
-            objgeneral_registration.typeof_rationcard = txttypeofrationcard.Value;
 
+                objclsGeneral_Logic.InsertGeneral(objgeneral_registration);
 
-            objclsGeneral_Logic.InsertGeneral(objgeneral_registration);
-
-            Response.Write("<script>alert('General Detail Updated Successfull');</script>");
-
+                Response.Write("<script>alert('General Detail Updated Successfull');</script>");
+            }
         }
 
         public void Validation()
@@ -104,7 +116,7 @@ namespace e_ration_card
         {
             txtaadharcardno.Value = "";
             txtaddress.Value = "";
-            txtannualincome.Value = "";
+            ddlannualincome.SelectedIndex = 0;
             txtcardholdername.Value = "";
             txtemail.Value = "";
             txtmobileno.Value = "";
@@ -141,6 +153,7 @@ namespace e_ration_card
                 ddldistrict.SelectedItem.Text = dtTemp.Rows[0]["district"].ToString();
                 ddlconstituency.SelectedItem.Text = dtTemp.Rows[0]["constituency"].ToString();
                 txttypeofrationcard.Value = dtTemp.Rows[0]["typeof_rationcard"].ToString();
+                ddlannualincome.SelectedItem.Text = dtTemp.Rows[0]["annual_income"].ToString();
             }
             else
             {
@@ -243,30 +256,37 @@ namespace e_ration_card
                     string user_id = Session["user_id"].ToString();
                     objgeneral_registration.user_id = Convert.ToInt32(user_id);
                 }
-
-                objgeneral_registration.rationcard_no = Convert.ToInt32(txtrationcardno.Value);
-                objgeneral_registration.addresss = txtaddress.Value;
-                objgeneral_registration.aadharcard_no = txtaadharcardno.Value;
-                objgeneral_registration.pancard_no = txtpanno.Value;
-                objgeneral_registration.pincode_no = Convert.ToInt32(txtpincode.Value);
-                objgeneral_registration.states = ddlstate.SelectedValue;
-                objgeneral_registration.district = ddldistrict.SelectedValue;
-                objgeneral_registration.constituency = ddlconstituency.SelectedValue;
-                objgeneral_registration.typeof_rationcard = txttypeofrationcard.Value;
-
-
-                objclsGeneral_Logic.UpdatedGeneral(objgeneral_registration);
-
-
-                InitializeField();
-                CheckData();
-                Response.Write("<script>alert('General Detail Updated Successfull');</script>");
+                if (string.IsNullOrEmpty(txtaadharcardno.Value) || ddlannualincome.SelectedValue == "SELECT" || string.IsNullOrEmpty(txtpincode.Value) || string.IsNullOrEmpty(txttypeofrationcard.Value) || (ddlstate.SelectedItem.Text == "SELECT") || ddldistrict.SelectedItem.Text == "SELECT" || ddlconstituency.SelectedItem.Text == "SELECT")
+                {
+                    ValidateForm();
+                }
+                else
+                {
+                    objgeneral_registration.rationcard_no = Convert.ToInt32(txtrationcardno.Value);
+                    objgeneral_registration.addresss = txtaddress.Value;
+                    objgeneral_registration.aadharcard_no = txtaadharcardno.Value;
+                    objgeneral_registration.pancard_no = txtpanno.Value;
+                    objgeneral_registration.pincode_no = Convert.ToInt32(txtpincode.Value);
+                    objgeneral_registration.states = ddlstate.SelectedValue;
+                    objgeneral_registration.district = ddldistrict.SelectedValue;
+                    objgeneral_registration.constituency = ddlconstituency.SelectedValue;
+                    objgeneral_registration.typeof_rationcard = txttypeofrationcard.Value;
+                    objgeneral_registration.annual_income = ddlannualincome.SelectedItem.Text;
 
 
+                    objclsGeneral_Logic.UpdatedGeneral(objgeneral_registration);
 
+
+                    //InitializeField();
+                    //CheckData();
+                    Response.Write("<script>alert('General Detail Updated Successfull');</script>");
+
+
+                }
 
 
             }
+            
             catch (Exception ex)
             {
                 Response.Write("<script>alert('Error Occure Contact Admin');</script>");
@@ -277,6 +297,74 @@ namespace e_ration_card
         protected void btnclear_Click(object sender, EventArgs e)
         {
             txtaadharcardno.Value = "";
+        }
+        
+        public void ValidateForm()
+        {
+            if (string.IsNullOrEmpty(txtrationcardno.Value))
+            {
+                Response.Write("<script>alert('Please Enter RationCardNo..');</script>");
+                return;
+            }
+            if (string.IsNullOrEmpty(txtaadharcardno.Value))
+            {
+                Response.Write("<script>alert('Please Enter Aadhar Card No..');</script>");
+                return;
+            }
+            if (string.IsNullOrEmpty(txtpanno.Value))
+            {
+                Response.Write("<script>alert('Please Enter Panno..');</script>");
+                return;
+            }
+            if (string.IsNullOrEmpty(txtaddress.Value))
+            {
+                Response.Write("<script>alert('Please Enter Address..');</script>");
+                return;
+            }
+            if (string.IsNullOrEmpty(txtpincode.Value))
+            {
+                Response.Write("<script>alert('Please Enter Pincode..');</script>");
+                return;
+            }
+            if (ddlannualincome.SelectedValue == "SELECT")
+            {
+                Response.Write("<script>alert('Please Select Anual Income..');</script>");
+                return;
+            }                                            
+           
+            if (ddlstate.SelectedItem.Text == "SELECT")
+            {
+                Response.Write("<script>alert('Please Select State..');</script>");
+                return;
+            }
+            if (ddldistrict.SelectedItem.Text == "SELECT")
+            {
+                Response.Write("<script>alert('Please Select District..');</script>");
+                return;
+            }
+            if (ddlconstituency.SelectedItem.Text == "SELECT")
+            {
+                Response.Write("<script>alert('Please Select Constituency..');</script>");
+                return;
+            }
+            if (string.IsNullOrEmpty(txttypeofrationcard.Value))
+            {
+                Response.Write("<script>alert('Please Enter Type Of RationCard..');</script>");
+                return;
+            }
+
+        }
+
+        protected void ddlannualincome_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlannualincome.SelectedValue == "SELECT")
+            {
+                Response.Write("<script>alert('Please Select Annual Income..');</script>");
+            }
+            else
+            {
+                txttypeofrationcard.Value = ddlannualincome.SelectedValue;
+            }
         }
     }
 }

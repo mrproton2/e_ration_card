@@ -31,46 +31,6 @@
 
 
   <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-12 ">
-<%-- <asp:ListBox ID="lstallgoods" runat="server"  style="margin-left:35px;" Height="200px" Width="150px" SelectionMode="Multiple">
-          <asp:ListItem>Wheat</asp:ListItem>
-          <asp:ListItem>Rice</asp:ListItem>
-          <asp:ListItem>Oil</asp:ListItem>
-          <asp:ListItem>Soyabean</asp:ListItem>
-          <asp:ListItem>Sugar</asp:ListItem>
-          <asp:ListItem>Salt</asp:ListItem>
-      </asp:ListBox>
-
-
-
-
-      <asp:ListBox ID="lstselected" runat="server" style="margin-left:80px;" Height="200px" Width="150px" SelectionMode="Multiple">
-      </asp:ListBox>--%>
-
-     <%-- <table border="0" cellpadding="0" cellspacing="5">
-    <tr>
-        <td>
-            <asp:ListBox ID="lstLeft" runat="server" SelectionMode="Multiple" style="margin-left:35px;" Height="200px" Width="150px">
-                <asp:ListItem>Wheat</asp:ListItem>
-          <asp:ListItem>Rice</asp:ListItem>
-          <asp:ListItem>Oil</asp:ListItem>
-          <asp:ListItem>Soyabean</asp:ListItem>
-          <asp:ListItem>Sugar</asp:ListItem>
-          <asp:ListItem>Salt</asp:ListItem>
-            </asp:ListBox>
-           
-        </td>
-        <td>
-            <asp:Button ID="btnLeft" Text="<<" runat="server" OnClick="LeftClick" />
-            <asp:Button ID="btnRight" Text=">>" runat="server" OnClick="RightClick" />
-        </td>
-        <td>
-            <asp:ListBox ID="lstRight" runat="server" SelectionMode="Multiple" style="margin-left:20px;" Height="200px" Width="150px"></asp:ListBox>
-             
-
-        </td>
-    </tr>
-</table>--%>
-
  <div id="divrecord">
       <asp:GridView ID="gvlist" runat="server" CssClass="table table-bordered" AutoGenerateColumns="false" Width="100%"
                                     OnRowDataBound="gvlist_RowDataBound" Style="text-align: center" 
@@ -162,12 +122,10 @@
    
         </Columns>
                                 </asp:GridView>
-     
-                            
-                
-
+    
    </div>
-  
+ </div>
+      
   <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-12 p-5">
        <div class="form-group">
        <label for="totalprice">Total Price:</label>
@@ -180,13 +138,7 @@
         <%--<input type="text" id="txtdate" placeholder="" name="date" required>  --%>  
          <asp:Label ID="lbldatetime" runat="server" Text=""></asp:Label> 
       </div>
-  </div>
-
-
-
-<div class="row bg-light">
-  <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-12 p-5">
-   <form class="needs-validation" novalidate >
+<form class="needs-validation" novalidate >
    <div class="form-group">
     <label for="utype">Active Mbr</label>
      <asp:DropDownList ID="ddlactivemember" runat="server" DataTextField="Member_Name" DataValueField="Member_Name" AutoPostBack="false">          
@@ -196,26 +148,29 @@
      </asp:DropDownList>   
   </div>
 </form>
-  </div>
 
-  <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-12 p-5 txt-center">  
-      <div class="form-group">
+      <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12 p-5">
           <asp:Button ID="btnsubmit" runat="server" Text="Submit" class="btn btn-info" OnClick="btnsubmit_Click"/>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <asp:Button ID="btnclear" runat="server" Text="Clear" class="btn btn-danger" OnClick="btnclear_Click"/>
-          
+          <asp:Button ID="btnclear" runat="server" Text="Clear" class="btn btn-danger" OnClick="btnclear_Click"/>          
            <div style="display:none"><asp:Label ID="lblgeneralid" runat="server" Text=""></asp:Label></div>
-      </div>
+  </div>
+
+  </div>
+</div>
+
+<div class="row bg-light pt-0">
+  
+
+  <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-12 p-5 txt-center">  
+      
       </div>
  
 
     </div>
-     </div>
+</div>
 
-
-    </div>
       </div>
-      
       <script>
 
 

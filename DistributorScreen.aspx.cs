@@ -45,15 +45,10 @@ namespace e_ration_card.Master
             //{
             //    objdistribution_Details.Authenticated_mbr = ddlactivemember.SelectedItem.Text;
 
+
             //}
 
-            Label lblname = this.Master.FindControl("lblkname") as Label;
-            lblname.Text = Session["name"].ToString();
-            Label lblkid = this.Master.FindControl("lblkid") as Label;
-            lblkid.Text = Session["kotedarid"].ToString();
-            Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
-            string test = Session["constituency"].ToString();
-            lblconstiuency.Text = Session["constituency"].ToString();
+            FetchData();
         }
 
         public void btnserch_Click(object sender, EventArgs e)
@@ -64,8 +59,8 @@ namespace e_ration_card.Master
             string strSQ = "select A.rationcard_no,A.card_holder_name,A.pancard_no,A.[addresss],B.mbr_name Member_Name,b.relation " +
                 "from tbl_general_registration A " +
                 "inner join tbl_member_list B " +
-                "on A.general_id = B.general_id " +
-                "where[status] = 'Active' And B.user_id = '" + user_id + "'And A.rationcard_no ='" + rationcard + "'";
+                "on A.user_id = B.user_id " +
+                "where[status] = 'Active' And A.rationcard_no ='" + rationcard + "'";
             DataSet dsActive = new DataSet();
             dsActive = objclsDbConnector.GetDataSet(strSQ);
             if (dsActive.Tables[0].Rows.Count > 0)
@@ -84,7 +79,7 @@ namespace e_ration_card.Master
             string strSQInActive = "select A.rationcard_no,A.card_holder_name,A.pancard_no,A.[addresss],B.mbr_name Member_Name,b.relation " +
                 "from tbl_general_registration A " +
                 "inner join tbl_member_list B " +
-                "on A.general_id = B.general_id " +
+                 "on A.user_id = B.user_id " +
                 "where[status] = 'InActive' And B.user_id = '" + user_id + "'And A.rationcard_no ='" + rationcard + "'";
             DataSet dsInActive = new DataSet();
             dsInActive = objclsDbConnector.GetDataSet(strSQInActive);
@@ -170,7 +165,7 @@ namespace e_ration_card.Master
             objdistribution_Details.kotedar_name = Session["name"].ToString();
             objdistribution_Details.Area = Session["constituency"].ToString();
             objdistribution_Details.cardholdernme = lblchn.Text;
-            objdistribution_Details.Authenticated_mbr = ddlactivemember.SelectedItem.Text;
+            objdistribution_Details.Authenticated_mbr = ddlactivemember.SelectedValue;
             objdistribution_Details.rationcard_no = Convert.ToInt32(txtrationcardno.Value);
             objdistribution_Details.total_price = 1;
             objdistribution_Details.total_weight = lblweight.Text;
@@ -483,5 +478,30 @@ namespace e_ration_card.Master
             //divrecord.visible = false;
         }
 
+
+        public void FetchData()
+        {
+
+            string userid = Session["user_id"].ToString();
+            string strSQL;
+            strSQL = "select * from tbl_kotedar_registration where user_id='" + userid + "'";
+            DataSet dsTemp = objclsDbConnector.GetDataSet(strSQL);
+            DataTable dtTemp = dsTemp.Tables[0];
+            if (dtTemp.Rows.Count > 0)
+            {
+
+
+                Label lblname = this.Master.FindControl("lblkname") as Label;
+                lblname.Text = Session["name"].ToString();
+
+                Label lblkid = this.Master.FindControl("lblkid") as Label;
+                lblkid.Text = dtTemp.Rows[0]["kotedar_no"].ToString();
+
+                Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
+                lblconstiuency.Text = dtTemp.Rows[0]["contituency"].ToString();
+
+            }
+
+        }
     }
 }

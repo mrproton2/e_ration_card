@@ -75,12 +75,7 @@
             <ItemTemplate>
                 <asp:Label ID="lblnewname" runat="server" Text='<%# Eval("new_name") %>'></asp:Label>
             </ItemTemplate>
-        </asp:TemplateField>
-         <asp:TemplateField ItemStyle-HorizontalAlign = "Center" HeaderText="Card holder name" >
-            <ItemTemplate>
-                <asp:Label ID="lblcardholder" runat="server" Text='<%# Eval("card_holder_name") %>'></asp:Label>
-            </ItemTemplate>
-        </asp:TemplateField> 
+        </asp:TemplateField>       
         <asp:TemplateField ItemStyle-HorizontalAlign = "Center" HeaderText="Ration Card No" >
             <ItemTemplate>
                 <asp:Label ID="lblrationcardno" runat="server" Text='<%# Eval("rationcard_no") %>'></asp:Label>
@@ -175,11 +170,6 @@
                 <asp:Label ID="lblnewname" runat="server" Text='<%# Eval("new_address") %>'></asp:Label>
             </ItemTemplate>
         </asp:TemplateField>
-         <asp:TemplateField ItemStyle-HorizontalAlign = "Center" HeaderText="Card holder name" >
-            <ItemTemplate>
-                <asp:Label ID="lblcardholder" runat="server" Text='<%# Eval("card_holder_name") %>'></asp:Label>
-            </ItemTemplate>
-        </asp:TemplateField> 
         <asp:TemplateField ItemStyle-HorizontalAlign = "Center" HeaderText="Ration Card No" >
             <ItemTemplate>
                 <asp:Label ID="lblrationcardno" runat="server" Text='<%# Eval("rationcard_no") %>'></asp:Label>
@@ -273,12 +263,7 @@
             <ItemTemplate>
                 <asp:Label ID="lblnewname" runat="server" Text='<%# Eval("new_mbrname") %>'></asp:Label>
             </ItemTemplate>
-        </asp:TemplateField>
-         <asp:TemplateField ItemStyle-HorizontalAlign = "Center" HeaderText="Card holder name" >
-            <ItemTemplate>
-                <asp:Label ID="lblcardholder" runat="server" Text='<%# Eval("card_holder_name") %>'></asp:Label>
-            </ItemTemplate>
-        </asp:TemplateField> 
+        </asp:TemplateField>      
         <asp:TemplateField ItemStyle-HorizontalAlign = "Center" HeaderText="Ration Card No" >
             <ItemTemplate>
                 <asp:Label ID="lblrationcardno" runat="server" Text='<%# Eval("rationcard_no") %>'></asp:Label>
@@ -371,12 +356,7 @@
             <ItemTemplate>
                 <asp:Label ID="lblnewname" runat="server" Text='<%# Eval("relation") %>'></asp:Label>
             </ItemTemplate>
-        </asp:TemplateField>
-         <asp:TemplateField ItemStyle-HorizontalAlign = "Center" HeaderText="Card holder name" >
-            <ItemTemplate>
-                <asp:Label ID="lblcardholder" runat="server" Text='<%# Eval("card_holder_name") %>'></asp:Label>
-            </ItemTemplate>
-        </asp:TemplateField> 
+        </asp:TemplateField>      
         <asp:TemplateField ItemStyle-HorizontalAlign = "Center" HeaderText="Ration Card No" >
             <ItemTemplate>
                 <asp:Label ID="lblrationcardno" runat="server" Text='<%# Eval("rationcard_no") %>'></asp:Label>
@@ -452,12 +432,17 @@
                  </asp:TemplateField>
         <asp:TemplateField ItemStyle-HorizontalAlign = "Center" HeaderText="user_id" Visible="false" >
             <ItemTemplate>
-                <asp:Label ID="lbluserid" runat="server" Text='<%# Eval("user_id") %>'></asp:Label>
+                <asp:Label ID="lbluserid" runat="server" Text='<%# Eval("user_id") %>'></asp:Label>removembr_id
             </ItemTemplate>
         </asp:TemplateField> 
          <asp:TemplateField ItemStyle-HorizontalAlign = "Center" HeaderText="cn_id" Visible="false" >
             <ItemTemplate>
                 <asp:Label ID="lblcnid" runat="server" Text='<%# Eval("removembr_id") %>'></asp:Label>
+            </ItemTemplate>
+        </asp:TemplateField> 
+            <asp:TemplateField ItemStyle-HorizontalAlign = "Center" HeaderText="cn_id" Visible="false" >
+            <ItemTemplate>
+                <asp:Label ID="lblmbrlistid" runat="server" Text='<%# Eval("mbrlist_id") %>'></asp:Label>
             </ItemTemplate>
         </asp:TemplateField> 
           <asp:TemplateField ItemStyle-HorizontalAlign = "Center" HeaderText="Member Name" >
@@ -469,12 +454,7 @@
             <ItemTemplate>
                 <asp:Label ID="lblnewname" runat="server" Text='<%# Eval("relation") %>'></asp:Label>
             </ItemTemplate>
-        </asp:TemplateField>
-         <asp:TemplateField ItemStyle-HorizontalAlign = "Center" HeaderText="Card holder name" >
-            <ItemTemplate>
-                <asp:Label ID="lblcardholder" runat="server" Text='<%# Eval("card_holder_name") %>'></asp:Label>
-            </ItemTemplate>
-        </asp:TemplateField> 
+        </asp:TemplateField>      
         <asp:TemplateField ItemStyle-HorizontalAlign = "Center" HeaderText="Ration Card No" >
             <ItemTemplate>
                 <asp:Label ID="lblrationcardno" runat="server" Text='<%# Eval("rationcard_no") %>'></asp:Label>

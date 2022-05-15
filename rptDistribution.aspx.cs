@@ -42,10 +42,7 @@ namespace e_ration_card
 
 
             }
-            Label lblhname = this.Master.FindControl("lblhname") as Label;
-            //lblhname.Text = Session["cardholdername"].ToString();
-            Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
-            lblconstiuency.Text = Session["constituency"].ToString();
+            FetchData();
             BindGridAll();
 
         }
@@ -95,6 +92,31 @@ namespace e_ration_card
         protected void btnserch_Click(object sender, EventArgs e)
         {
             BindGridAll();
+        }
+
+        public void FetchData()
+        {
+
+            string userid = Session["user_id"].ToString();
+            string strSQL;
+            strSQL = "select * from tbl_kotedar_registration where user_id='" + userid + "'";
+            DataSet dsTemp = objclsDbConnector.GetDataSet(strSQL);
+            DataTable dtTemp = dsTemp.Tables[0];
+            if (dtTemp.Rows.Count > 0)
+            {
+
+
+                Label lblname = this.Master.FindControl("lblkname") as Label;
+                lblname.Text = Session["name"].ToString();
+
+                Label lblkid = this.Master.FindControl("lblkid") as Label;
+                lblkid.Text = dtTemp.Rows[0]["kotedar_no"].ToString();
+
+                Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
+                lblconstiuency.Text = dtTemp.Rows[0]["contituency"].ToString();
+
+            }
+
         }
     }
 }

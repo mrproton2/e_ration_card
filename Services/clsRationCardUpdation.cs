@@ -215,7 +215,9 @@ namespace e_ration_card.Services
                     {
                         using (SqlCommand cmd = new SqlCommand("usp_insert_removemember"))
                         {
+                           
                             cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                            cmd.Parameters.AddWithValue("@mbrlist_id", objclsremovembr.mbrlist_id);
                             cmd.Parameters.AddWithValue("@Mbrname", objclsremovembr.new_membername);
                             cmd.Parameters.AddWithValue("@Relation", objclsremovembr.relation);
                             cmd.Parameters.AddWithValue("@removembr_doc1_name", objclsremovembr.removembr_doc1_name);

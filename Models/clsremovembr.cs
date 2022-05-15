@@ -17,11 +17,15 @@ namespace e_ration_card.Models
 
         public string contcontenttype { get; set; }
         public int user_id { get; set; }
+
+        public int mbrlist_id { get; set; }
         public int removembr_doc1_size { get; set; }
         public int removembr_doc2_size { get; set; }
 
         public byte[] removembr_doc1_data { get; set; }
 
         public byte[] removembr_doc2_data { get; set; }
+
+
     }
 }

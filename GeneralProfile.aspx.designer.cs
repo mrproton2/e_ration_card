@@ -96,13 +96,13 @@ namespace e_ration_card
         protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtpincode;
 
         /// <summary>
-        /// txtannualincome control.
+        /// ddlannualincome control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl txtannualincome;
+        protected global::System.Web.UI.WebControls.DropDownList ddlannualincome;
 
         /// <summary>
         /// ddlstate control.
