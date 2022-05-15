@@ -122,8 +122,11 @@ namespace e_ration_card.Master
                         strSQL = "Select * from tbl_general_registration where user_id ='" + userid + "'";
                         DataSet ds = objclsDbConnector.GetDataSet(strSQL);
                         DataTable dt = ds.Tables[0];
-                        Session["cardholdername"] = dt.Rows[0]["card_holder_name"].ToString();
-                        Session["constituency"] = dt.Rows[0]["constituency"].ToString();
+                        if (Session["user_id"] == null)
+                        {
+                            Session["cardholdername"] = dt.Rows[0]["card_holder_name"].ToString();
+                            Session["constituency"] = dt.Rows[0]["constituency"].ToString();
+                        }
 
 
                         if (Session["username"].ToString() != null && Session["user_id"].ToString() != null)
@@ -152,8 +155,11 @@ namespace e_ration_card.Master
                         DataTable dt = ds.Tables[0];
                         if (dt.Rows.Count > 0)
                         {
-                            Session["kotedarid"] = dt.Rows[0]["kotedar_no"].ToString();
-                            Session["constituency"] = dt.Rows[0]["contituency"].ToString();
+                            if (Session["user_id"] == null)
+                            {
+                                Session["kotedarid"] = dt.Rows[0]["kotedar_no"].ToString();
+                                Session["constituency"] = dt.Rows[0]["contituency"].ToString();
+                            }
                         }
 
                         if (Session["username"].ToString() != null && Session["user_id"].ToString() != null)
