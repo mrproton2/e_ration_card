@@ -150,6 +150,15 @@ namespace e_ration_card
         protected global::System.Web.UI.WebControls.DropDownList ddlrelation;
 
         /// <summary>
+        /// txtuserid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtuserid;
+
+        /// <summary>
         /// lblmsg control.
         /// </summary>
         /// <remarks>

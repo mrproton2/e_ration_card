@@ -746,7 +746,7 @@ namespace e_ration_card
                                 //script += message;
                                 //script += "')};";
                                 //ClientScript.RegisterStartupScript(this.GetType(), "", script, true);
-                                Response.Write("<script>alert('Detail Updated Successfull');</script>");
+                               
 
                                 UpdateMbrNameMain();
 
@@ -784,7 +784,7 @@ namespace e_ration_card
                         TextBox reason = (TextBox)row.FindControl("txtrejectreason");
 
                         string res = reason.Text;
-                        Label addmbid = (Label)row.FindControl("lblcnid");
+                        Label addmbid = (Label)row.FindControl("lblcnid"); 
                         int addmbrid1 = Convert.ToInt32(addmbid.Text);
                         string dateCreated = DateTime.Now.ToShortDateString();
                         string user_id1 = Session["user_id"].ToString();
@@ -805,8 +805,7 @@ namespace e_ration_card
                                 //script += message;
                                 //script += "')};";
                                 //ClientScript.RegisterStartupScript(this.GetType(), "", script, true);
-                                Response.Write("<script>alert('Detail Updated Successfull');</script>");
-
+                                
                                 // Bulk_UpdateMain();
                                 InsertMbrActive();
 
@@ -869,7 +868,7 @@ namespace e_ration_card
                                 if (auth == "Approved")
                                 {
                                     RemoveMbrActive();
-                                    return;
+                                    //return;
 
                                 }
 
@@ -1051,8 +1050,10 @@ namespace e_ration_card
                     {
                         Label mbrname = (Label)row.FindControl("lbloldname");
                         string mbrname1 = mbrname.Text;
-                        string constr = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
-                        string Query = "insert into tbl_member_list(mbr_name,Status) values('" + mbrname1 + "','Active');";
+                        Label useridm = (Label)row.FindControl("lbluserid");
+                        int useridm1 = Convert.ToInt32(useridm.Text);
+                        string constr = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString; 
+                        string Query = "insert into tbl_member_list(mbr_name,Status,user_id) values('" + mbrname1 + "','Active','" + useridm1 + "');";
                         using (SqlConnection con = new SqlConnection(constr))
                         {
                             using (SqlCommand cmd = new SqlCommand(Query, con))

@@ -36,7 +36,7 @@ namespace e_ration_card.Services
                             cmd.Parameters.AddWithValue("@NewName", objchangename.new_name);
                             cmd.Parameters.AddWithValue("@cn_doc1_name", objchangename.cn_doc1_name);
                             cmd.Parameters.AddWithValue("@cn_doc2_name","test");
-                            cmd.Parameters.AddWithValue("@user_id",3);
+                            cmd.Parameters.AddWithValue("@user_id", objchangename.user_id);
                             cmd.Parameters.AddWithValue("@cn_doc1_size", objchangename.cn_doc1_size);
                             cmd.Parameters.AddWithValue("@cn_doc2_size",3254);
                             cmd.Parameters.AddWithValue("@cn_doc1_data", objchangename.cn_doc1_data);

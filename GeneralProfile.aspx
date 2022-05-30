@@ -24,7 +24,7 @@
                     </div>
             </div>
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
-                <input type="text" id="txtrationcardno" runat="server" placeholder="Ration Card No" name="rationcardno" readonly="readonly">
+                <input type="text" id="txtrationcardno" runat="server" placeholder="Ration Card No" name="rationcardno" >
             </div>
 
             <div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 col-12">
@@ -219,6 +219,10 @@
                          <td>  
                             <input type="text" name="aadharno" class="form-control aadharno01" /></td>
                         <td>  
+                         <td>  
+                            <%--<input type="text" ranat="server" id="txtuserid" name="userid" class="form-control userid01" /></td>--%>
+                        <asp:TextBox ID="txtuserid" runat="server" name="userid" class="form-control userid01" Visible="false"></asp:TextBox>
+                        <td>  
                             <button type="button" id="btnAdd" class="btn btn-xs btn-primary classAdd">Add</button>  
                         </td>  
                     </tr>  
@@ -342,12 +346,14 @@
                 var Age = $(this).find('.age01').val();//Bind to the first name with class f-name01 
                 var DOB = $(this).find('.dob01').val();//Bind to the first name with class f-name01 
                 var Aadharno = $(this).find('.aadharno01').val();//Bind to the first name with class f-name01 
+                var Userid = $(this).find('.userid01').text()//Bind to the first name with class f-name01 
                 var alldata = {
                     'Name': Name, //FName as per Employee class name in .cs  
                     'Relation': Relation, //LName as per Employee class name in .cs  
                     'Age': Age, //EmailId as per Employee class name in .cs   
                     'DOB': DOB, //EmailId as per Employee class name in .cs   
-                    'Aadharno': Aadharno //EmailId as per Employee class name in .cs   
+                    'Aadharno': Aadharno, //EmailId as per Employee class name in .cs  
+                    'Userid': Userid //EmailId as per Employee class name in .cs  
                 }
                 data.push(alldata);
             });

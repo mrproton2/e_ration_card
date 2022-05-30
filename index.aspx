@@ -20,24 +20,24 @@
   </ul>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img class="img-fluid" src="Assets/Images/img.jpg" alt="Los Angeles">
+      <img class="img-fluid" src="Assets/Images/onenationoneration.jpg"  alt="Los Angeles">
       <div class="carousel-caption">
-        <h3>Los Angeles</h3>
-        <p>We had such a great time in LA!</p>
+        <h3>One nation One Ration Card</h3>
+        <p>To commemorate 75 Years of India's Independence as part of the ongoing ‘Azadi Ka Amrit Mahotsav’, this call for submission of Tagline/slogan for ‘One Nation One Ration ...</p>
       </div>   
     </div>
     <div class="carousel-item">
-      <img src="Assets/Images/img.jpg" alt="Chicago">
+      <img src="Assets/Images/cereals.jpg" alt="Chicago">
       <div class="carousel-caption">
-        <h3>Chicago</h3>
-        <p>Thank you, Chicago!</p>
+        <h3>Cereals</h3>
+        <p>The affluent families do not purchase foodgrains under PDS and therefore with a view to curb diversion of foodgrains and provide more foodgrains to the needy families</p>
       </div>   
     </div>
     <div class="carousel-item">
-      <img src="Assets/Images/img.jpg" alt="New York">
+      <img src="Assets/Images/ration%20taking.jpg" alt="New York">
       <div class="carousel-caption">
-        <h3>New York</h3>
-        <p>We love the Big Apple!</p>
+        <h3>........</h3>
+        <p>.............</p>
       </div>   
     </div>
   </div>

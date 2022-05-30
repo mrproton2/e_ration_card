@@ -49,25 +49,29 @@ namespace e_ration_card
 
         private void BindGridAll()
         {
-
+            string kono = "";
+            if (Session["kono"] != null)
+            {
+                kono = Session["kono"].ToString();
+            }
 
             string userid = Session["user_id"].ToString();
-            string strSQ1 = "select A.rationcard_no RationCardNo,A.card_holder_name CardHolderName," +
+            string strSQ1 = "select A.rationcard_no RationCardNo," +
                 "A.typeof_rationcard RationCardType,B.cereals_name CerealsName,B.per_personunit UnitPerPerson,B.weight_individual Weight," +
                 "B.price_individual Price,B.kotedar_name KotedarName,Convert(varchar, B.curr_date,105) Dates " +
                 "from tbl_general_registration A " +
                 "inner join tbl_dd_cerealsdata B " +
                 "on A.general_id = B.general_id " +
-                "where A.user_id='" + userid + "'" +
-                "AND B.curr_date='" + txtdate.Value + "'" +
-                "or A.rationcard_no='" + txtration.Text + "'";
-               
+                "where B.kotedar_no='" + kono + "'" +
+                "or A.rationcard_no='" + txtration.Text + "'"+
+                "or B.curr_date='" + txtdate.Value + "'";
 
 
 
 
 
-            DataTable dsGrid = new DataTable();
+
+         DataTable dsGrid = new DataTable();
             dsGrid = objclsDbConnector.GetData(strSQ1);
             gvlist.DataSource = dsGrid;
             gvlist.DataBind();
@@ -114,6 +118,8 @@ namespace e_ration_card
 
                 Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
                 lblconstiuency.Text = dtTemp.Rows[0]["contituency"].ToString();
+
+                Session["kono"]= dtTemp.Rows[0]["kotedar_no"].ToString();
 
             }
 

@@ -119,12 +119,13 @@ namespace e_ration_card.Master
                         clsUsers_logic objclsUsers_logic = new clsUsers_logic();
                         string userid = Session["user_id"].ToString();
                         string strSQL;
-                        strSQL = "Select * from tbl_general_registration where user_id ='" + userid + "'";
+                        strSQL = "Select a.constituency,b.name  from tbl_general_registration a inner join users b on a.user_id = b.user_id where b.user_id ='" + userid + "'";
                         DataSet ds = objclsDbConnector.GetDataSet(strSQL);
-                        DataTable dt = ds.Tables[0];
-                        if (Session["user_id"] == null)
+                        DataTable dt = ds.Tables[0]; 
+
+                        if (dt.Rows.Count>0)
                         {
-                            Session["cardholdername"] = dt.Rows[0]["card_holder_name"].ToString();
+                            Session["name"] = dt.Rows[0]["name"].ToString();
                             Session["constituency"] = dt.Rows[0]["constituency"].ToString();
                         }
 

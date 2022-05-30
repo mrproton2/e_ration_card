@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Web;
 using System.Web.Services;
 using System.Web.UI.WebControls;
 
@@ -24,7 +25,7 @@ namespace e_ration_card
         protected void Page_Load(object sender, EventArgs e)
         {
             clsDbConnector objclsDbConnector = new clsDbConnector();
-            string strSQ = "SELECT state_id,state_name from tbl_state";
+            string strSQ = "SELECT state_name,state_id from tbl_state";
             DataSet ds = new DataSet();
             ds=objclsDbConnector.GetDataSet(strSQ);
 
@@ -37,8 +38,9 @@ namespace e_ration_card
             string strSQ2 = "Select annual_income,typeof_rationcard from tbl_annual_income";
             DataTable ds2 = new DataTable();
             ds2 = objclsDbConnector.GetData(strSQ2);
-            
 
+            txtuserid.Text = Session["user_id"].ToString();
+            string userid1 = txtuserid.Text;
 
             if (Session["user_id"] == null)
             {
@@ -67,12 +69,17 @@ namespace e_ration_card
 
 
             }
-
-            Label lblhname = this.Master.FindControl("lblhname") as Label;
-            lblhname.Text = Session["cardholdername"].ToString();
-            Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
-            lblconstiuency.Text = Session["constituency"].ToString();
-
+            if (Session["name"] != null)
+            {
+                Label lblhname = this.Master.FindControl("lblhname") as Label;
+                lblhname.Text = Session["name"].ToString();
+            }
+                if (Session["constituency"] != null)
+                {
+                    Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
+                    lblconstiuency.Text = Session["constituency"].ToString();
+                }
+            
         }
 
         protected void btnsubmit_Click(object sender, EventArgs e)
@@ -94,7 +101,7 @@ namespace e_ration_card
                 objgeneral_registration.pancard_no = txtpanno.Value;
                 objgeneral_registration.card_holdername = txtcardholdername.Value;
                 objgeneral_registration.annual_income =ddlannualincome.SelectedItem.Text;
-                objgeneral_registration.states = ddlstate.SelectedValue;
+                objgeneral_registration.states = ddlstate.SelectedItem.Text;
                 objgeneral_registration.district = ddldistrict.SelectedValue;
                 objgeneral_registration.addresss = txtaddress.Value;
                 objgeneral_registration.constituency = ddlconstituency.SelectedValue;
@@ -154,6 +161,7 @@ namespace e_ration_card
                 ddlconstituency.SelectedItem.Text = dtTemp.Rows[0]["constituency"].ToString();
                 txttypeofrationcard.Value = dtTemp.Rows[0]["typeof_rationcard"].ToString();
                 ddlannualincome.SelectedItem.Text = dtTemp.Rows[0]["annual_income"].ToString();
+                Session["general_id"]= dtTemp.Rows[0]["general_id"].ToString();
             }
             else
             {
@@ -167,8 +175,8 @@ namespace e_ration_card
             DataTable dtTempU = dsTempU.Tables[0];
             if (dtTempU.Rows.Count > 0)
             {
-                btnsubmit.Visible = false;
-                btnupdate.Visible = true;
+                //btnsubmit.Visible = false;
+                //btnupdate.Visible = true;
                 txtcardholdername.Value = dtTempU.Rows[0]["name"].ToString();
                 txtmobileno.Value = dtTempU.Rows[0]["mobile"].ToString();
                 txtemail.Value = dtTempU.Rows[0]["email"].ToString();
@@ -195,11 +203,17 @@ namespace e_ration_card
            
         }
 
-
+        
         public static string Constr = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+        
         [WebMethod]
         public static string SaveData(string empdata)//WebMethod to Save the data  
         {
+            string userid1 = (string)HttpContext.Current.Session["user_id"];
+
+            string generalid1 = (string)HttpContext.Current.Session["general_id"];
+
+
             var serializeData = JsonConvert.DeserializeObject<List<MemberList>>(empdata);
             if (serializeData==null)
             {
@@ -208,11 +222,12 @@ namespace e_ration_card
                 
             else
             {
+                
                 using (var con = new SqlConnection(Constr))
                 {
                     foreach (var data in serializeData)
                     {
-                        using (var cmd = new SqlCommand("INSERT INTO tbl_member_list([mbr_name],[relation],[age],[creatredate],[createdby],[general_id],[Status],[user_id],[aadharno],[dob]) VALUES(@mbr_name, @relation, @age, @creatredate, @createdby, @general_id, @Status, @user_id, @aadharno, @dob);"))
+                        using (var cmd = new SqlCommand("INSERT INTO tbl_member_list([mbr_name],[relation],[age],[creatredate],[createdby],[general_id],[Status],[user_id],[aadharno],[dob]) VALUES(@mbr_name, @relation, @age, @creatredate, @createdby, @general_id, @Status,@user_id, @aadharno, @dob);"))
                         {
                             cmd.CommandType = CommandType.Text;
                             cmd.Parameters.AddWithValue("@mbr_name", data.Name);
@@ -220,9 +235,9 @@ namespace e_ration_card
                             cmd.Parameters.AddWithValue("@age", data.age);
                             cmd.Parameters.AddWithValue("@creatredate", DateTime.Now);
                             cmd.Parameters.AddWithValue("@createdby", data.Name);
-                            cmd.Parameters.AddWithValue("@general_id", 1);
+                            cmd.Parameters.AddWithValue("@general_id",generalid1);
                             cmd.Parameters.AddWithValue("@Status", "Active");
-                            cmd.Parameters.AddWithValue("@user_id", '1');
+                            cmd.Parameters.AddWithValue("@user_id",userid1);
                             cmd.Parameters.AddWithValue("@aadharno", data.aadharno);
                             cmd.Parameters.AddWithValue("@dob", data.dob);
                             cmd.Connection = con;
@@ -256,7 +271,7 @@ namespace e_ration_card
                     string user_id = Session["user_id"].ToString();
                     objgeneral_registration.user_id = Convert.ToInt32(user_id);
                 }
-                if (string.IsNullOrEmpty(txtaadharcardno.Value) || ddlannualincome.SelectedValue == "SELECT" || string.IsNullOrEmpty(txtpincode.Value) || string.IsNullOrEmpty(txttypeofrationcard.Value) || (ddlstate.SelectedItem.Text == "SELECT") || ddldistrict.SelectedItem.Text == "SELECT" || ddlconstituency.SelectedItem.Text == "SELECT")
+                if (string.IsNullOrEmpty(txtaadharcardno.Value) || string.IsNullOrEmpty(txtrationcardno.Value) || ddlannualincome.SelectedValue == "SELECT" || string.IsNullOrEmpty(txtpincode.Value) || string.IsNullOrEmpty(txttypeofrationcard.Value) || (ddlstate.SelectedItem.Text == "SELECT") || ddldistrict.SelectedItem.Text == "SELECT" || ddlconstituency.SelectedItem.Text == "SELECT")
                 {
                     ValidateForm();
                 }
@@ -267,7 +282,7 @@ namespace e_ration_card
                     objgeneral_registration.aadharcard_no = txtaadharcardno.Value;
                     objgeneral_registration.pancard_no = txtpanno.Value;
                     objgeneral_registration.pincode_no = Convert.ToInt32(txtpincode.Value);
-                    objgeneral_registration.states = ddlstate.SelectedValue;
+                    objgeneral_registration.states = ddlstate.SelectedItem.Text;
                     objgeneral_registration.district = ddldistrict.SelectedValue;
                     objgeneral_registration.constituency = ddlconstituency.SelectedValue;
                     objgeneral_registration.typeof_rationcard = txttypeofrationcard.Value;

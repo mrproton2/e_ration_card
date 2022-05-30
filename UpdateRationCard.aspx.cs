@@ -64,12 +64,16 @@ namespace e_ration_card
             BindGridRemoveMember();
             BindGridRemoveMemberD();
 
-            Label lblhname = this.Master.FindControl("lblhname") as Label;
-            lblhname.Text = Session["cardholdername"].ToString();
-            //txtoldname.Value= Session["cardholdername"].ToString();
-            Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;           
-            lblconstiuency.Text = Session["constituency"].ToString();
-
+            if (Session["name"] != null)
+            {
+                Label lblhname = this.Master.FindControl("lblhname") as Label;
+                lblhname.Text = Session["name"].ToString();
+            }
+            if (Session["constituency"] != null)
+            {
+                Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
+                lblconstiuency.Text = Session["constituency"].ToString();
+            }
 
         }
 
@@ -113,6 +117,7 @@ namespace e_ration_card
             objchangename.new_name = txtnewname.Value;
             objchangename.old_name = txtoldname.Value;
             HttpPostedFile postedFile = fu1changename.PostedFile;
+            objchangename.user_id = Convert.ToInt32(Session["user_id"].ToString());
             //string filename = Path.GetFileName(postedFile.FileName);
             //string fileExtension = Path.GetExtension(filename);
             //int fileSize = postedFile.ContentLength;
@@ -131,7 +136,7 @@ namespace e_ration_card
 
 
             Response.Write("<script>alert('Request Raise Successfully');</script>");
-
+            Page_Load(this, null);
 
 
         }
@@ -287,6 +292,7 @@ namespace e_ration_card
             objclsRationCardUpdation.ChangeName(objchangename);
 
             Response.Write("<script>alert('Request Raise Successfully');</script>");
+            Page_Load(this, null);
 
         }
 
@@ -433,14 +439,15 @@ namespace e_ration_card
 
         private void BindGridAddress()
         {
-
-            string strSQ1 = "select * from tbl_address_correction";
+            int userid = Convert.ToInt32(Session["user_id"].ToString());
+            string strSQ1 = "select * from tbl_address_correction where user_id='" + userid + "'";
             DataTable dsGrid = new DataTable();
             dsGrid = objclsDbConnector.GetData(strSQ1);
 
             gvchangeaddress.DataSource = dsGrid;
             gvchangeaddress.DataBind();
             ViewState["dtadd"] = dsGrid;
+         
 
         }
 
@@ -450,14 +457,15 @@ namespace e_ration_card
 
             gvchangeaddress.DataSource = ViewState["dtadd1"] as DataTable;
             gvchangeaddress.DataBind();
+            Page_Load(null, null);
 
 
         }
 
         private void BindGridMbrCorrection()
         {
-
-            string strSQ1 = "select * from tbl_membername_correction";
+            int userid = Convert.ToInt32(Session["user_id"].ToString());
+            string strSQ1 = "select * from tbl_membername_correction where user_id='" + userid + "'";
             DataTable dsGrid = new DataTable();
             dsGrid = objclsDbConnector.GetData(strSQ1);
 
@@ -479,8 +487,9 @@ namespace e_ration_card
 
         private void BindGridAddMember()
         {
+            int userid = Convert.ToInt32(Session["user_id"].ToString());
 
-            string strSQ1 = "select * from tbl_add_member";
+            string strSQ1 = "select * from tbl_add_member where user_id='" + userid + "'";
             DataTable dsGrid = new DataTable();
             dsGrid = objclsDbConnector.GetData(strSQ1);
 
@@ -501,8 +510,9 @@ namespace e_ration_card
 
         private void BindGridRemoveMember()
         {
+            int userid = Convert.ToInt32(Session["user_id"].ToString());
 
-            string strSQ1 = "select * from tbl_remove_member";
+            string strSQ1 = "select * from tbl_remove_member where user_id='" + userid + "'";
             DataTable dsGrid = new DataTable();
             dsGrid = objclsDbConnector.GetData(strSQ1);
 
@@ -529,15 +539,19 @@ namespace e_ration_card
             strSQL = "SELECT * from tbl_general_registration where user_id='" + userid + "'";
             DataSet dsTemp = objclsDbConnector.GetDataSet(strSQL);
             DataTable dtTemp = dsTemp.Tables[0];
-            txtoldaddress.Value= dtTemp.Rows[0]["addresss"].ToString();
-            
+            if (dtTemp.Rows.Count > 0)
+            {
+                txtoldaddress.Value = dtTemp.Rows[0]["addresss"].ToString();
+            }
             
             string strSQLU;
             strSQLU = "SELECT * from users where user_id='" + userid + "'";
             DataSet dsTempU = objclsDbConnector.GetDataSet(strSQLU);
             DataTable dtTempU = dsTempU.Tables[0];
-            txtoldname.Value= dtTempU.Rows[0]["name"].ToString();
-
+            if (dtTempU.Rows.Count > 0)
+            {
+                txtoldname.Value = dtTempU.Rows[0]["name"].ToString();
+            }
         }
 
         public void MemberBind()
@@ -667,6 +681,7 @@ namespace e_ration_card
 
             objclsRationCardUpdation.ChangeMbrName(objclsmembercorrection);
             Response.Write("<script>alert('Request Raise Successfully');</script>");
+            Page_Load(this, null);
 
         }
 
@@ -780,6 +795,7 @@ namespace e_ration_card
 
             objclsRationCardUpdation.AddMember(objclsaddmember);
             Response.Write("<script>alert('Request Raise Successfully');</script>");
+            Page_Load(this, null);
 
         }
 
@@ -882,6 +898,7 @@ namespace e_ration_card
             
             objclsRationCardUpdation.RemoveMember(objclsremovembr);
             Response.Write("<script>alert('Request Raise Successfully');</script>");
+            Page_Load(this, null);
         }
 
         //public void GetMemberId()

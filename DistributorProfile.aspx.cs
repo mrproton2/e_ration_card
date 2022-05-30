@@ -22,12 +22,22 @@ namespace e_ration_card
         protected void Page_Load(object sender, EventArgs e)
         {
             clsDbConnector objclsDbConnector = new clsDbConnector();
-            string strSQ = "SELECT state_id,state_name from tbl_state";
+            string strSQ = "SELECT state_name,state_id from tbl_state";
             DataSet ds = new DataSet();
             ds = objclsDbConnector.GetDataSet(strSQ);
+
+            string strSQ1 = "SELECT consitiuency_name from tbl_consitiuency";
+            DataSet ds1 = new DataSet();
+            ds1 = objclsDbConnector.GetDataSet(strSQ1);
+
             if (Session["user_id"] == null)
             {
                 Response.Redirect("index.aspx");
+            }
+            else if (txtkotedarid.Value =="")
+            {
+                Response.Write("<script>alert('Please update Kotedar number');</script>");
+             
             }
             else
             {
@@ -35,26 +45,25 @@ namespace e_ration_card
             }
 
 
-            string strSQ1 = "SELECT consitiuency_name from tbl_consitiuency";
-            DataSet ds1 = new DataSet();
-            ds1 = objclsDbConnector.GetDataSet(strSQ1);
-
+            
             if (!IsPostBack)
             {
                
 
                 ddlstate.DataSource = ds.Tables[0];
                 ddlstate.DataBind();
+
                 ddlstate.Items.Insert(0, "**SELECT**");
                 ddldistrict.Items.Insert(0, "**SELECT**");
                 ddlconstituency.DataSource = ds1.Tables[0];
                 ddlconstituency.DataBind();
                 ddlconstituency.Items.Insert(0, "**SELECT**");
                 CheckData();
-               
 
-               
+
+
             }
+            
 
             FetchData();
             
@@ -84,7 +93,7 @@ namespace e_ration_card
                 {
                     objkotedar_registration.kotedar_name = txtkotedar.Value;
                     objkotedar_registration.addresss = txtaddress.Value;
-                    objkotedar_registration.states = ddlstate.SelectedValue;
+                    objkotedar_registration.states = ddlstate.SelectedItem.Text;
                     objkotedar_registration.district = ddldistrict.SelectedValue;
                     objkotedar_registration.Constituency = ddlconstituency.SelectedValue;
                     objkotedar_registration.kotedar_no = txtkotedarid.Value;
@@ -157,7 +166,7 @@ namespace e_ration_card
                 {
                     objkotedar_registration.kotedar_name = txtkotedar.Value;
                     objkotedar_registration.addresss = txtaddress.Value;
-                    objkotedar_registration.states = ddlstate.SelectedValue;
+                    objkotedar_registration.states = ddlstate.SelectedItem.Text;
                     objkotedar_registration.district = ddldistrict.SelectedValue;
                     objkotedar_registration.Constituency = ddlconstituency.SelectedValue;
                     objkotedar_registration.kotedar_no = txtkotedarid.Value;
@@ -215,8 +224,8 @@ namespace e_ration_card
                 txtkotedarid.Value = dtTemp.Rows[0]["kotedar_no"].ToString();
                 txtpanno.Value= dtTemp.Rows[0]["pan_no"].ToString();
                 txtpincode.Value = dtTemp.Rows[0]["pincode_no"].ToString();
-                ddlstate.SelectedValue= dtTemp.Rows[0]["states"].ToString();
-                ddldistrict.SelectedValue= dtTemp.Rows[0]["district"].ToString();
+                ddlstate.SelectedItem.Text = dtTemp.Rows[0]["states"].ToString();
+                ddldistrict.SelectedItem.Text = dtTemp.Rows[0]["district"].ToString();
                 ddlconstituency.SelectedValue = dtTemp.Rows[0]["contituency"].ToString();
                 lblphotoname.Text= dtTemp.Rows[0]["photo_name"].ToString();
                 lblsignature.Text = dtTemp.Rows[0]["signature_name"].ToString();
@@ -233,16 +242,16 @@ namespace e_ration_card
             DataTable dtTempU = dsTempU.Tables[0];
             if (dtTempU.Rows.Count > 0)
             {
-                btnsubmit.Visible = false;
-                btnupdate.Visible = true;
+                //btnsubmit.Visible = false;
+                //btnupdate.Visible = true;
                 txtkotedar.Value= dtTempU.Rows[0]["name"].ToString();
                 txtmobile.Value = dtTempU.Rows[0]["mobile"].ToString();
                 txtemail.Value = dtTempU.Rows[0]["email"].ToString();                           
             }
             else
             {
-                btnsubmit.Visible = true;
-                btnupdate.Visible = false;
+                //btnsubmit.Visible = true;
+                //btnupdate.Visible = false;
 
             }
         }

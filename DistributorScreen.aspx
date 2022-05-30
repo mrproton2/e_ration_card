@@ -63,11 +63,11 @@
               <asp:TemplateField>
               <HeaderTemplate>
                    <asp:CheckBox ID="chkAll" runat="server" AutoPostBack="false" Checked="true"
-                                     Style="text-align: center; width: 100%" />
+                                     Style="text-align: center; width: 100%"  Visible="false"/>
              </HeaderTemplate>
                          <ItemTemplate>
                  <asp:CheckBox ID="chkChange" runat="server" AutoPostBack="false" Checked="true" Style="text-align: center"
-                                                    Width="100%" Text=" " />
+                                                    Width="100%" Text=" " Enabled="true"  Visible="false"/>
                      </ItemTemplate>
                  </asp:TemplateField>
               <%--<asp:BoundField DataField="Name" HeaderText="Name" />
@@ -138,16 +138,14 @@
         <%--<input type="text" id="txtdate" placeholder="" name="date" required>  --%>  
          <asp:Label ID="lbldatetime" runat="server" Text=""></asp:Label> 
       </div>
-<form class="needs-validation" novalidate >
-   <div class="form-group">
+<div>
     <label for="utype">Active Mbr</label>
-     <asp:DropDownList ID="ddlactivemember" runat="server" DataTextField="Member_Name" DataValueField="Member_Name" AutoPostBack="false">          
-     </asp:DropDownList> 
+     <asp:DropDownList ID="ddlactivemember" runat="server" DataTextField="Member_Name" DataValueField="Member_Name"></asp:DropDownList>
         <label for="utype">InActive Mbr</label>
      <asp:DropDownList ID="ddlinactivemember" runat="server" DataTextField="Member_Name" DataValueField="Member_Name">
      </asp:DropDownList>   
   </div>
-</form>
+
 
       <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-12 p-5">
           <asp:Button ID="btnsubmit" runat="server" Text="Submit" class="btn btn-info" OnClick="btnsubmit_Click"/>

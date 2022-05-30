@@ -38,10 +38,18 @@ namespace e_ration_card
             {
 
             }
-            Label lblhname = this.Master.FindControl("lblhname") as Label;
-            lblhname.Text = Session["cardholdername"].ToString();
-            Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
-            lblconstiuency.Text = Session["constituency"].ToString();
+
+            if (Session["name"] != null)
+            {
+                Label lblhname = this.Master.FindControl("lblhname") as Label;
+                lblhname.Text = Session["name"].ToString();
+            }
+            if (Session["constituency"] != null)
+            {
+                Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
+                lblconstiuency.Text = Session["constituency"].ToString();
+            }
+
             GetData();
             BindGridAll();
             Authenticatembr();
@@ -52,11 +60,12 @@ namespace e_ration_card
 
             string userid = Session["user_id"].ToString();
             string strSQL;
-            strSQL = "SELECT * from tbl_general_registration where user_id='" + userid + "'";
+            strSQL = "Select a.constituency,b.name,a.rationcard_no,a.addresss,a.typeof_rationcard from tbl_general_registration a inner join users b on a.user_id = b.user_id where b.user_id='" + userid + "'";
             DataSet dsTemp = objclsDbConnector.GetDataSet(strSQL);
             DataTable dtTemp = dsTemp.Tables[0];
             if (dtTemp.Rows.Count > 0)
             {
+                lblcardholdername.Text= dtTemp.Rows[0]["name"].ToString();
                 lblrationca.Text = dtTemp.Rows[0]["rationcard_no"].ToString();
                 txtaddress.Value= dtTemp.Rows[0]["addresss"].ToString();
                 lblcardtype.Text = dtTemp.Rows[0]["typeof_rationcard"].ToString();
@@ -79,7 +88,7 @@ namespace e_ration_card
 
 
             string userid = Session["user_id"].ToString();
-            string strSQ1 = "select A.rationcard_no RationCardNo,A.card_holder_name CardHolderName," +
+            string strSQ1 = "select A.rationcard_no RationCardNo," +
                 "A.typeof_rationcard RationCardType,B.cereals_name CerealsName,B.per_personunit UnitPerPerson,B.weight_individual Weight," +
                 "B.price_individual Price,B.kotedar_name KotedarName,B.curr_date DateTime " +
                 "from tbl_general_registration A " +

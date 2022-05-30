@@ -21,7 +21,19 @@ namespace e_ration_card.Master
         clsdd_cereals_data clsdd_Cereals_Data = new clsdd_cereals_data();
 
         protected void Page_Load(object sender, EventArgs e)
-        {
+       {
+            string au = ddlactivemember.SelectedValue;
+            if ((txtrationcardno.Value.Length>0)&& (ddlactivemember.SelectedValue==""))
+            {
+                string authenticate = ddlactivemember.SelectedValue;
+                BindActiveMBR();          
+            }
+            
+
+
+                
+           
+            
            detailDiv.Visible = false;
             if (ViewState["Data"] != null)
             {
@@ -33,13 +45,21 @@ namespace e_ration_card.Master
             }
 
                 lbldatetime.Text = DateTime.Now.ToString();
+            FetchData();
+
             if (Session["user_id"] == null)
             {
                 Response.Redirect("index.aspx");
             }
+            else if(Session["kono"] == null)
+            {
+                Response.Write("<script>alert('Please update Kotedar number');</script>");
+                Response.Redirect("DistributorProfile.aspx");
+                Response.Write("<script>alert('Please update Kotedar number');</script>");
+            }
             else
             {
-               
+
             }
             //if (IsPostBack)
             //{
@@ -48,31 +68,49 @@ namespace e_ration_card.Master
 
             //}
 
-            FetchData();
+          
         }
 
         public void btnserch_Click(object sender, EventArgs e)
         {
+
+        
+            string userid = "";
             clsDbConnector objclsDbConnector = new clsDbConnector();
-            string user_id = Session["user_id"].ToString();
+            //string user_id = Session["user_id"].ToString();
+
             string rationcard = txtrationcardno.Value;
-            string strSQ = "select A.rationcard_no,A.card_holder_name,A.pancard_no,A.[addresss],B.mbr_name Member_Name,b.relation " +
-                "from tbl_general_registration A " +
-                "inner join tbl_member_list B " +
-                "on A.user_id = B.user_id " +
-                "where[status] = 'Active' And A.rationcard_no ='" + rationcard + "'";
-            DataSet dsActive = new DataSet();
-            dsActive = objclsDbConnector.GetDataSet(strSQ);
-            if (dsActive.Tables[0].Rows.Count > 0)
+            string strSQ5 = @"select general_id,user_id from tbl_general_registration where rationcard_no='" + rationcard + "'";
+            DataSet dsActive1 = new DataSet();
+            dsActive1 = objclsDbConnector.GetDataSet(strSQ5);
+            if (dsActive1.Tables[0].Rows.Count > 0)
             {
-               
-                    ddlactivemember.DataSource = dsActive.Tables[0];
-                    ddlactivemember.DataBind();
-                
-                //detailDiv.Visible = true;
-                lblchn.Text= dsActive.Tables[0].Rows[0]["card_holder_name"].ToString();
-               
+                lblgeneralid.Text = dsActive1.Tables[0].Rows[0]["general_id"].ToString();
+                 userid = dsActive1.Tables[0].Rows[0]["user_id"].ToString();
             }
+
+          
+            //string user_id = Session["user_id"].ToString();
+            ////string rationcard = txtrationcardno.Value;
+            //string strSQ = "select A.rationcard_no,A.card_holder_name,A.pancard_no,A.[addresss],B.mbr_name Member_Name,b.relation,C.name " +
+            //    "from tbl_general_registration A " +
+            //    "inner join tbl_member_list B " +
+            //    "on A.user_id = B.user_id " +
+            //    "inner join users C " +
+            //    "on B.user_id = C.user_id " +
+            //    "where[status] = 'Active' And A.rationcard_no ='" + rationcard + "'";
+            //DataSet dsActive = new DataSet();
+            //dsActive = objclsDbConnector.GetDataSet(strSQ);
+            //if (dsActive.Tables[0].Rows.Count > 0)
+            //{
+               
+            //        ddlactivemember.DataSource = dsActive.Tables[0];
+            //        ddlactivemember.DataBind();
+                
+            //    //detailDiv.Visible = true;
+            //    lblchn.Text= dsActive.Tables[0].Rows[0]["name"].ToString();
+               
+            //}
 
 
 
@@ -80,7 +118,7 @@ namespace e_ration_card.Master
                 "from tbl_general_registration A " +
                 "inner join tbl_member_list B " +
                  "on A.user_id = B.user_id " +
-                "where[status] = 'InActive' And B.user_id = '" + user_id + "'And A.rationcard_no ='" + rationcard + "'";
+                "where[status] = 'InActive' And B.user_id = '" + userid + "'And A.rationcard_no ='" + rationcard + "'";
             DataSet dsInActive = new DataSet();
             dsInActive = objclsDbConnector.GetDataSet(strSQInActive);
             if (dsInActive.Tables[0].Rows.Count > 0)
@@ -95,30 +133,32 @@ namespace e_ration_card.Master
             string strSQLCount = "select count(1)" +
                "from tbl_general_registration A " +
                "inner join tbl_member_list B " +
-               "on A.general_id = B.general_id " +
-               "where[status] = 'Active' And B.user_id = '" + user_id + "'And A.rationcard_no ='" + rationcard + "'";
+               "on A.user_id = B.user_id " +
+               "where[status] = 'Active' And B.user_id = '" + userid + "'And A.rationcard_no ='" + rationcard + "'";
             DataSet dsActiveCount = new DataSet();
             dsActiveCount = objclsDbConnector.GetDataSet(strSQLCount);
             string activecount = dsActiveCount.Tables[0].Rows[0]["column1"].ToString();
             lblmember.Text = activecount;
-            int checkactive = Convert.ToInt32(activecount);
-            if(activecount !=null)
+            int checkactive = Convert.ToInt32(activecount)+1;
+            lblmember.Text = Convert.ToString(checkactive);
+            if (checkactive >= 1)
             {
                 detailDiv.Visible = true;
+                
                 //int activecount1 = Convert.ToInt32(activecount);
             }
 
             string strSQLCount1 = "select count(1)" +
               "from tbl_general_registration where rationcard_no ='" + rationcard + "'";
             DataSet dsRationCard = new DataSet();
-            dsRationCard = objclsDbConnector.GetDataSet(strSQLCount);
+            dsRationCard = objclsDbConnector.GetDataSet(strSQLCount1);
             string rationcardcount = dsRationCard.Tables[0].Rows[0]["column1"].ToString();
             //lblmember.Text = activecount;
             int checkactive1 = Convert.ToInt32(rationcardcount);
-            if (checkactive1 == 0 && checkactive == 0)
+            if (checkactive1 == 0 && checkactive >=1)
             {
                 Response.Write("<script>alert('Invalid Rationcard No');</script>");
-                Initalizefield();
+                //Initalizefield();
                 return;
                 
             }
@@ -134,38 +174,66 @@ namespace e_ration_card.Master
             gvlist.DataSource = dsGrid;
             gvlist.DataBind();          
             
-            GetGeneralid();
+            
             GridBindNew();
         }
 
         public void GetGeneralid()
         {
             clsDbConnector objclsDbConnector = new clsDbConnector();
-            string user_id = Session["user_id"].ToString();
+            //string user_id = Session["user_id"].ToString();
+
             string rationcard = txtrationcardno.Value;
-            string strSQ = @"select general_id from tbl_general_registration where rationcard_no='" + rationcard + "'";         
+            string strSQ = @"select general_id,user_id from tbl_general_registration where rationcard_no='" + rationcard + "'";         
             DataSet dsActive = new DataSet();
             dsActive = objclsDbConnector.GetDataSet(strSQ);
             if (dsActive.Tables[0].Rows.Count > 0)
             {
               lblgeneralid.Text= dsActive.Tables[0].Rows[0]["general_id"].ToString();
+              string userid= dsActive.Tables[0].Rows[0]["user_id"].ToString();
             }
 
         }
 
         protected void btnsubmit_Click(object sender, EventArgs e)
         {
+            string kotedarno = "";
+            string constituency = "";
+            string kotedarno1 = "";
             if (Session["user_id"] != null)
             {
                 string user_id1 = Session["user_id"].ToString();
                 //objgeneral_registration.user_id = Convert.ToInt32(user_id1);
             }
-            
-            objdistribution_Details.kotedar_id = Convert.ToInt32(Session["kotedarid"].ToString());
+            string userid = Session["user_id"].ToString();
+            string strSQL;
+            strSQL = "select * from tbl_kotedar_registration where user_id='" + userid + "'";
+            DataSet dsTemp = objclsDbConnector.GetDataSet(strSQL);
+            DataTable dtTemp = dsTemp.Tables[0];
+            if (dtTemp.Rows.Count > 0)
+            {
+
+
+                Label lblname = this.Master.FindControl("lblkname") as Label;
+                lblname.Text = Session["name"].ToString();
+
+                Label lblkid = this.Master.FindControl("lblkid") as Label;
+                lblkid.Text = dtTemp.Rows[0]["kotedar_no"].ToString();
+                kotedarno= dtTemp.Rows[0]["kotedar_no"].ToString();
+                
+                Session["kotedarno"] = kotedarno;
+
+                Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
+                lblconstiuency.Text = dtTemp.Rows[0]["contituency"].ToString();
+                constituency= dtTemp.Rows[0]["contituency"].ToString();
+
+            }
+
+            objdistribution_Details.kotedar_id = Convert.ToInt32(kotedarno);
             objdistribution_Details.kotedar_name = Session["name"].ToString();
-            objdistribution_Details.Area = Session["constituency"].ToString();
+            objdistribution_Details.Area = constituency;
             objdistribution_Details.cardholdernme = lblchn.Text;
-            objdistribution_Details.Authenticated_mbr = ddlactivemember.SelectedValue;
+            objdistribution_Details.Authenticated_mbr = ddlactivemember.SelectedItem.Text;
             objdistribution_Details.rationcard_no = Convert.ToInt32(txtrationcardno.Value);
             objdistribution_Details.total_price = 1;
             objdistribution_Details.total_weight = lblweight.Text;
@@ -173,6 +241,7 @@ namespace e_ration_card.Master
             objdistribution_Details.date_time = DateTime.Now;
             objdistribution_Details.general_id = Convert.ToInt32(lblgeneralid.Text);
 
+            
 
             Bulk_Insert();
 
@@ -180,7 +249,8 @@ namespace e_ration_card.Master
 
             Response.Write("<script>alert('Dis Detail Updated Successfull');</script>");
 
-          
+            ddlactivemember.Items.Clear();
+
         }
 
         protected void gvlist_PreRender(object sender, EventArgs e)
@@ -352,6 +422,7 @@ namespace e_ration_card.Master
             dt.Columns.Add(new System.Data.DataColumn("kotedarno", typeof(int)));
             dt.Columns.Add(new System.Data.DataColumn("kotedarname", typeof(string)));
             dt.Columns.Add(new System.Data.DataColumn("currentdate", typeof(string)));
+            
             foreach (GridViewRow row in gvlist.Rows)
             {
                 if ((row.FindControl("chkChange") as CheckBox).Checked)
@@ -361,7 +432,7 @@ namespace e_ration_card.Master
                     Label weight = (Label)row.FindControl("acm");
                     Label price = (Label)row.FindControl("price");
                     int general = Convert.ToInt32(lblgeneralid.Text);
-                    int kotedarno = Convert.ToInt32(Session["kotedarid"].ToString());
+                    int kotedarno = Convert.ToInt32(Session["kotedarno"].ToString());
                     string kotedarname = Session["name"].ToString();
                     string currentdate = lbldatetime.Text;
                     dr = dt.NewRow();
@@ -376,8 +447,9 @@ namespace e_ration_card.Master
                     dr[7] = currentdate;
 
                     dt.Rows.Add(dr);
-
+                   
                 }
+           
 
             }
             if (dt.Rows.Count > 0)
@@ -417,6 +489,8 @@ namespace e_ration_card.Master
             dt.Columns.Add(new System.Data.DataColumn("weight", typeof(int)));
             dt.Columns.Add(new System.Data.DataColumn("price", typeof(int)));
             dt.Columns.Add(new System.Data.DataColumn("generalid", typeof(int)));
+            int m = 0;
+            int i = 0;
             foreach (GridViewRow row in gvlist.Rows)
             {
                 if ((row.FindControl("chkChange") as CheckBox).Checked)
@@ -436,12 +510,18 @@ namespace e_ration_card.Master
                     dr[4] = general;
 
                     dt.Rows.Add(dr);
+                  
+
                     gvlist.DataSource = dt;
                     gvlist.DataBind();
+                    m = m + int.Parse(price.Text);
+                    i = i + int.Parse(weight.Text);
                 }
 
             }
-         
+            lblprice.Text = Convert.ToString(m) + " ₹";
+            lblweight.Text = Convert.ToString(i);
+
         }
         protected void btnclear_Click(object sender, EventArgs e)
         {
@@ -500,8 +580,36 @@ namespace e_ration_card.Master
                 Label lblconstiuency = this.Master.FindControl("lblconstiuency") as Label;
                 lblconstiuency.Text = dtTemp.Rows[0]["contituency"].ToString();
 
+                Session["kono"] = dtTemp.Rows[0]["kotedar_no"].ToString();
+
             }
 
+        }
+
+        public void BindActiveMBR()
+        {
+
+            string user_id = Session["user_id"].ToString();
+            string rationcard = txtrationcardno.Value;
+            string strSQ = "select A.rationcard_no,A.card_holder_name,A.pancard_no,A.[addresss],B.mbr_name Member_Name,b.relation,C.name " +
+                "from tbl_general_registration A " +
+                "inner join tbl_member_list B " +
+                "on A.user_id = B.user_id " +
+                "inner join users C " +
+                "on B.user_id = C.user_id " +
+                "where[status] = 'Active' And A.rationcard_no ='" + rationcard + "'";
+            DataSet dsActive = new DataSet();
+            dsActive = objclsDbConnector.GetDataSet(strSQ);
+            if (dsActive.Tables[0].Rows.Count > 0)
+            {
+
+                ddlactivemember.DataSource = dsActive.Tables[0];
+                ddlactivemember.DataBind();
+
+                //detailDiv.Visible = true;
+                lblchn.Text = dsActive.Tables[0].Rows[0]["name"].ToString();
+
+            }
         }
     }
 }

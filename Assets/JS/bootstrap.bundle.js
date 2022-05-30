@@ -829,7 +829,8 @@
       };
 
       var move = function move(event) {
-        // ensure swiping with one touch and not pinching
+          // ensure swiping with one touch and not pin
+          ng
         _this3.touchDeltaX = event.originalEvent.touches && event.originalEvent.touches.length > 1 ? 0 : event.originalEvent.touches[0].clientX - _this3.touchStartX;
       };
 
